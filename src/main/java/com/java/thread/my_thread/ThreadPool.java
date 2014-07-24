@@ -1,4 +1,4 @@
-package com.thread.my_thread;
+package com.java.thread.my_thread;
 
 import java.util.Collections;
 import java.util.Date;

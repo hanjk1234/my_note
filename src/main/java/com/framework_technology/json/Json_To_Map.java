@@ -1,11 +1,8 @@
-package com.json;
+package com.framework_technology.json;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

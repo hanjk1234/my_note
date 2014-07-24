@@ -1,6 +1,6 @@
 package com.framework_technology.elasticsearch.elasticsearchs_233_demo;
 
-import com.json.Json_To_Map;
+import com.framework_technology.json.Json_To_Map;
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsRequest;

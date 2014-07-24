@@ -1,4 +1,4 @@
-package com.thread.disruptor;
+package com.java.thread.disruptor;
 
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.RingBuffer;
@@ -41,7 +41,7 @@ public class Disruptor_Example {
 
     /**
      * 添加消费者对象
-     * {@link com.thread.disruptor.DeliveryReportEventHandler}
+     * {@link com.java.thread.disruptor.DeliveryReportEventHandler}
      * @param eventHandlers 消费者对象
      */
     protected static void handleEventsWith(EventHandler[] eventHandlers) {
@@ -70,7 +70,7 @@ public class Disruptor_Example {
         } else {
             long seq = ringBuffer.next();
             /**
-             * @see com.thread.disruptor.ValueEvent.<com.thread.disruptor.DeliveryReportEventHandler>
+             * @see com.java.thread.disruptor.ValueEvent.< com.java.thread.disruptor.DeliveryReportEventHandler>
              */
             ValueEvent valueEvent = ringBuffer.get(seq);
             valueEvent.setValue(event.getValue());

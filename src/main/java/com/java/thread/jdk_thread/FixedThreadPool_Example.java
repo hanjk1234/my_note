@@ -1,4 +1,4 @@
-package com.thread.jdk_thread;
+package com.java.thread.jdk_thread;
 
 import com.util.date.Joda_Time;
 
