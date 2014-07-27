@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by lw on 14-4-18.
  *
- * @参考博客 http://blog.csdn.net/xiaohulunb/article/details/21102055
+ * 参考博客 http://blog.csdn.net/xiaohulunb/article/details/21102055
  */
 public class Joda_Time {
 
@@ -128,6 +128,10 @@ public class Joda_Time {
     }
 
     public static void main(String[] args) {
-        System.out.printf(str2Date("2013-04-04").toString());
+
+        Long aLong = (long)(1401785160 * 1000);
+        DateTime dateTime = new DateTime(aLong);
+        String s = getDateTime(dateTime);
+        System.out.println(s);
     }
 }

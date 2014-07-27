@@ -82,7 +82,7 @@ public class Es_BuildIndex {
      * @throws Exception
      */
     protected static void buildIndex(User user) throws Exception {
-        // productindex_liwei为上个方法中定义的索引,prindextype为类型.jk8231为id,以此可以代替memchche来进行数据的缓存
+        // INDEX_DEMO_01_MAPPING为上个方法中定义的索引,prindextype为类型.jk8231为id,以此可以代替memchche来进行数据的缓存
         IndexResponse response = Es_Utils.client.prepareIndex(Es_Utils.INDEX_DEMO_01, Es_Utils.INDEX_DEMO_01_MAPPING)
                 .setSource(
                         User.getXContentBuilder(user)

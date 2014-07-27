@@ -23,11 +23,12 @@ public class Es_233_Search {
 
     public Client client;
 
-    private static final int SEARCHREQUEST_SIZE = 1000;
+    private static final int SEARCHREQUEST_SIZE = 6000;
 
     public Es_233_Search(Client client) {
         this.client = client;
     }
+
     /**
      * 搜索，通过Id搜索API
      *
@@ -66,6 +67,7 @@ public class Es_233_Search {
 
         return client.prepareSearch(indices)
                 .setTypes(type).setSize(SEARCHREQUEST_SIZE);
+
     }
 
     /**
@@ -86,9 +88,13 @@ public class Es_233_Search {
      * @return
      */
     protected SearchResponse builderSearchResponse(SearchRequestBuilder searchRequestBuilder) {
-
-        SearchResponse searchResponse = searchRequestBuilder.execute().actionGet();
-
+        SearchResponse searchResponse = null;
+        try {
+            searchResponse = searchRequestBuilder.execute().actionGet();
+        } catch (Exception e) {
+            System.out.println("~~~~~~~~~~~ " + e.getMessage() + "~~~~~~~~~~~~");
+        } finally {
+        }
         return searchResponse;
     }
 

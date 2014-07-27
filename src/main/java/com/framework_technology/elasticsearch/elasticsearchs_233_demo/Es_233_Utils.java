@@ -2,6 +2,7 @@ package com.framework_technology.elasticsearch.elasticsearchs_233_demo;
 
 import com.framework_technology.json.Json_To_Map;
 import org.elasticsearch.action.ActionFuture;
+import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsRequest;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsResponse;
@@ -17,10 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ *
  * Created by lw on 14-7-15.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * startup and shutDownClient ----》Client
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
  */
 public class Es_233_Utils {
 
@@ -79,8 +82,28 @@ public class Es_233_Utils {
     }
 
     /**
-     * 查询indices 是否存在
+     * 获取某个alias指向的index
      *
+     * @param alias
+     * @return
+     */
+    public String aliasTarget(String alias) {
+        // The ES return value of this has an awkward format: The first key of the hash is the target index. Thanks.
+        // return client.admin().indices().getAliases(new IndicesGetAliasesRequest(alias)).actionGet().getAliases().keysIt().next();
+        Iterator<String> itr = client.admin().indices().getAliases(new GetAliasesRequest(alias)).actionGet().getAliases().keysIt();
+        if (itr.hasNext()) {
+            // 有alias
+            String currentIndexName = itr.next();
+            System.out.println(currentIndexName);
+            return currentIndexName;
+        } else
+            return null;
+    }
+
+
+    /**
+     * 查询indices 是否存在
+     * @see #aliasTarget(String)
      * @param indices
      * @return
      */
@@ -113,6 +136,10 @@ public class Es_233_Utils {
      * @param filed 获取指标的字段名称
      */
     protected static void writeSearchResponseToMap(SearchResponse response, String filed) {
+        if (null == response) {
+            System.out.println("~~~~~~~~~ response is null ~~~~~~~~~");
+            return;
+        }
         SearchHit[] searchHitsByPrepareSearch = response.getHits().hits();
         Set<String> stringSet = new TreeSet<>();
         //获取结果集打印
