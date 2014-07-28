@@ -2,6 +2,7 @@ package com.framework_technology.elasticsearch;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.count.CountRequest;
+import org.elasticsearch.action.count.CountResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -111,7 +112,10 @@ public class Es_Search {
         )
                 .actionGet()
                 .getCount();
-
+        CountResponse countResponse =Es_Utils.client.count(
+                new CountRequest(Es_Utils.INDEX_DEMO_01).types(Es_Utils.INDEX_DEMO_01_MAPPING)
+        )
+                .actionGet();
         //预准备
         long countByPrepareCount = Es_Utils.client.prepareCount(Es_Utils.INDEX_DEMO_01)
                 .setTypes(Es_Utils.INDEX_DEMO_01_MAPPING)

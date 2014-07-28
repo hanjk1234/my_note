@@ -145,8 +145,8 @@ public class Es_233_QueryBuilders_DSL {
      */
     protected static QueryBuilder moreLikeThisQuery() {
         // mlt Query
-        QueryBuilders.moreLikeThisQuery("home", "now_home") // Fields
-                .likeText("山西省太原市7429街道")                 // Text
+        QueryBuilders.moreLikeThisQuery("home", "now_home")     // Fields
+                .likeText("山西省太原市7429街道")                  // Text
                 .minTermFreq(1)                                 // Ignore Threshold
                 .maxQueryTerms(12);                             // Max num of Terms
         // in generated queries

@@ -229,5 +229,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!-- Resource Filters for build.properties -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>
