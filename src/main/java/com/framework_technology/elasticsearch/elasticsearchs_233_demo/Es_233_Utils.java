@@ -49,7 +49,7 @@ public class Es_233_Utils {
          * 这样做的好 处是一般你不用手动设置集群里所有集群的ip到连接客户端，它会自动帮你添加，并且自动发现新加入集群的机器。
          */
         Settings settings = ImmutableSettings.settingsBuilder()
-                .put("client.transport.sniff", true).put("cluster.name", "liw_test").build();
+                .put("client.transport.sniff", true).build();
         client = new TransportClient(settings)
                 .addTransportAddress(new InetSocketTransportAddress("192.168.1.233", 9300));
         //.addTransportAddress(new InetSocketTransportAddress("10.211.55.4", 9300));

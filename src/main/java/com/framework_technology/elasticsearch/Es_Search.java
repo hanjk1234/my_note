@@ -112,7 +112,7 @@ public class Es_Search {
         )
                 .actionGet()
                 .getCount();
-        CountResponse countResponse =Es_Utils.client.count(
+        /*CountResponse countResponse =Es_Utils.client.count(
                 new CountRequest(Es_Utils.INDEX_DEMO_01).types(Es_Utils.INDEX_DEMO_01_MAPPING)
         )
                 .actionGet();
@@ -122,7 +122,7 @@ public class Es_Search {
                 .setQuery(QueryBuilders.termQuery("name", "葫芦1娃"))
                 .execute()
                 .actionGet()
-                .getCount();
+                .getCount();*/
         System.out.println("searchByQuery_Count<{}>:" + countByCount);
     }
 }

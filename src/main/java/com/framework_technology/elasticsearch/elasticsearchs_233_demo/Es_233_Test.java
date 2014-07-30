@@ -5,6 +5,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 
 /**
  * Created by lw on 14-7-15.
+ * <p>
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * 官方JAVA-API
  * http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/index.html
@@ -12,7 +13,7 @@ import org.elasticsearch.index.query.QueryBuilder;
  */
 public class Es_233_Test {
 
-    private static final String[] INDEXS = {"recent_ezsonar_2014-07-25_15-12"};
+    private static final String[] INDEXS = {"ezsonar_2014-07-19"};
 
     public static void main(String[] dfd) {
         Es_233_Utils.startupClient();

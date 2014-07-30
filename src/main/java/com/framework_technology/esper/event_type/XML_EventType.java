@@ -18,6 +18,7 @@ import java.net.URL;
  * User: wei.Li
  * Date: 14-7-28
  * Time: 17:57
+ * TODO unfinished
  */
 public class XML_EventType {
 

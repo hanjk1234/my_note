@@ -17,9 +17,9 @@ public class Es_Test {
             // Es_BuildIndex.buildBulkIndex(User.getRandomUsers(1000));
             //searchById("5_XDJBA-TBOra4a7oyiYrA");
             //Es_Search.searchByQuery();
-            //Es_Search.searchByQuery_Count();
+            Es_Search.searchByQuery_Count();
             //updateByQuery();
-            Es_Facets.searchByQuery_Facets();
+            //Es_Facets.searchByQuery_Facets();
             // Es_Update_Del.deleteIndexByQuery();
             //Es_Utils.getAllIndices();
 
