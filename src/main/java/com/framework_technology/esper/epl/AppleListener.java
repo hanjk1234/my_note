@@ -19,7 +19,7 @@ class AppleListener implements UpdateListener {
                 EventBean eventBean = newEvents[i];
                 String key = "aPrice";
                 String color = "color", size = "size";
-                LOGGER.info("Apple's" + key + " is <{}>,color  is <{}> ,size is <{}>\" ", eventBean.get(key), eventBean.get(color), eventBean.get(size));
+                LOGGER.info("Apple's" + key + " is <{}>,color  is <{}> ", eventBean.get(key), eventBean.get(color));
             }
         }
 
