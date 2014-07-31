@@ -1,21 +1,20 @@
-package com.framework_technology.esper.epl;
+package com.framework_technology.esper.javabean;
 
 import org.slf4j.LoggerFactory;
 
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * apple javaBean
  */
-class Apple {
+public class Apple {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Apple.class);
 
     private static final String[] COLORS = new String[]{"1", "2", "3"};
     private static final int COLORS_LENGTH = COLORS.length;
-    protected static final String AVG_PRICE = "avg(price)";
-    protected static final String CLASSNAME = Apple.class.getName();
+    public static final String AVG_PRICE = "avg(price)";
+    public static final String CLASSNAME = Apple.class.getName();
 
     private String id; //id
     private int price; //价格
@@ -25,16 +24,17 @@ class Apple {
 
     Apple() {
         Random random = new Random();
-        this.price = random.nextInt(10000);
+        this.id = "2";
+        this.price = random.nextInt(3);
         this.discount = random.nextDouble();
         this.color = COLORS[random.nextInt(COLORS_LENGTH)];
         this.size = random.nextInt(10);
     }
 
     /**
-     * @return 返回一个随机创建的 {@link com.framework_technology.esper.epl.Apple}
+     * @return 返回一个随机创建的 {@link Apple}
      */
-    protected static Apple getRandomApple() {
+    public static Apple getRandomApple() {
 
         Apple apple = new Apple();
         LOGGER.info("~~~~~~~~~ random Apple JavaBean is <{}> ~~~~~~~~~~", apple);
@@ -83,7 +83,7 @@ class Apple {
 
     /**
      * @return 该Apple 折扣后的价格
-     * @see com.framework_technology.esper.epl.Apple#getPriceByDiscount(int, double)
+     * @see Apple#getPriceByDiscount(int, double)
      */
     public double getPriceByDiscount() {
         return this.price * this.discount;

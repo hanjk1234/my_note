@@ -1,4 +1,4 @@
-package com.framework_technology.esper.epl;
+package com.framework_technology.esper.javabean;
 
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +13,7 @@ import java.util.Random;
 public class Banana {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Banana.class);
 
-    protected static final String AVG_PRICE = "avg(price)";
-    protected static final String CLASSNAME = Banana.class.getName();
+    public static final String CLASSNAME = Banana.class.getName();
     private String id; //id
     private int price; //价格
     private double discount;//折扣
@@ -25,7 +24,7 @@ public class Banana {
     }
 
     /**
-     * @return 返回一个随机创建的 {@link com.framework_technology.esper.epl.Banana}
+     * @return 返回一个随机创建的 {@link Banana}
      */
     protected static Banana getRandomBanana() {
         Random random = new Random();
@@ -57,7 +56,7 @@ public class Banana {
 
     /**
      * @return Banana 折扣后的价格
-     * @see com.framework_technology.esper.epl.Banana#getPriceByDiscount(int, double)
+     * @see Banana#getPriceByDiscount(int, double)
      */
     public double getPriceByDiscount() {
         return this.price * this.discount;

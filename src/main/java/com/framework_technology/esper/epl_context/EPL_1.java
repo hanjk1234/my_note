@@ -1,4 +1,6 @@
-package com.framework_technology.esper.epl;
+package com.framework_technology.esper.epl_context;
+
+import com.framework_technology.esper.javabean.Apple;
 
 /**
  * Created by IntelliJ IDEA.
@@ -144,7 +146,7 @@ public class EPL_1 {
 
          注意一定要是静态方法，不然没有实例化是没法引用的。
          */
-        EPL_Main_Examples.epAdministrator.getConfiguration().addImport(Apple.class);
+        Main_Execute.epAdministrator.getConfiguration().addImport(Apple.class);
         String epl5 = "select " + Apple.CLASSNAME + ".getPriceByDiscount2StaticMethod(r.price,r.discount) as discount_price from " + Apple.CLASSNAME + " as r";
 
         /**
@@ -297,7 +299,7 @@ public class EPL_1 {
      * 3.通常情况要保证分组数量有限制，以防止内存溢出。但是如果分组分了很多，就需要使用@Hint加以控制。
      *
      * @return epl
-     * @see com.framework_technology.esper.epl.EPL_1#annotation()
+     * @see com.framework_technology.esper.epl_context.EPL_1#annotation()
      */
     protected static String groupBy() {
         //TODO Conslole : Apple'saPrice is <null>,color  is <2> ,size is <1>"   NULL?记忆了上次计算的数据

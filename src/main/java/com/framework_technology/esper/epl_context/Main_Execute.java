@@ -1,16 +1,17 @@
-package com.framework_technology.esper.epl;
+package com.framework_technology.esper.epl_context;
 
 
 import com.espertech.esper.client.*;
+import com.framework_technology.esper.javabean.Apple;
 
 /**
  * main 函数测试
  *
  * @author wei.Li
  *         事件监听处理
- * @see com.framework_technology.esper.epl.AppleListener#update(com.espertech.esper.client.EventBean[], com.espertech.esper.client.EventBean[])
+ * @see com.framework_technology.esper.epl_context.AppleListener#update(com.espertech.esper.client.EventBean[], com.espertech.esper.client.EventBean[])
  */
-public class EPL_Main_Examples implements Runnable {
+public class Main_Execute implements Runnable {
 
     //线程执行时间间隔-ms
     private static final int EXECUTE_INTERVAL_MILLISECOND = 1000;
@@ -21,30 +22,45 @@ public class EPL_Main_Examples implements Runnable {
     protected static final EPAdministrator epAdministrator = defaultProvider.getEPAdministrator();
     protected static final EPRuntime epRuntime = defaultProvider.getEPRuntime();
 
-
     public static void main(String[] args) throws InterruptedException {
 
-        //获取 epl
-        String epl = EPL_1.groupBy();
+        /**
+         * 定义数据
+         * @see EPL_2#when()
+         */
+        ConfigurationOperations config = epAdministrator.getConfiguration();
+        config.addVariable("exceed", boolean.class, false);
 
-        EPStatement epStatement = epAdministrator.createEPL(epl);
+        //获取 epl
+        String[] epl = Context_1.contextProperties();
+        epAdministrator.createEPL(epl[0]);
+        EPStatement epStatement = epAdministrator.createEPL(epl[1]);
+
         //注册监听
         epStatement.addListener(new AppleListener());
 
-        new EPL_Main_Examples().run();
+        new Main_Execute().run();
 
     }
 
-    /**e
+    /**
      * use Thread add event
      */
     @Override
     public void run() {
-
         int temp = 1;
         while (temp <= EXECUTE_NUM) {
             temp++;
+
             epRuntime.sendEvent(Apple.getRandomApple());
+            /**
+             * 满足条件修改数据
+             * @see EPL_2#when()
+             */
+            if (temp % 3 == 0)
+                epRuntime.setVariableValue("exceed", true);
+
+
             try {
                 Thread.sleep(EXECUTE_INTERVAL_MILLISECOND);
             } catch (InterruptedException e) {
