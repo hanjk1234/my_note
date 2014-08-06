@@ -8,6 +8,8 @@ import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.QueryBuilders;
 
+import java.util.UUID;
+
 /**
  * Created by lw on 14-7-16.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,12 +329,20 @@ public class Es_FilterBuilders_DSL {
      */
     protected static FilterBuilder cache() {
         return FilterBuilders.andFilter(
-                FilterBuilders.rangeFilter("age").from(1000).to(9000),
-                FilterBuilders.prefixFilter("name", "葫芦3582")
+                FilterBuilders.rangeFilter("age").from(0).to(9000),
+                FilterBuilders.prefixFilter("name", "葫芦")
         )
                 .cache(true);//默认false
     }
+    protected static FilterBuilder cache_Temp() {
 
+        return FilterBuilders.andFilter(
+                FilterBuilders.termFilter("isRealMen", true)
+        )
+                .cache(true)//默认false
+                .cacheKey(UUID.randomUUID().toString());
+
+    }
 
     public static void main(String[] args) {
         Es_Utils.startupClient();

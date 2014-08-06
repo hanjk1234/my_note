@@ -9,8 +9,8 @@ import java.util.Map;
  * Date: 14-8-5
  * Time: 9:38
  * <p>
- * finally块的语句在try或catch中的return语句执行之后返回之前执行且finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值，
- * 若finally里也有return语句则覆盖try或catch中的return语句直接返回。
+ * finally块的语句在try或catch中的return语句(不含try,catch外)执行之后返回之前执行且finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值，
+ * 因为若finally里也有return语句则覆盖try或catch中的return语句直接返回。
  * <p>
  * 值传递、地址传递
  */
@@ -26,7 +26,7 @@ public class TryCatchFinally {
     private static int hasException() {
         int temp = 0;
         try {
-            temp = temp / 0;
+            temp = temp / 1;
             System.out.println("not have Exception ,return 0");
             return temp--;
         } catch (Exception e) {
@@ -38,6 +38,7 @@ public class TryCatchFinally {
             System.out.println("run  finally{   i++;  }  i=" + temp);
             //return 2;
         }
+        //return temp;
     }
 
     /**
@@ -114,7 +115,7 @@ public class TryCatchFinally {
 
 
     public static void main(String[] args) {
-        System.out.println("return : " + stringMapNotHasException());
+        System.out.println("return : " + hasException());
 
     }
 

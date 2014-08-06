@@ -125,7 +125,7 @@ public class Es_233_Utils {
     }
 
 
-    private static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA),
+    protected static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA),
             DATETIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.CHINA);
 
     /**

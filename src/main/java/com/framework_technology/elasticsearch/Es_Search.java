@@ -2,13 +2,12 @@ package com.framework_technology.elasticsearch;
 
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.count.CountRequest;
+import org.elasticsearch.action.count.CountRequestBuilder;
 import org.elasticsearch.action.count.CountResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
@@ -107,22 +106,49 @@ public class Es_Search {
      */
     protected static void searchByQuery_Count() {
 
-        long countByCount = Es_Utils.client.count(
+        /*long countByCount = Es_Utils.client.count(
                 new CountRequest(Es_Utils.INDEX_DEMO_01).types(Es_Utils.INDEX_DEMO_01_MAPPING)
+
         )
                 .actionGet()
-                .getCount();
+                .getCount();*/
         /*CountResponse countResponse =Es_Utils.client.count(
                 new CountRequest(Es_Utils.INDEX_DEMO_01).types(Es_Utils.INDEX_DEMO_01_MAPPING)
         )
                 .actionGet();
+                */
         //预准备
-        long countByPrepareCount = Es_Utils.client.prepareCount(Es_Utils.INDEX_DEMO_01)
-                .setTypes(Es_Utils.INDEX_DEMO_01_MAPPING)
-                .setQuery(QueryBuilders.termQuery("name", "葫芦1娃"))
-                .execute()
-                .actionGet()
-                .getCount();*/
-        System.out.println("searchByQuery_Count<{}>:" + countByCount);
+        for (int i = 0; i < 10; i++) {
+            FilterBuilder filterBuilder;
+            CountResponse countResponse;
+            String index = "";
+            long start = System.currentTimeMillis();
+            if (i >= 0) {
+                filterBuilder = Es_FilterBuilders_DSL.cache_Temp();
+                if (i%2==0) {
+                    index = "index_demo_02";
+                }else {
+                    index = "index_demo_01";
+                }
+                countResponse = Es_Utils.client.prepareCount(index)
+                        .setTypes(Es_Utils.INDEX_DEMO_01_MAPPING)
+                        .setQuery(new FilteredQueryBuilder(Es_QueryBuilders_DSL.matchAllQuery(), filterBuilder))
+                        .execute()
+                        .actionGet();
+            } else {
+                filterBuilder = Es_FilterBuilders_DSL.cache();
+                countResponse = Es_Utils.client.prepareCount(Es_Utils.INDEX_DEMO_ALL)
+                        .setTypes(Es_Utils.INDEX_DEMO_01_MAPPING)
+                        .setQuery(new FilteredQueryBuilder(Es_QueryBuilders_DSL.matchAllQuery(), filterBuilder))
+                        .execute()
+                        .actionGet();
+            }
+
+
+            System.out.println("cache search . result :" + (System.currentTimeMillis() - start) + " \t, count : " + countResponse.getCount());
+
+        }
+
+        System.out.println("searchByQuery_Count<{}>:" + "");
     }
 }
