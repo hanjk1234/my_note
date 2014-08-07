@@ -26,13 +26,13 @@ public class Main_Execute implements Runnable {
 
         /**
          * 定义数据
-         * @see EPL_3#when()
+         * @see EPL_3_Output#when()
          */
         ConfigurationOperations config = epAdministrator.getConfiguration();
         config.addVariable("exceed", boolean.class, false);
 
         //获取 epl
-        String[] epl = EPL_2_Context_1.contextProperties();
+        String[] epl = EPL_2_Context_2.contextOverlapping();
         epAdministrator.createEPL(epl[0]);
         EPStatement epStatement = epAdministrator.createEPL(epl[1]);
 
@@ -55,7 +55,7 @@ public class Main_Execute implements Runnable {
             epRuntime.sendEvent(Apple.getRandomApple());
             /**
              * 满足条件修改数据
-             * @see EPL_3#when()
+             * @see EPL_3_Output#when()
              */
             if (temp % 3 == 0)
                 epRuntime.setVariableValue("exceed", true);

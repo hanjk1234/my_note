@@ -5,7 +5,9 @@ import com.designmodel.proxy.BookFacadeProxy_Cglib;
 import java.util.StringTokenizer;
 
 /**
- * Created by lw on 14-5-5.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-5-5
  */
 public class Split {
 

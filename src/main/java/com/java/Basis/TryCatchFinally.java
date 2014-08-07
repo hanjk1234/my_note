@@ -9,8 +9,10 @@ import java.util.Map;
  * Date: 14-8-5
  * Time: 9:38
  * <p>
- * finally块的语句在try或catch中的return语句(不含try,catch外)执行之后返回之前执行且finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值，
- * 因为若finally里也有return语句则覆盖try或catch中的return语句直接返回。
+ * ①： finally块的语句在try或catch中的return语句执行之后返回之前执行且finally里的修改语句可能影响也可能不影响try或catch中 return已经确定的返回值，
+ * 因为如果finally里也有return语句则覆盖try或catch中的return语句直接返回。
+ * <p>
+ * ②：finally块的语句在try或catch外的return语句执行之后返回之前执行且finally里的修改语句影响try或catch外 return的返回值
  * <p>
  * 值传递、地址传递
  */
@@ -26,7 +28,7 @@ public class TryCatchFinally {
     private static int hasException() {
         int temp = 0;
         try {
-            temp = temp / 1;
+            temp = temp / 0;
             System.out.println("not have Exception ,return 0");
             return temp--;
         } catch (Exception e) {
@@ -40,6 +42,13 @@ public class TryCatchFinally {
         }
         //return temp;
     }
+    /*
+    执行结果:
+    run  catch{ i += 100; }  i=100
+    run  finally{   i++;  }  i=101
+    return : 100
+     */
+
 
     /**
      * 基本数据类型
@@ -50,7 +59,6 @@ public class TryCatchFinally {
     private static int notHasException() {
         int temp = 0;
         try {
-            temp = temp / 1;
             return temp--;
         } catch (Exception e) {
             temp += 100;
@@ -61,7 +69,13 @@ public class TryCatchFinally {
             System.out.println("run  finally{   i++;  }  i=" + temp);
             //return 2;
         }
+        //return temp;
     }
+    /*
+    执行结果:
+    run  finally{   i++;  }  i=0
+    return : 0
+     */
 
 
     /**
@@ -86,8 +100,15 @@ public class TryCatchFinally {
             map = null;
             System.out.println("run finally{ map.put(\"Key\", \"finally\"); map = null;} ,  map=" + map);
         }
-
+        //return map;
     }
+    /*
+    执行结果:
+    run catch{}  map={Key=catch}
+    run finally{ map.put("Key", "finally"); map = null;} ,  map=null
+    return : {Key=catch}
+     */
+
 
     /**
      * 引用类型
@@ -111,12 +132,17 @@ public class TryCatchFinally {
             System.out.println("run finally{ map.put(\"Key\", \"finally\"); map = null;} ,  map=" + map);
             return map;
         }
+        //return map;
     }
+    /*
+    执行结果:
+    run finally{ map.put("Key", "finally"); map = null;} ,  map=null
+    return : null
+     */
 
 
     public static void main(String[] args) {
-        System.out.println("return : " + hasException());
-
+        System.out.println("return : " + stringMapNotHasException());
     }
 
 }

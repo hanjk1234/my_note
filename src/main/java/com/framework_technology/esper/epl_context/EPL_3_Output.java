@@ -6,9 +6,10 @@ import com.framework_technology.esper.javabean.Apple;
  * Created by IntelliJ IDEA.
  * User: wei.Li
  * Date: 14-7-31
- * Time: 9:53
+ * <p>
+ * Output 用来控制Esper对事件流计算结果的输出时间和形式,可以以固定频率，也可以是某个时间点输出
  */
-public class EPL_3 {
+public class EPL_3_Output {
 
 
     /**
@@ -174,7 +175,7 @@ public class EPL_3 {
 
     /**
      Output和Aggregation，Group by一起使用时，first，last，all，snapshot四个关键字产生的效果会比较特别。
-     建议各位自己看看Esper的官方文档的Appendix A，有相当完整的例子做说明.
+     Esper的官方文档 【5.7. Stabilizing and Controlling Output: the Output Clause】，有相当完整的例子做说明.
      另外针对first，last，all，snapshot四个关键字，只有使用snapshot是不会缓存计算结果。
      其他的关键字会缓存事件直到触发了输出条件才会释放，所以如果输入的数据量比较大，就要注意输出条件被触发前的内存使用量。
 

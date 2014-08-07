@@ -15,11 +15,10 @@ class AppleListener implements UpdateListener {
     public void update(EventBean[] newEvents, EventBean[] oldEvents) {
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
+                EventBean event = newEvents[i];
                 //LOGGER.error("~~~~~~~~ newEvents‘s size is <{}> ~~~~~~~~", i);
                 EventBean eventBean = newEvents[i];
-                String key = "key1";
-                String[] keys = new String[]{"key1", "key2", "name", "id"};
-                LOGGER.info("Apple's " + key + " is <{}>, key2 is <{}> ,name is <{}>. id is <{}>", eventBean.get(keys[0]),eventBean.get(keys[1]),eventBean.get(keys[2]),eventBean.get(keys[3]));
+                System.out.println(eventBean.getUnderlying().toString());
             }
         }
 

@@ -2,7 +2,7 @@ package com.framework_technology.plug.jcommander;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import org.junit.Assert;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.List;

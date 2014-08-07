@@ -1,8 +1,9 @@
-package com.audition.String;
-
+package com.java.string;
 
 /**
- * Created by lw on 14-5-5.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-5-5
  */
 public class String_Char {
     private static String string = "liwei我爱我的China!";
@@ -56,9 +57,9 @@ class A {
     }
 
     void getX() {
-        int a=0;
+        int a = 0;
         boolean b;
-        int c=0;
-        b=a!=7;
+        int c = 0;
+        b = a != 7;
     }
 }

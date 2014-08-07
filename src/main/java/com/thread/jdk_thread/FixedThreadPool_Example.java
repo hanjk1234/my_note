@@ -6,7 +6,9 @@ import java.util.Random;
 import java.util.concurrent.*;
 
 /**
- * Created by lw on 14-7-1.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-7-1
  */
 public class FixedThreadPool_Example {
 
