@@ -4,7 +4,7 @@
     <groupId>com.springapp</groupId>
     <artifactId>my_note</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>my_note</name>
 
     <properties>
@@ -16,6 +16,7 @@
         <jackson.version>2.2.3</jackson.version>
         <org.slf4j-version>1.7.5</org.slf4j-version>
         <quartz.verison>2.1.7</quartz.verison>
+        <package.environment>etc_java</package.environment>
     </properties>
 
     <dependencies>
@@ -63,6 +64,7 @@
             <version>4.11</version>
         </dependency>
 
+        <!--elasticsearch-->
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
@@ -131,7 +133,7 @@
             <version>1.9</version>
         </dependency>
 
-
+        <!--esper-->
         <dependency>
             <groupId>com.espertech</groupId>
             <artifactId>esper</artifactId>
@@ -157,7 +159,7 @@
             <version>3.0.1</version>
         </dependency>
 
-
+        <!--disruptor-->
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
@@ -188,6 +190,7 @@
             <version>0.1</version>
         </dependency>
 
+        <!--google-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -206,13 +209,36 @@
 
     </dependencies>
 
+    <scm>
+        <connection>scm:svn:http://127.0.0.1/none</connection>
+        <developerConnection>
+            scm:svn:https://127.0.0.1/none
+        </developerConnection>
+        <tag>HEAD</tag>
+        <url>http://127.0.0.1/isaynone</url>
+    </scm>
+
     <build>
-        <finalName>my_note</finalName>
+        <!--<finalName>my_note</finalName>-->
+        <finalName>${project.artifactId}##${project.version}_${package.environment}</finalName>
+
         <plugins>
+
+            <!-- For resource encoding in copy -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.0</version>
             </plugin>
+
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
@@ -221,6 +247,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.10</version>
@@ -230,7 +257,58 @@
                     </includes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <timestampFormat>{0,date,MM/dd/yyyy hh:mm:ss a}</timestampFormat>
+                    <doUpdate>false</doUpdate>
+                    <doCheck>false</doCheck>
+                    <format>{1}</format>
+                    <items>
+                        <item>timestamp</item>
+                        <item>scmVersion</item>
+                        <item>buildNumber</item>
+                    </items>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>src/main/${package.environment}_resources</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                    <archive>
+                        <manifestEntries>
+                            <Revision>${buildNumber}</Revision>
+                            <Build-Time>${timestamp}</Build-Time>
+                        </manifestEntries>
+                    </archive>
+                    <outputDirectory>target/deploy/${package.environment}</outputDirectory>
+                </configuration>
+            </plugin>
+
         </plugins>
+
+
         <!-- Resource Filters for build.properties -->
         <resources>
             <resource>
@@ -239,4 +317,15 @@
             </resource>
         </resources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>etc_java</id>
+            <properties>
+                <package.environment>etc_java</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+
 </project>

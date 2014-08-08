@@ -212,7 +212,7 @@ public class Server extends Thread {
     }
 
     public static void main(String argv[]) throws IOException {
-        MODES.load(Server.class.getClassLoader().getResourceAsStream("statements.properties"));
+        MODES.load(Server.class.getClassLoader().getResourceAsStream("esper_benchmark.properties"));
         MODES.put("NOOP", "");
 
         int port = DEFAULT_PORT;

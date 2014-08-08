@@ -11,11 +11,12 @@ public class GetResourceAsStream {
 
 
     protected static void aVoid() {
-        URL uri =GetResourceAsStream.class.getClassLoader().getResource("src/main/etc/say.txt");
+        URL uri = GetResourceAsStream.class.getClassLoader().getResource("esper_benchmark.properties");
         System.out.println(uri != null ? uri.getPath() : null);
     }
 
     public static void main(String[] args) {
+
         aVoid();
     }
 }
