@@ -6,7 +6,13 @@ package com.framework_technology.esper.epl_context;
  * User: wei.Li
  * Date: 14-8-7
  * <p>
- * Context 过滤条件
+ * Context 过滤条件   {@link #contextFilterCondition()}
+ * <p>
+ * 模式过滤             {@link #contextPatternCondition()}
+ * 定时任务过滤           {@link #contextCrontabCondition()}
+ * 时间段条件过滤          {@link #contextTimePeriodCondition()}
+ * 嵌套的context过滤         {@link #contextNesting()}
+ * 查看 context 的内容       {@link #ContextEndsOutPut()}
  */
 public class EPL_2_Context_3 {
 
@@ -199,14 +205,4 @@ public class EPL_2_Context_3 {
         return null;
     }
 
-
-    /**
-     * TODO unsolved
-     *
-     * @return epl[]
-     */
-    protected static String[] ContextAndNamedWindow() {
-
-        return null;
-    }
 }

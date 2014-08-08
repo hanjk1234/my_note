@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="my_note:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="my_note##1.0_etc_java.war">
+      <element id="artifact" artifact-name="my_note:war exploded" />
+    </root>
+  </artifact>
+</component>

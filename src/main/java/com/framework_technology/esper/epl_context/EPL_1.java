@@ -168,6 +168,10 @@ public class EPL_1 {
          newEvents通常对应事件的计算结果，oldEvents可以理解过上一次计算结果。
          默认情况下，只有newEvents有值，oldEvents为null。
          如果需要查看oldEvents，则需要使用一个参数。
+
+         在滑动时间窗口中，CEP会在每条事件进入和移出窗口时，执行EPL语句，比如istream分析窗口内的事件，当有事件移出时，也会对当前窗口内的事件进行统计
+         rstream分析移出窗口的事件，但当有事件进入时，也会统计当前移出窗口的事件的总数，当窗口中无数据时，看上去像是把一个空数据移出了
+         @see com.framework_technology.esper.views.View_1#dataWindowViews() -> String epl3
          */
         String epl6 = "select rstream * from " + Apple.CLASSNAME;
         String epl7 = "select irstream * from " + Apple.CLASSNAME;
@@ -303,7 +307,7 @@ public class EPL_1 {
      */
     protected static String groupBy() {
         //TODO Conslole : Apple'saPrice is <null>,color  is <2> ,size is <1>"   NULL?记忆了上次计算的数据
-        // 根据color和size来对10个Apple事件进行分组计算平均price
+        // 根据color和size来对5个Apple事件进行分组计算平均price
         String epl1 = "select avg(price) as aPrice, color, size from " + Apple.CLASSNAME + ".win:length_batch(5) group by color,size";
 
         //通常Having配合Group by使用，如果没有使用Group by，那么就只有一组。
