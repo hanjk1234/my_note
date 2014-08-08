@@ -9,7 +9,7 @@ import com.framework_technology.esper.javabean.Apple;
  * <p>
  * 1.类别分组新建 context        {@link #contextCategorySegmented()}
  * 2.通过开始和结束条件控制 context 的新建和停止（重叠和非重叠）     {@link #contextNon_Overlapping(),#contextOverlapping()}
- * 3.不同的事件的起始条件        {@link #contextDistinctEventsForTheInitiatingCondition()}
+ * 3.不同的事件的起始条件         {@link #contextDistinctEventsForTheInitiatingCondition()}
  */
 public class EPL_2_Context_2 {
 
