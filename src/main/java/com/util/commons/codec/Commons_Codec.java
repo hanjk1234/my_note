@@ -9,7 +9,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by lw on 14-4-18.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-4-18
  */
 public class Commons_Codec {
 
@@ -18,7 +20,7 @@ public class Commons_Codec {
 
     /**
      * Base64 编解码
-     * <p/>
+     * <p>
      * 将 bytecode 转换成 ascii 码
      */
     public static void base64() {
@@ -38,7 +40,7 @@ public class Commons_Codec {
 
     /**
      * Hex 编解码
-     * <p/>
+     * <p>
      * 通常我们会对于 URL Form GET 时候进行 16 进位编码, 将 byte[] 转成 char[]
      */
     public static void hex() {
@@ -60,7 +62,6 @@ public class Commons_Codec {
 
     /**
      * md5 加密
-     * <p/>
      */
     public static void md5() {
 

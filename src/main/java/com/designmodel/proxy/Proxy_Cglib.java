@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by lw on 14-5-1.
- * <p/>
+ * <p>
  * cglib动态代理
  * 项目中计时方法执行计时使用
  */
@@ -19,8 +19,8 @@ public class Proxy_Cglib implements MethodInterceptor {
     /**
      * 创建代理对象
      *
-     * @param object
-     * @return
+     * @param object 代理对象
+     * @return 代理对象
      */
     public Object getInstance(Object object) {
         this.object = object;

@@ -39,7 +39,6 @@ public class Es_Utils {
      * startup Transport Client
      * 启动es
      *
-     * @return
      */
     protected static void startupClient() {
         /**
@@ -67,20 +66,19 @@ public class Es_Utils {
     /**
      * 获取所有index
      *
-     * @return
      */
     protected static void getAllIndices() {
         ActionFuture<IndicesStatsResponse> isr = client.admin().indices().stats(new IndicesStatsRequest().all());
         IndicesAdminClient  indicesAdminClient =client.admin().indices();
         Map<String, IndexStats> indexStatsMap = isr.actionGet().getIndices();
         Set<String> set = isr.actionGet().getIndices().keySet();
-        set.forEach(System.out::println);
+        //set.forEach(System.out::println);
     }
 
     /**
      * 打印SearchResponse结果集
      *
-     * @param response
+     * @param response response
      */
     protected static void writeSearchResponse(SearchResponse response) {
         SearchHit[] searchHitsByPrepareSearch = response.getHits().hits();

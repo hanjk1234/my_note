@@ -219,14 +219,18 @@ public class POJO_EventType implements Runnable {
 
         EPStatement epStatement = epAdministrator.createEPL(epl);
         //注册修改事件监听
-        epStatement.addListener((newEvents, oldEvents) -> {
-            if (newEvents != null) {
-                System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
-                System.out.println("Person's age        is \t" + newEvents[0].get("age"));
-                System.out.println("Person's children   is \t" + newEvents[0].get("children"));
-                System.out.println("Person's address    is \t" + newEvents[0].get("address"));
+        UpdateListener updateListener = new My_UpdateListener() {
+            @Override
+            public void update_Event(EventBean[] newEvents) {
+                if (newEvents != null) {
+                    System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
+                    System.out.println("Person's age        is \t" + newEvents[0].get("age"));
+                    System.out.println("Person's children   is \t" + newEvents[0].get("children"));
+                    System.out.println("Person's address    is \t" + newEvents[0].get("address"));
+                }
             }
-        });
+        };
+        epStatement.addListener(updateListener);
 
         //默认添加2个事件
         Person person = Person.getRandomPerson();
@@ -254,22 +258,27 @@ public class POJO_EventType implements Runnable {
             System.out.println(eventBean.getName());
         }
 
-        //注册修改事件监听
-        epStatement.addListener((newEvents, oldEvents) -> {
-            if (newEvents != null) {
-                System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
-                System.out.println("Person's children[1]        is \t" + newEvents[0].get("children[1]"));
-                System.out.println("Person's phones('home')     is \t" + newEvents[0].get("phones('home')"));
-                System.out.println("Person's address.road       is \t" + newEvents[0].get("address.road"));
+        UpdateListener updateListener = new UpdateListener(){
+
+            @Override
+            public void update(EventBean[] newEvents, EventBean[] oldEvents) {
+                if (newEvents != null) {
+                    System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
+                    System.out.println("Person's children[1]        is \t" + newEvents[0].get("children[1]"));
+                    System.out.println("Person's phones('home')     is \t" + newEvents[0].get("phones('home')"));
+                    System.out.println("Person's address.road       is \t" + newEvents[0].get("address.road"));
+                }
+                if (oldEvents != null) {
+                    System.out.println("~~~~~~~~~~~~~oldEvents write~~~~~~~~~~~~~~");
+                    System.out.println("Person's children[1]        is \t" + oldEvents[0].get("children[1]"));
+                    System.out.println("Person's phones('home')     is \t" + oldEvents[0].get("phones('home')"));
+                    System.out.println("Person's address.road       is \t" + oldEvents[0].get("address.road"));
+                } else
+                    System.out.println("~~~~~~~~~~~~~oldEvents not find ~~~~~~~~~~~~~~");
             }
-            if (oldEvents != null) {
-                System.out.println("~~~~~~~~~~~~~oldEvents write~~~~~~~~~~~~~~");
-                System.out.println("Person's children[1]        is \t" + oldEvents[0].get("children[1]"));
-                System.out.println("Person's phones('home')     is \t" + oldEvents[0].get("phones('home')"));
-                System.out.println("Person's address.road       is \t" + oldEvents[0].get("address.road"));
-            } else
-                System.out.println("~~~~~~~~~~~~~oldEvents not find ~~~~~~~~~~~~~~");
-        });
+        };
+        //注册修改事件监听
+        epStatement.addListener(updateListener);
 
         //启动线程添加事件
         new POJO_EventType().run();

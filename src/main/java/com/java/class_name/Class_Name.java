@@ -5,24 +5,23 @@ import java.util.ArrayList;
 
 /**
  * Created by lw on 14-7-18.
- * <p/>
+ * <p>
  * TODO 一般，用于load class的时候，比如说Class.forName，就需要用Class.getName而不是Class.getCononicalName
- * <p/>
+ * <p>
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * public String getCanonicalName()
  * 返回 Java Language Specification 中所定义的底层类的规范化名称。
  * 如果底层类没有规范化名称（即如果底层类是一个组件类型没有规范化名称的本地类、匿名类或数组），则返回 null。
- * <p/>
+ * <p>
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *
- * @see public String getName()
- * 以 String 的形式返回此 Class 对象所表示的实体（类、接口、数组类、基本类型或 void）名称。
+ * 以 String 的形式返回此 Class 对象所表示的实体类、接口、数组类、基本类型或 void名称。
  * 如果此类对象表示的是非数组类型的引用类型，则返回该类的二进制名称，Java Language Specification, Second Edition 对此作了详细说明。
- * <p/>
+ * <p>
  * 如果此类对象表示一个基本类型或 void，则返回的名字是一个与该基本类型或 void 所对应的 Java 语言关键字相同的 String。
- * <p/>
+ * <p>
  * 如果此类对象表示一个数组类，则名字的内部形式为：表示该数组嵌套深度的一个或多个 '[' 字符加元素类型名。元素类型名的编码如下：
- * <p/>
+ * <p>
  * Element Type	    	 Encoding
  * boolean	    	         Z
  * byte	    	             B

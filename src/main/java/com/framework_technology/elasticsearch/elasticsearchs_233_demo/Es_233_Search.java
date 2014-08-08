@@ -15,9 +15,8 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 /**
  * Created by lw on 14-7-15.
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
  * 搜索
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 public class Es_233_Search {
 
@@ -32,7 +31,7 @@ public class Es_233_Search {
     /**
      * 搜索，通过Id搜索API
      *
-     * @param id
+     * @param id id 值
      */
     protected void searchById(String id) {
         GetResponse responsere = client.prepareGet(Es_233_Utils.INDEX_DEMO_01, Es_233_Utils.INDEX_DEMO_01_MAPPING, id)
@@ -59,9 +58,9 @@ public class Es_233_Search {
     /**
      * 构建 SearchRequestBuilder
      *
-     * @param type
-     * @param indices
-     * @return
+     * @param type    索引类型
+     * @param indices 索引名称
+     * @return SearchRequestBuilder
      */
     protected SearchRequestBuilder builderSearchRequestBuilderByIndex(String type, String... indices) {
 
@@ -73,7 +72,9 @@ public class Es_233_Search {
     /**
      * 构建 SearchRequestBuilder
      *
-     * @return
+     * @param queryBuilder         queryBuilder
+     * @param searchRequestBuilder searchRequestBuilder
+     * @return SearchRequestBuilder SearchRequestBuilder
      */
     protected SearchRequestBuilder builderSearchRequestBuilder(SearchRequestBuilder searchRequestBuilder, QueryBuilder queryBuilder) {
 
@@ -84,8 +85,8 @@ public class Es_233_Search {
     /**
      * 执行搜索
      *
-     * @param searchRequestBuilder
-     * @return
+     * @param searchRequestBuilder SearchRequestBuilder
+     * @return SearchResponse
      */
     protected SearchResponse builderSearchResponse(SearchRequestBuilder searchRequestBuilder) {
         SearchResponse searchResponse = null;
@@ -100,6 +101,7 @@ public class Es_233_Search {
 
     /**
      * 搜索，Query搜索API
+     * <p>
      * 条件组合查询
      */
     protected void searchByQuery() {
@@ -154,6 +156,7 @@ public class Es_233_Search {
 
     /**
      * 搜索，Query搜索API
+     * <p>
      * count查询
      */
     protected void searchByQuery_Count() {

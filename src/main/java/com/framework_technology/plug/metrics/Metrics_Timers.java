@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lw on 14-7-2.
- * <p/>
+ * <p>
  *Timers主要是用来统计某一块代码段的执行时间以及其分布情况，具体是基于Histograms和Meters来实现的。
  */
 public class Metrics_Timers {

@@ -17,10 +17,11 @@ import org.elasticsearch.index.query.QueryBuilders;
  */
 public class Es_QueryBuilders_DSL {
 
+
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * match query 单个匹配
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder matchQuery() {
         return QueryBuilders.matchQuery("name", "葫芦4032娃");
@@ -28,10 +29,10 @@ public class Es_QueryBuilders_DSL {
 
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * multimatch  query
      * 创建一个匹配查询的布尔型提供字段名称和文本。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder multiMatchQuery() {
         //现住址和家乡在【山西省太原市7429街道】的人
@@ -42,9 +43,9 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * boolean query and 条件组合查询
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder booleanQuery() {
 
@@ -57,10 +58,10 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * ids query
      * 构造一个只会匹配的特定数据 id 的查询。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder idsQuery() {
         return QueryBuilders.idsQuery().ids("CHszwWRURyK08j01p0Mmug", "ojGrYKMEQCCPvh75lHJm3A");
@@ -68,15 +69,16 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * constant score query
      * 另一个查询和查询,包裹查询只返回一个常数分数等于提高每个文档的查询。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder constantScoreQuery() {
         /*return // Using with Filters
                 QueryBuilders.constantScoreQuery(FilterBuilders.termFilter("name", "kimchy"))
-                        .boost(2.0f);*/
+                        .boost(2.0f);@return QueryBuilder */
 
         // With Queries
         return QueryBuilders.constantScoreQuery(QueryBuilders.termQuery("name", "葫芦3033娃"))
@@ -85,12 +87,13 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * disjunction max query
      * 一个生成的子查询文件产生的联合查询，
      * 而且每个分数的文件具有最高得分文件的任何子查询产生的，
      * 再加上打破平手的增加任何额外的匹配的子查询。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder disMaxQuery() {
         return QueryBuilders.disMaxQuery()
@@ -101,10 +104,10 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * fuzzy query
      * 使用模糊查询匹配文档查询。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder fuzzyQuery() {
         return QueryBuilders.fuzzyQuery("name", "葫芦3582");
@@ -112,10 +115,11 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * has child / has parent
      * 父或者子的文档查询
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder hasChildQuery() {
         return // Has Child
@@ -124,14 +128,14 @@ public class Es_QueryBuilders_DSL {
 
         // Has Parent
         /*return QueryBuilders.hasParentQuery("blog",
-                QueryBuilders.termQuery("tag","something"));*/
+                QueryBuilders.termQuery("tag","something"));@return QueryBuilder */
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * matchall query
      * 查询匹配所有文件。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder matchAllQuery() {
         return QueryBuilders.matchAllQuery();
@@ -139,27 +143,17 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * more like this (field) query (mlt and mlt_field)
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     * percent_terms_to_match：  匹配项（term）的百分比，默认是0.3
-     * min_term_freq：           一篇文档中一个词语至少出现次数，小于这个值的词将被忽略，默认是2
-     * max_query_terms：         一条查询语句中允许最多查询词语的个数，默认是25
-     * stop_words：               设置停止词，匹配时会忽略停止词
-     * min_doc_freq：            一个词语最少在多少篇文档中出现，小于这个值的词会将被忽略，默认是无限制
-     * max_doc_freq：            一个词语最多在多少篇文档中出现，大于这个值的词会将被忽略，默认是无限制
-     * min_word_len：            最小的词语长度，默认是0
-     * max_word_len：            最多的词语长度，默认无限制
-     * boost_terms：             设置词语权重，默认是1
-     * boost：                   设置查询权重，默认是1
-     * analyzer：                设置使用的分词器，默认是使用该字段指定的分词器
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder moreLikeThisQuery() {
         // mlt Query
-        QueryBuilders.moreLikeThisQuery("home", "now_home") // Fields
-                .likeText("山西省太原市7429街道")                 // Text
+        QueryBuilders.moreLikeThisQuery("home", "now_home")     // Fields
+                .likeText("山西省太原市7429街道")                  // Text
                 .minTermFreq(1)                                 // Ignore Threshold
-                .maxQueryTerms(12);                          // Max num of Terms
+                .maxQueryTerms(12);                             // Max num of Terms
         // in generated queries
 
         // mlt_field Query
@@ -170,10 +164,10 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * prefix query
      * 包含与查询相匹配的文档指定的前缀。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder prefixQuery() {
         return QueryBuilders.prefixQuery("name", "葫芦31");
@@ -181,7 +175,7 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * querystring query
      * 　　查询解析查询字符串,并运行它。有两种模式,这种经营。
      * 第一,当没有添加字段(使用{ @link QueryStringQueryBuilder #字段(String)},将运行查询一次,非字段前缀
@@ -189,17 +183,18 @@ public class Es_QueryBuilders_DSL {
      * 第二,当一个或多个字段
      * 　　(使用{ @link QueryStringQueryBuilder #字段(字符串)}),将运行提供的解析查询字段,并结合
      * 　　他们使用DisMax或者一个普通的布尔查询(参见{ @link QueryStringQueryBuilder # useDisMax(布尔)})。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder queryString() {
         return QueryBuilders.queryString("+kimchy -elasticsearch");
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * range query
      * 查询相匹配的文档在一个范围。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder rangeQuery() {
         return QueryBuilders
@@ -211,10 +206,10 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * span queries (first, near, not, or, term)
      * 跨度查询
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder spanQueries() {
         // Span First
@@ -249,10 +244,10 @@ public class Es_QueryBuilders_DSL {
 
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * term query
      * 一个查询相匹配的文件包含一个术语。。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder termQuery() {
         return QueryBuilders.termQuery("name", "葫芦580娃");
@@ -260,10 +255,10 @@ public class Es_QueryBuilders_DSL {
 
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * terms query
      * 一个查询相匹配的多个value
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder termsQuery() {
         return QueryBuilders.termsQuery("name", // field
@@ -273,10 +268,11 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * top children  query
      * 构建了一种新的评分的子查询，与子类型和运行在子文档查询。这个查询的结果是，那些子父文档文件匹配。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder topChildrenQuery() {
         return QueryBuilders.topChildrenQuery(
@@ -289,15 +285,14 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * wildcard query
-     * 　　实现了通配符搜索查询。支持通配符* < /tt>,<tt>
-     * 　　匹配任何字符序列(包括空),<tt> ? < /tt>,
+     * 　　实现了通配符搜索查询。支持通配符*
+     * 　　匹配任何字符序列(包括空), ? ,
      * 　　匹配任何单个的字符。注意该查询可以缓慢,因为它
      * 　　许多方面需要遍历。为了防止WildcardQueries极其缓慢。
-     * 　　一个通配符词不应该从一个通配符* < /tt>或<tt>
-     * 　　< /tt> <tt> ?。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * 　　一个通配符词不应该从一个通配符*或?。
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder wildcardQuery() {
         return QueryBuilders.wildcardQuery("name", "葫芦*2娃");
@@ -305,10 +300,11 @@ public class Es_QueryBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * p
      * nested query
      * 嵌套查询
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static QueryBuilder nestedQuery() {
         return QueryBuilders.nestedQuery("location",               // Path
@@ -320,10 +316,10 @@ public class Es_QueryBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * indices query
      * 索引查询
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return QueryBuilder
      */
     protected static IndicesQueryBuilder indicesQuery() {
         // Using another query when no match for the main one
@@ -364,8 +360,8 @@ public class Es_QueryBuilders_DSL {
                         //注册监听事件
                 .addListener(new ActionListener<SearchResponse>() {
                     @Override
-                    public void onResponse(SearchResponse searchResponse) {
-                        Es_Utils.writeSearchResponse(searchResponse);
+                    public void onResponse(SearchResponse response) {
+
                     }
 
                     @Override

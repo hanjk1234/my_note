@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * A Stats instance gathers percentile based on a given histogram
  * This class is thread unsafe.
- * @see com.espertech.esper.example.benchmark.server.StatsHolder for thread safe access
  * Use createAndMergeFrom(proto) for best effort merge of this instance into the proto instance
  * (no read / write lock is performed so the actual counts are a best effort)
  *
@@ -43,6 +42,9 @@ public class Stats {
 
     /**
      * Use this method to merge this stat instance into a prototype one (for thread safe read only snapshoting)
+     *
+     * @param model model
+     * @return Stats
      */
     public static Stats createAndMergeFrom(Stats model) {
         Stats r = new Stats(model.name, model.unit, 0);
@@ -59,7 +61,7 @@ public class Stats {
             internal_reset();
 
         count++;
-        avg = (avg*(count-1) + ns)/count;
+        avg = (avg * (count - 1) + ns) / count;
         if (ns >= histogram[histogram.length - 1]) {
             counts[counts.length - 1]++;
         } else {
@@ -85,10 +87,10 @@ public class Stats {
             if (index != counts.length - 1) {
                 System.out.printf("  %7d < %7d: %6.2f%% %6.2f%% #%d\n",
                         lastLevel, histogram[index], (float) occur / count * 100,
-                        (float) occurCumul  / count * 100, occur);
+                        (float) occurCumul / count * 100, occur);
                 lastLevel = histogram[index];
             } else {
-                System.out.printf("  %7d <    more: %6.2f%% %6.2f%% #%d\n", lastLevel, (float)occur /count * 100, 100f, occur);
+                System.out.printf("  %7d <    more: %6.2f%% %6.2f%% #%d\n", lastLevel, (float) occur / count * 100, 100f, occur);
             }
             index++;
         }
@@ -130,7 +132,7 @@ public class Stats {
 
         long l = 100;
         long l2 = 3;
-        System.out.println(""+ (float) l/l2);
-        System.out.printf("%15.4f", (float) l/l2);
+        System.out.println("" + (float) l / l2);
+        System.out.printf("%15.4f", (float) l / l2);
     }
 }

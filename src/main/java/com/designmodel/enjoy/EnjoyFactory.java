@@ -9,7 +9,7 @@ import java.util.Map;
  * 享元模式
  * 由不同的名字获取对应的数据库连接
  * 与对象池的区别是每个name有自己共享对应的对象。
- * <p/>
+ * <p>
  * javax.sql.DataSource 以数据库连接池为实际class
  */
 public class EnjoyFactory {

@@ -14,8 +14,8 @@ public class BookFacadeProxy_JDK implements InvocationHandler {
     /**
      * 绑定委托对象并返回一个代理类
      *
-     * @param object
-     * @return
+     * @param object 委托对象
+     * @return 代理类
      */
     public Object bind(Object object) {
         this.object = object;

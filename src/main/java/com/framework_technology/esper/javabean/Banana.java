@@ -63,8 +63,8 @@ public class Banana {
     }
 
     /**
-     * @param price
-     * @param discount
+     * @param price price
+     * @param discount discount
      * @return Banana 折扣后的价格
      */
     public double getPriceByDiscount(int price, double discount) {
@@ -74,8 +74,8 @@ public class Banana {
     /**
      * 静态方法
      *
-     * @param price
-     * @param discount
+     * @param price price
+     * @param discount discount
      * @return Banana 折扣后的价格
      */
     public static double getPriceByDiscount2StaticMethod(int price, double discount) {

@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by lw on 14-4-22.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-4-22
  */
 public abstract class Task implements Runnable {
     // private static Logger logger = Logger.getLogger(Task.class);
@@ -41,21 +43,22 @@ public abstract class Task implements Runnable {
     /**
      * 所有任务的核心 所有特别的业务逻辑执行之处
      *
-     * @throws Exception
+     * @return Task[]
+     * @throws Exception Exception
      */
     public abstract Task[] taskCore() throws Exception;
 
     /**
      * 是否用到数据库
      *
-     * @return
+     * @return 是否用到数据库
      */
     protected abstract boolean useDb();
 
     /**
      * 是否需要立即执行
      *
-     * @return
+     * @return boolean
      */
     protected abstract boolean needExecuteImmediate();
 

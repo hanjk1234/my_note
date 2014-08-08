@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by lw on 14-5-18.
- * <p/>
+ * <p>
  * 交换变量的几种方式
  */
 public class Replace {

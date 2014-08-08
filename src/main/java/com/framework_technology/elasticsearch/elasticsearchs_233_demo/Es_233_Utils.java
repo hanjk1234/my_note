@@ -18,12 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- *
  * Created by lw on 14-7-15.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * startup and shutDownClient ----》Client
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
  */
 public class Es_233_Utils {
 
@@ -40,8 +38,6 @@ public class Es_233_Utils {
     /**
      * startup Transport Client
      * 启动es
-     *
-     * @return
      */
     protected static void startupClient() {
         /**
@@ -66,8 +62,6 @@ public class Es_233_Utils {
 
     /**
      * 获取所有index
-     *
-     * @return
      */
     protected static void getAllIndices() {
         ActionFuture<IndicesStatsResponse> isr = client.admin().indices().stats(new IndicesStatsRequest().all());
@@ -84,8 +78,8 @@ public class Es_233_Utils {
     /**
      * 获取某个alias指向的index
      *
-     * @param alias
-     * @return
+     * @param alias alias
+     * @return index
      */
     public String aliasTarget(String alias) {
         // The ES return value of this has an awkward format: The first key of the hash is the target index. Thanks.
@@ -103,9 +97,10 @@ public class Es_233_Utils {
 
     /**
      * 查询indices 是否存在
+     *
+     * @param indices 索引名称
+     * @return boolean
      * @see #aliasTarget(String)
-     * @param indices
-     * @return
      */
     protected static boolean isExistsIndices(String... indices) {
         return client.admin().indices().exists(new IndicesExistsRequest(indices)).actionGet().isExists();
@@ -114,7 +109,7 @@ public class Es_233_Utils {
     /**
      * 打印SearchResponse结果集
      *
-     * @param response
+     * @param response SearchResponse
      */
     protected static void writeSearchResponse(SearchResponse response) {
         SearchHit[] searchHitsByPrepareSearch = response.getHits().hits();
@@ -132,8 +127,8 @@ public class Es_233_Utils {
      * SearchResponse结果集转Map
      * 获取某指标的值set去重打印
      *
-     * @param response
-     * @param filed 获取指标的字段名称
+     * @param response response
+     * @param filed    获取指标的字段名称
      */
     protected static void writeSearchResponseToMap(SearchResponse response, String filed) {
         if (null == response) {
@@ -147,12 +142,14 @@ public class Es_233_Utils {
             String s = searchHit.getSourceAsString();
             Map map = Json_To_Map.json_To_Map(s);
             Set set = map.keySet();
+/*
             set.stream().filter(s1 -> s1.equals(filed)).forEach(s1 -> {
                 long aLong = Long.parseLong((map.get(s1) + ""));
                 stringSet.add(DATETIME_FORMATTER.format(new Date(aLong * 1000L)));
             });
+*/
         }
-        stringSet.forEach(System.out::println);
+        //stringSet.forEach(System.out::println);
     }
 
 

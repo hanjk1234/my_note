@@ -70,14 +70,18 @@ public class Map_EventType {
         String epl = "select age,children from Person where name=\"xiaohulu\"";
         EPStatement epStatement = epAdministrator.createEPL(epl);
         //注册修改事件监听
-        epStatement.addListener((newEvents, oldEvents) -> {
-            if (newEvents != null) {
-                System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
-                System.out.println("Person's age        is \t" + newEvents[0].get("age"));
-                System.out.println("Person's children   is \t" + newEvents[0].get("children"));
-                System.out.println("Person's address    is \t" + newEvents[0].get("address"));
+        UpdateListener updateListener = new My_UpdateListener() {
+            @Override
+            public void update_Event(EventBean[] newEvents) {
+                if (newEvents != null) {
+                    System.out.println("~~~~~~~~~~~~~newEvents write~~~~~~~~~~~~~~");
+                    System.out.println("Person's age        is \t" + newEvents[0].get("age"));
+                    System.out.println("Person's children   is \t" + newEvents[0].get("children"));
+                    System.out.println("Person's address    is \t" + newEvents[0].get("address"));
+                }
             }
-        });
+        };
+        epStatement.addListener(updateListener);
         final EPRuntime epRuntime = defaultProvider.getEPRuntime();
 
         Map<String, Object> addressMap = new HashMap<String, Object>();

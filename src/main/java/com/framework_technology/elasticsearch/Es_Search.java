@@ -23,7 +23,7 @@ public class Es_Search {
     /**
      * 搜索，通过Id搜索API
      *
-     * @param id
+     * @param id id
      */
     protected static void searchById(String id) {
         GetResponse responsere = Es_Utils.client.prepareGet(Es_Utils.INDEX_DEMO_01, Es_Utils.INDEX_DEMO_01_MAPPING, id)
@@ -124,7 +124,7 @@ public class Es_Search {
             String index = "";
             long start = System.currentTimeMillis();
             if (i >= 0) {
-                filterBuilder = Es_FilterBuilders_DSL.cache_Temp();
+                filterBuilder = Es_FilterBuilders_DSL.cache();
                 if (i%2==0) {
                     index = "index_demo_02";
                 }else {

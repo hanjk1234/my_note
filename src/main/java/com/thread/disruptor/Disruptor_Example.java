@@ -61,6 +61,8 @@ public class Disruptor_Example {
      * 通过 seq 检索消息；
      * 修改消息的 value 属性；
      * 通过 publish 方法，告知消费者线程，当前索引位置的消息可被消费了
+     *
+     * @param event 事件
      */
     protected static void addEVent(ValueEvent event) {
         if (hasCapacity()) {
@@ -89,7 +91,7 @@ public class Disruptor_Example {
     /**
      * 获取ringBuffer剩余量是否低于RINGBUFFER_SIZE * 0.1
      *
-     * @return
+     * @return boolean
      */
     public static boolean hasCapacity() {
         return (ringBuffer.remainingCapacity() < RINGBUFFER_SIZE * 0.1);

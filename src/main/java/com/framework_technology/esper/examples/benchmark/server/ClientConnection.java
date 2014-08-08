@@ -22,8 +22,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * the underlying ESP/CEP engine by using/or not the executor policy.
  * Each ClientConnection manages a throughput statistic (evt/10s) over a 10s batched window
  *
- * @See Server
  * @author Alexandre Vasseur http://avasseur.blogspot.com
+ * @see Server
  */
 public class ClientConnection extends Thread {
 

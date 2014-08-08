@@ -89,7 +89,7 @@ class Outputer {
     }
 
     public void aVoid2SetValue() {
-        Runnable runnable;
+       /* Runnable runnable;
         runnable = () -> {
             for (int i = 0; i < 100; i++) {
                 List<String> list = new ArrayList<>();
@@ -107,22 +107,25 @@ class Outputer {
 
 
         Thread thread = new Thread(runnable);
-        thread.start();
+        thread.start();*/
     }
 
 
     public void aVoid2GetValue() {
-        Runnable runnable = () -> {
-            for (int i = 0; i < 100; i++) {
-                try {
-                    Thread.sleep(new Random().nextInt(2000));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Read Value : " + STRING_LIST);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    try {
+                        Thread.sleep(new Random().nextInt(2000));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Read Value : " + STRING_LIST);
 
+                }
             }
-        };
+        } ;
 
 
         for (int i = 0; i < 10; i++) {

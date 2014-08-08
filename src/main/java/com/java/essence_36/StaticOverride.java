@@ -2,15 +2,15 @@ package com.java.essence_36;
 
 /**
  * Created by lw on 14-5-18.
- * <p/>
+ * <p>
  * 1.静态方法不能重写
  * 2.成员变量也不可用重写，只可以隐藏，
- *  相对于方法的隐藏，成员变量的隐藏只要求父类与之类的成员变量名称相同
- *  并且父类的成员变量在子类中可见。与成员变量的访问权限、类型、实例变量还是静态变量无关。
+ * 相对于方法的隐藏，成员变量的隐藏只要求父类与之类的成员变量名称相同
+ * 并且父类的成员变量在子类中可见。与成员变量的访问权限、类型、实例变量还是静态变量无关。
  * 3.重写与隐藏的区别是：
- *  重写是动态绑定，隐藏是静态绑定，根据编译时引用的静态类型来决定调用相关的类成员。
- *  即：如果子类重写了父类的方法，当父类的引用指向子类时，通过父类的引用调用的是子类的方法。
- *      如果子类隐藏了父类的方法（成员变量），则调用的还是父类的方法（成员变量）。
+ * 重写是动态绑定，隐藏是静态绑定，根据编译时引用的静态类型来决定调用相关的类成员。
+ * 即：如果子类重写了父类的方法，当父类的引用指向子类时，通过父类的引用调用的是子类的方法。
+ * 如果子类隐藏了父类的方法（成员变量），则调用的还是父类的方法（成员变量）。
  */
 public class StaticOverride extends SuperStaticOverride {
 
@@ -47,7 +47,7 @@ public class StaticOverride extends SuperStaticOverride {
         superStaticOverride.static_demo();
         superStaticOverride.demo();
 
-        superStaticOverride=null;
+        superStaticOverride = null;
         System.out.println("对象实例为空时，是否可以调用静态方法呢？为什么？->");
         //superStaticOverride.static_demo();
     }

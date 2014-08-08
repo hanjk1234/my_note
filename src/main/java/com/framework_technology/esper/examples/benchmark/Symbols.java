@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Holds the list of symbols. Defaults to 1000
  * Use -Desper.benchmark.symbol=1000 to configure the number of symbols to use (hence the number of EPL statements)
- * <p/>
+ * <p>
  * Each symbol is prefixed with "S" and suffixed with "A" to have all symbols have the same length
  * (f.e. S1AA S2AA ... S99A for 100 symbols)
  *

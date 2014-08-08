@@ -16,8 +16,8 @@ public class BookFacadeProxy_Cglib implements MethodInterceptor {
     /**
      * 创建代理对象
      *
-     * @param object
-     * @return
+     * @param object object
+     * @return 创建代理对象
      */
     public Object getInstance(Object object) {
         this.object = object;

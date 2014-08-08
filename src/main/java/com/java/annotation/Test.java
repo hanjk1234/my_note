@@ -16,7 +16,7 @@ public class Test {
      * @param annotationField 注解类字段名称
      * @param aClass          使用注解的class名称
      * @param methodName      使用注解的方法名称
-     * @throws Exception
+     * @throws Exception Exception
      */
     public static void getAnnotationPar(Class annotationClass, String annotationField, Class aClass, String methodName) throws Exception {
 

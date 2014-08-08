@@ -9,18 +9,18 @@ import java.util.*;
 
 /**
  * Created by lw on 14-5-20.
- * <p/>
+ * <p>
  * 运行内存-Xms512m -Xmx512m -XX:+PrintGCDetails
  * 测试的结果与实际两者的区别不符，ArrayList居然任何地方表现优秀
  * ！！！待追究原因...
- * <p/>
+ * <p>
  * ------------------------------------------------
  * ArrayList  末尾添加数据[50w次]测试：执行耗时：8ms
  * LinkedList 末尾添加数据[50w次]测试：执行耗时：15ms
  * Q:
  * ArrayList如果没有指定大小会动态扩展，涉及到数组的复制
  * ------------------------------------------------
- * <p/>
+ * <p>
  * ------------------------------------------------
  * ArrayList  随机位置添加数据[1w次]测试：执行耗时：516ms
  * LinkedList 随机位置添加数据[1w次]测试：执行耗时：3104ms
@@ -28,7 +28,7 @@ import java.util.*;
  * ArrayList每次随机插入时候进行一次数组的复制
  * 表现应该没有LinkedList优秀
  * ------------------------------------------------
- * <p/>
+ * <p>
  * ------------------------------------------------
  * ArrayList  随机位置删除次数[1w次]测试：执行耗时：508ms
  * LinkedList 随机位置删除次数[1w次]测试：执行耗时：3621ms
@@ -38,14 +38,14 @@ import java.util.*;
  * LinkedList删除时候判断位置是{前半段、中间、后半段}去删除
  * ArrayList应该没有LinkedList优秀
  * ------------------------------------------------
- * <p/>
+ * <p>
  * ------------------------------------------------
  * ArrayList  forEach2循环读取测试：执行耗时：10ms
  * LinkedList forEach2循环读取测试：执行耗时：23ms
- * <p/>
+ * <p>
  * ArrayList  iterator2循环读取测试：执行耗时：9ms
  * LinkedList iterator2循环读取测试：执行耗时：29ms
- * <p/>
+ * <p>
  * ArrayList  for循环读取测试：执行耗时：6ms
  * LinkedList for循环读取测试： 无穷大...
  * Q:
@@ -140,7 +140,7 @@ public class ArrayList2LinkedList_Compare {
 
 /**
  * Created by lw on 14-5-1.
- * <p/>
+ * <p>
  * cglib动态代理
  * 项目中计时方法执行计时使用
  */

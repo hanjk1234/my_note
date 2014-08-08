@@ -24,7 +24,7 @@ public class Apple {
 
     Apple() {
         Random random = new Random();
-        this.id = random.nextInt(20)+"";
+        this.id = random.nextInt(20) + "";
         this.price = random.nextInt(20);
         this.discount = random.nextDouble();
         this.color = COLORS[random.nextInt(COLORS_LENGTH)];
@@ -90,8 +90,8 @@ public class Apple {
     }
 
     /**
-     * @param price
-     * @param discount
+     * @param price    price
+     * @param discount discount
      * @return 该Apple 折扣后的价格
      */
     public double getPriceByDiscount(int price, double discount) {
@@ -101,8 +101,8 @@ public class Apple {
     /**
      * 静态方法
      *
-     * @param price
-     * @param discount
+     * @param price    price
+     * @param discount discount
      * @return 该Apple 折扣后的价格
      */
     public static double getPriceByDiscount2StaticMethod(int price, double discount) {

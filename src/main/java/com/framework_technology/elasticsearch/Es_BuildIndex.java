@@ -12,29 +12,27 @@ import java.util.List;
 
 /**
  * Created by lw on 14-7-7.
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
  * mapping创建
  * 添加记录到es
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 public class Es_BuildIndex {
 
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 索引的mapping
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * 预定义一个索引的mapping,使用mapping的好处是可以个性的设置某个字段等的属性
      * Es_Setting.INDEX_DEMO_01类似于数据库
      * mapping 类似于预设某个表的字段类型
-     * <p/>
+     * <p>
      * Mapping,就是对索引库中索引的字段名及其数据类型进行定义，类似于关系数据库中表建立时要定义字段名及其数据类型那样，
      * 不过es的 mapping比数据库灵活很多，它可以动态添加字段。
      * 一般不需要要指定mapping都可以，因为es会自动根据数据格式定义它的类型，
      * 如果你需要对某 些字段添加特殊属性（如：定义使用其它分词器、是否分词、是否存储等），就必须手动添加mapping。
      * 有两种添加mapping的方法，一种是定义在配 置文件中，一种是运行时手动提交mapping，两种选一种就行了。
      *
-     * @throws Exception
+     * @throws Exception Exception
      */
     protected static void buildIndexMapping() throws Exception {
         //在本例中主要得注意,ttl及timestamp如何用java ,这些字段的具体含义,请去到es官网查看
@@ -73,13 +71,12 @@ public class Es_BuildIndex {
 
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 添加记录到es
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * 增加索引记录
      *
      * @param user 添加的记录
-     * @throws Exception
+     * @throws Exception Exception
      */
     protected static void buildIndex(User user) throws Exception {
         // INDEX_DEMO_01_MAPPING为上个方法中定义的索引,prindextype为类型.jk8231为id,以此可以代替memchche来进行数据的缓存
@@ -96,7 +93,7 @@ public class Es_BuildIndex {
      * 批量添加记录到索引
      *
      * @param userList 批量添加数据
-     * @throws java.io.IOException
+     * @throws java.io.IOException IOException
      */
     protected static void buildBulkIndex(List<User> userList) throws IOException {
         BulkRequestBuilder bulkRequest = Es_Utils.client.prepareBulk();

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by lw on 14-5-23.
- * <p/>
+ * <p>
  * 构造器做了什么？
  * 对象是谁创建的？构造器？
  * this到底是什么？

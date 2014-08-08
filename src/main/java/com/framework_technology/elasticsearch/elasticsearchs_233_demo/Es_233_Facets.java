@@ -26,10 +26,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lw on 14-7-15.
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
  * 搜索 Facets分组统计
- * http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/java-facets.html
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
+ * <a>http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/java-facets.html</a>
  */
 public class Es_233_Facets {
 
@@ -103,7 +103,6 @@ public class Es_233_Facets {
          * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          */
         Es_233_Utils.writeSearchResponse(response);
-
 
 
         Facets facets = response.getFacets();

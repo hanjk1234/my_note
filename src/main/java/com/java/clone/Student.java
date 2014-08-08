@@ -4,7 +4,9 @@ import java.util.Vector;
 
 /**
  * Created by lw on 14-5-5.
+ * <p>
  * 浅拷贝
+ * <p>
  * 深拷贝
  */
 public class Student implements Cloneable {
@@ -56,7 +58,7 @@ public class Student implements Cloneable {
      * 浅拷贝
      * 克隆对象拥有和原始对象相同的引用，不是值拷贝。
      *
-     * @return
+     * @return Student
      */
     public Student newInstance() {
 
@@ -73,8 +75,7 @@ public class Student implements Cloneable {
     /**
      * 深拷贝
      *
-     * @return
-     * @throws CloneNotSupportedException
+     * @return Object
      */
     @Override
     protected Object clone() {
@@ -84,10 +85,15 @@ public class Student implements Cloneable {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        Vector vector = student.getCourses();
+        Vector vector = null;
+        if (student != null) {
+            vector = student.getCourses();
+        }
         Vector vector1 = new Vector();
-        for (Object o : vector) {
-            vector1.add(o);
+        if (vector != null) {
+            for (Object o : vector) {
+                vector1.add(o);
+            }
         }
         student.setCourses(vector1);
         return student;

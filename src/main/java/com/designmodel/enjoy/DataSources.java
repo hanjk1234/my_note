@@ -1,10 +1,11 @@
 package com.designmodel.enjoy;
 
+
 import javax.sql.DataSource;
 
 /**
  * Created by lw on 14-5-1.
- * <p/>
+ * <p>
  * 获取不同的数据库连接信息
  */
 public class DataSources implements DataSourcesInterface {

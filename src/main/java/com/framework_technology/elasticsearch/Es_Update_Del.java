@@ -21,7 +21,7 @@ public class Es_Update_Del {
     /**
      * 通过Id删除索引记录
      *
-     * @param id
+     * @param id id
      */
     protected static void deleteIndexById(String id) {
 
@@ -58,6 +58,7 @@ public class Es_Update_Del {
 
     /**
      * 修改
+     * @throws java.io.IOException  IOException
      */
     protected static void updateByQuery() throws IOException {
 

@@ -1,6 +1,5 @@
 package com.util.commons.bean;
 
-import com.util.commons.bean.People;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -55,11 +54,7 @@ public class Commons_BeanUtils {
             BeanUtils.setProperty(people, "addressMap", addressMap);
             address = BeanUtils.getProperty(people, "addressMap(2)");//括号下标1开始
 
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -68,7 +63,9 @@ public class Commons_BeanUtils {
      * strust 返回封装的表单对象转换后直接赋值
      * 此处用class Form模拟表单
      *
-     * @param form
+     * @param form form
+     * @throws java.lang.reflect.InvocationTargetException InvocationTargetException
+     * @throws java.lang.IllegalAccessException IllegalAccessException
      */
     public static void getPeopleForForm(Form form) throws InvocationTargetException, IllegalAccessException {
         People people = (People) form;

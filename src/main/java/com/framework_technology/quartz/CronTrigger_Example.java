@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by lw on 14-7-16.
+ * <p>
  * CronTrigger
  */
 public class CronTrigger_Example {
@@ -14,8 +15,8 @@ public class CronTrigger_Example {
     private static Logger _log = LoggerFactory.getLogger(CronTrigger_Example.class);
 
     /**
-     * @param helloJob
-     * @throws SchedulerException
+     * @param helloJob helloJob
+     * @throws SchedulerException SchedulerException
      */
     protected static void buildScheduleJob(HelloJob helloJob) throws SchedulerException {
 

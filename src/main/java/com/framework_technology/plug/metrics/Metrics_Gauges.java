@@ -34,8 +34,8 @@ public class Metrics_Gauges {
     /**
      * Gauges是一个最简单的计量，一般用来统计瞬时状态的数据信息，比如系统中处于pending状态的job
      *
-     * @param args
-     * @throws InterruptedException
+     * @param args args
+     * @throws InterruptedException InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
         //1秒打印一次

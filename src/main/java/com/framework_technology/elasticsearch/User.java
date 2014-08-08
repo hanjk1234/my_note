@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by lw on 14-7-8.
- */
-public class User {
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-7-8
+ */public class User {
 
     private String name;
     private String home;//家乡
@@ -40,7 +41,7 @@ public class User {
     /**
      * 随机生成一个用户信息
      *
-     * @return
+     * @return User
      */
     public static User getOneRandomUser() {
         Random random = new Random();
@@ -55,7 +56,7 @@ public class User {
      * 随机生成num个用户信息
      *
      * @param num 生成数量
-     * @return
+     * @return List User
      */
     public static List<User> getRandomUsers(int num) {
         List<User> users = new ArrayList<>();
@@ -75,9 +76,9 @@ public class User {
     /**
      * 封装对象的Json信息
      *
-     * @param user
-     * @return
-     * @throws java.io.IOException
+     * @param user user
+     * @return XContentBuilder
+     * @throws java.io.IOException IOException
      */
     public static XContentBuilder getXContentBuilder(User user) throws IOException {
         return XContentFactory.jsonBuilder()

@@ -36,6 +36,8 @@ public class RemoteServerExample {
      * This example will spawn a large number of jobs to run
      * 
      * @author James House, Bill Kratzer
+     *
+     * @throws java.lang.Exception   exception
      */
     public void run() throws Exception {
         Logger log = LoggerFactory.getLogger(RemoteServerExample.class);

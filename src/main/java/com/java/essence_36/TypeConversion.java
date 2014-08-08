@@ -2,7 +2,7 @@ package com.java.essence_36;
 
 /**
  * Created by lw on 14-5-18.
- * <p/>
+ * <p>
  * 类型转换的神秘
  */
 class Int2Byte {
@@ -30,9 +30,9 @@ class Int2Byte {
  * char无符号类型(0~65535)
  * byte(-128~127)
  * short(-32768~32767)
- * <p/>
+ * <p>
  * 因此char与byte、short不存在子集关系，需要做类型转换
- * <p/>
+ * <p>
  * 其次当byte、char、short（或者三者之间进行混合运算）结果为int
  * 并非与较高的类型相同
  */

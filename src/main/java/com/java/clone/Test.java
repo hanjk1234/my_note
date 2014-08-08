@@ -10,7 +10,7 @@ public class Test {
     /**
      * 克隆对象拥有和原始对象相同的引用，不是值拷贝。
      *
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         int age = 18;

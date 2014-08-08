@@ -7,8 +7,8 @@ import java.util.Date;
 
 /**
  * Created by lw on 14-4-18.
- *
- * 参考博客 http://blog.csdn.net/xiaohulunb/article/details/21102055
+ * <p>
+ * 参考博客 <a>http://blog.csdn.net/xiaohulunb/article/details/21102055</a>
  */
 public class Joda_Time {
 
@@ -20,13 +20,13 @@ public class Joda_Time {
     /**
      * 自定义DateTime
      *
-     * @param year
-     * @param month
-     * @param day
-     * @param hour
-     * @param minute
-     * @param second
-     * @param milliseconds
+     * @param year         year
+     * @param month        month
+     * @param day          day
+     * @param hour         hour
+     * @param minute       minute
+     * @param second       second
+     * @param milliseconds milliseconds
      * @return DateTime
      */
     public static DateTime getDareTime(int year, int month, int day, int hour, int minute, int second, int milliseconds) {
@@ -63,7 +63,7 @@ public class Joda_Time {
     /**
      * 获取当前时间，Time
      *
-     * @param dateTime
+     * @param dateTime dateTime
      * @return String
      */
     public static String getDateTime(DateTime dateTime) {
@@ -74,7 +74,7 @@ public class Joda_Time {
     /**
      * 根据多个参数自己组建日期格式，默认不含空格
      *
-     * @param parameter
+     * @param parameter parameter
      * @return String
      */
     public static String getTimeForParameter(String parameter) {
@@ -97,7 +97,7 @@ public class Joda_Time {
      * 计算五年后的第二个月的最后一天-demo
      * monthOfYear()     // get monthOfYear property
      *
-     * @param dateTime
+     * @param dateTime dateTime
      * @return String
      */
     public static String computationDateDemo(DateTime dateTime) {
@@ -129,7 +129,7 @@ public class Joda_Time {
 
     public static void main(String[] args) {
 
-        Long aLong = (long)(1401785160 * 1000);
+        Long aLong = (long) (1401785160 * 1000);
         DateTime dateTime = new DateTime(aLong);
         String s = getDateTime(dateTime);
         System.out.println(s);

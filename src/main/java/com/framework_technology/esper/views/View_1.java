@@ -36,6 +36,8 @@ public class View_1 {
      * std:firstunique(unique criteria(s))	    Retains only the very first among events having the same value for the criteria expression(s), disregarding all subsequent events for same value(s).
      * win:firstlength(size)	                保留一批数据的前 size 条，需配合delete操作
      * win:firsttime(time period)	            保留窗口初始化后 period 内的所有数据
+     *
+     * @return epl
      */
     protected static String dataWindowViews() {
         //每进入3个事件后统计输出一次newEvents[3]

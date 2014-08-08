@@ -19,7 +19,7 @@ public class EPS_Utils {
     /**
      * 返回默认EPServiceProvider。返回服务的URI值是“默认”。
      *
-     * @return
+     * @return EPServiceProvider
      */
     public static EPServiceProvider getDefaultProvider() {
         return EPServiceProviderManager.getDefaultProvider();

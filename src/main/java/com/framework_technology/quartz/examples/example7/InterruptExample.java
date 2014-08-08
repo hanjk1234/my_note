@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
  * misfire instructions affect the firings of triggers of <code>StatefulJob</code>
  * s - when the jobs take longer to execute that the frequency of the trigger's
  * repitition.
- * <p/>
  * <p>
  * While the example is running, you should note that there are two triggers
  * with identical schedules, firing identical工作。 The triggers "want" to fire

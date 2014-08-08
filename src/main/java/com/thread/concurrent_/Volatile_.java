@@ -25,7 +25,7 @@ public class Volatile_ {
     }
 
     /**
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         // final VolatileTest test = new VolatileTest();

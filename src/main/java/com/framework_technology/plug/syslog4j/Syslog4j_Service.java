@@ -8,21 +8,21 @@ import org.productivity.java.syslog4j.server.SyslogServerMain;
 public class Syslog4j_Service {
     /**
      * org.productivity.java.syslog4j.server.SyslogServerMain
-     * <p/>
+     * <p>
      * -h 192.168.1.58 -p 1514 -o /lw/workfile/log/syslog4j_test/syslog4j.log -a udp
-     * <p/>
+     * <p>
      * Usage:
-     * <p/>
+     * <p>
      * SyslogServer [-h <host>] [-p <port>] [-o <file>] [-a] [-q] <protocol>
-     * <p/>
+     * <p>
      * -h <host>    host or IP to bind
      * -p <port>    port to bind
      * -t <timeout> socket timeout (in milliseconds)
      * -o <file>    file to write entries (overwrites by default)
-     * <p/>
+     * <p>
      * -a           append to file (instead of overwrite)
      * -q           do not write anything to standard out
-     * <p/>
+     * <p>
      * protocol     Syslog4j protocol implementation (tcp, udp, ...)
      */
 

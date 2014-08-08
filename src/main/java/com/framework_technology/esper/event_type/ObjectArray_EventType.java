@@ -19,7 +19,7 @@ import com.espertech.esper.client.EventType;
 public class ObjectArray_EventType {
 
     /**
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();

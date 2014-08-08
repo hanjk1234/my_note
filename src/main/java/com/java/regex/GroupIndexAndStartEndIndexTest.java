@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by lw on 14-7-14.
- * <p/>
+ * <p>
  * group(),start(),end()所带的参数i就是正则表达式中的子表达式索引（第几个子表达式），
  * 当将“组”的概念与“子表达式”对应起来之后，理解matcher的group,start,end就完全没有障碍了。
  */

@@ -18,8 +18,8 @@ public class SimpleTrigger_Example {
     private static Logger _log = LoggerFactory.getLogger(SimpleTrigger_Example.class);
 
     /**
-     * @param helloJob
-     * @throws org.quartz.SchedulerException
+     * @param helloJob helloJob
+     * @throws org.quartz.SchedulerException SchedulerException
      */
     protected static void buildScheduleJob(HelloJob helloJob) throws SchedulerException {
 

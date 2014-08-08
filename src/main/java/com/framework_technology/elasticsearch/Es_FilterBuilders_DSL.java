@@ -8,7 +8,6 @@ import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.QueryBuilders;
 
-import java.util.UUID;
 
 /**
  * Created by lw on 14-7-16.
@@ -21,12 +20,12 @@ import java.util.UUID;
  */
 public class Es_FilterBuilders_DSL {
 
-
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * and Filter
+     * <p>
      * 一个过滤器匹配文档匹配的布尔组合其他过滤器。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder andFilter() {
         return FilterBuilders.andFilter(
@@ -36,10 +35,10 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * bool Filter
      * 一个过滤器匹配文档匹配的布尔组合其他过滤器。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder boolFilter() {
         return FilterBuilders.boolFilter()
@@ -49,20 +48,20 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * exists filter
      * 一个过滤器来过滤字段唯一字段存在。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder existsFilter() {
         return FilterBuilders.existsFilter("home");
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * ids filter
      * 创建一个新的id筛选提供 doc/映射类型。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder idsFilter() {
         return FilterBuilders.idsFilter(Es_Utils.INDEX_DEMO_01_MAPPING, "type2")
@@ -73,20 +72,20 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * limit filter
      * 一个过滤器,用于限制结果提供的极限值(每个shard * 2 )。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder limitFilter() {
         return FilterBuilders.limitFilter(2);//返回碎片shard*2 个结果
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * type filter
      * 过滤type
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder typeFilter() {
         return FilterBuilders.typeFilter(Es_Utils.INDEX_DEMO_01_MAPPING);
@@ -94,10 +93,11 @@ public class Es_FilterBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * geo bounding box filter
      * 定义一个过滤器来过滤基于边界框左上角和右下角的位置/分
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder geoBoundingBoxFilter() {
         return FilterBuilders.geoBoundingBoxFilter("pin.location")
@@ -108,10 +108,11 @@ public class Es_FilterBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * geodistance filter
      * 一个过滤器来过滤基于一个特定的距离从一个特定的地理位置/点。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder geoDistanceFilter() {
         return FilterBuilders.geoDistanceFilter("pin.location")
@@ -123,10 +124,11 @@ public class Es_FilterBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * geo distance range filter
      * 一个过滤器来过滤基于一个特定的范围从一个特定的地理位置/点。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder geoDistanceRangeFilter() {
         return FilterBuilders.geoDistanceRangeFilter("pin.location")
@@ -141,10 +143,11 @@ public class Es_FilterBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * geo polygon filter
      * 一个过滤器来过滤基于多边形定义为一组位置/分。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder geoPolygonFilter() {
         return FilterBuilders.geoPolygonFilter("pin.location")
@@ -156,10 +159,11 @@ public class Es_FilterBuilders_DSL {
 
     /**
      * TODO NotSolved
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * has child / has parent filters
      * 构造一个子过滤器,子类型和查询与文档、过滤的结果是父* *文档。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder hasChildFilter() {
         // Has Child
@@ -172,20 +176,20 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * match all filter
      * 一个过滤器匹配所有文件。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder matchAllFilter() {
         return FilterBuilders.matchAllFilter();
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * missing filter
      * 一个过滤器来过滤字段唯一文件不存在。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder missingFilter() {
         return FilterBuilders.missingFilter("name")
@@ -194,9 +198,9 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * not filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder notFilter() {
         return FilterBuilders.notFilter(
@@ -204,9 +208,9 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * or filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder orFilter() {
         return FilterBuilders.orFilter(
@@ -216,19 +220,19 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * prefix filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder prefixFilter() {
         return FilterBuilders.prefixFilter("name", "葫芦5083");
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * query filter
      * 一个过滤器,仅包装一个查询。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder queryFilter() {
         return FilterBuilders.queryFilter(
@@ -237,10 +241,10 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * range filter
      * 过滤器,限制搜索结果值在给定的范围内。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder rangeFilter() {
         FilterBuilders.rangeFilter("age")
@@ -256,10 +260,10 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * script filter
      * 过滤器基于脚本的构建。
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder scriptFilter() {
         return FilterBuilders.scriptFilter(
@@ -268,40 +272,41 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * term filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder termFilter() {
         return FilterBuilders.termFilter("name", "葫芦5083娃");
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * terms filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * <p>
      * The execution option now has the following options :
-     * <p/>
+     * <p>
      * plain
      * The default. Works as today. Iterates over all the terms, building a bit set matching it, and filtering. The total filter is cached.
-     * <p/>
+     * <p>
      * fielddata
      * Generates a terms filters that uses the fielddata cache to compare terms.
      * This execution mode is great to use when filtering on a field that is already loaded into the fielddata cache from faceting, sorting, or index warmers.
      * When filtering on a large number of terms, this execution can be considerably faster than the other modes.
      * The total filter is not cached unless explicitly configured to do so.
-     * <p/>
+     * <p>
      * bool
      * Generates a term filter (which is cached) for each term, and wraps those in a bool filter.
      * The bool filter itself is not cached as it can operate very quickly on the cached term filters.
-     * <p/>
+     * <p>
      * and
      * Generates a term filter (which is cached) for each term, and wraps those in an and filter.
      * The and filter itself is not cached.
-     * <p/>
+     * <p>
      * or
      * Generates a term filter (which is cached) for each term, and wraps those in an or filter.
      * The or filter itself is not cached. Generally, the bool execution mode should be preferred.
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder termsFilter() {
         return FilterBuilders.termsFilter("name", "葫芦5083娃", "葫芦3582娃")
@@ -309,9 +314,9 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * nested filter
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder nestedFilter() {
         return FilterBuilders.nestedFilter("obj1",
@@ -322,27 +327,19 @@ public class Es_FilterBuilders_DSL {
     }
 
     /**
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * caching
      * 缓存 过滤器
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *
+     * @return FilterBuilder
      */
     protected static FilterBuilder cache() {
         return FilterBuilders.andFilter(
-                FilterBuilders.rangeFilter("age").from(0).to(9000),
-                FilterBuilders.prefixFilter("name", "葫芦")
+                FilterBuilders.rangeFilter("age").from(1000).to(9000),
+                FilterBuilders.prefixFilter("name", "葫芦3582")
         )
                 .cache(true);//默认false
     }
-    protected static FilterBuilder cache_Temp() {
 
-        return FilterBuilders.andFilter(
-                FilterBuilders.termFilter("isRealMen", true)
-        )
-                .cache(true)//默认false
-                .cacheKey(UUID.randomUUID().toString());
-
-    }
 
     public static void main(String[] args) {
         Es_Utils.startupClient();
@@ -356,6 +353,9 @@ public class Es_FilterBuilders_DSL {
         }
     }
 
+    /**
+     * @param filterBuilder filterBuilder
+     */
     private static void searchTest(FilterBuilder filterBuilder) {
         //预准备执行搜索
         Es_Utils.client.prepareSearch(Es_Utils.INDEX_DEMO_01)

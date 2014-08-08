@@ -25,20 +25,20 @@ import java.util.concurrent.*;
  * on the given -mode argument.
  * Statements are read from an statements.properties file in the classpath
  * If statements contains '$' the '$' is replaced by a symbol string, so as to register one statement per symbol.
- * <p/>
+ * <p>
  * Based on -queue, the server implements a direct handoff to the ESP/CEP engine, or uses a Syncrhonous queue
  * (somewhat an indirect direct handoff), or uses a FIFO queue where each events is put/take one by one from the queue.
  * Usually with few clients sending a lot of events, use the direct handoff, else consider using queues. Consumer thread
  * can be configured using -thread (it will range up to #processor x #thread).
  * When queues is full, overload policy triggers execution on the caller side.
- * <p/>
+ * <p>
  * To simulate an ESP/CEP listener work, use -sleep.
- * <p/>
+ * <p>
  * Use -stat to control how often percentile stats are displayed. At each display stats are reset.
- * <p/>
+ * <p>
  * If you use -rate nxM (n threads, M event/s), the server will simulate the load for a standalone simulation without
  * any remote client(s).
- * <p/>
+ * <p>
  * By default the benchmark registers a subscriber to the statement(s). Use -Desper.benchmark.ul to use
  * an UpdateListener instead. Note that the subscriber contains suitable update(..) methods for the default
  * proposed statement in the statements.properties files but might not be suitable if you change statements due

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lw on 14-4-22.
+ * Created by IntelliJ IDEA.
+ * User: lw
+ * Date: 14-4-22
  */
 public class Task_Demo extends Task {
     public String str;
@@ -12,7 +14,7 @@ public class Task_Demo extends Task {
     /**
      * 所有任务的核心 所有特别的业务逻辑执行之处-demo
      *
-     * @throws Exception
+     * @throws Exception Exception
      */
     @Override
     public Task[] taskCore() throws Exception {
@@ -36,7 +38,7 @@ public class Task_Demo extends Task {
     /**
      * 是否用到数据库
      *
-     * @return
+     * @return 是否用到数据库
      */
     @Override
     protected boolean useDb() {
@@ -46,7 +48,7 @@ public class Task_Demo extends Task {
     /**
      * 是否需要立即执行
      *
-     * @return
+     * @return 是否需要立即执行
      */
     @Override
     protected boolean needExecuteImmediate() {

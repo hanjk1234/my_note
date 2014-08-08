@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Created by lw on 14-4-22.
- * <p/>
+ * <p>
  * 线程池
  */
 public class ThreadPool {
@@ -60,7 +60,7 @@ public class ThreadPool {
      * 增加新的任务
      * 每增加一个新任务，都要唤醒任务队列
      *
-     * @param newTask
+     * @param newTask newTask
      */
     public void addTask(Task newTask) {
         synchronized (taskQueue) {
@@ -75,7 +75,7 @@ public class ThreadPool {
     /**
      * 批量增加新任务
      *
-     * @param taskes
+     * @param taskes taskes
      */
     public void batchAddTask(Task[] taskes) {
         if (taskes == null || taskes.length == 0) {
@@ -103,7 +103,7 @@ public class ThreadPool {
     /**
      * 线程池信息
      *
-     * @return
+     * @return 线程池信息
      */
     public String getInfo() {
         StringBuffer sb = new StringBuffer();

@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Created by lw on 14-5-20.
- * <p/>
+ * <p>
  * 有序的HashMap -LinkedHashMap
  */
 public class Linked_HashMap {
@@ -35,7 +35,7 @@ public class Linked_HashMap {
     /**
      * accessOrder=true  按照元素最后访问时间排序
      * 遍历时候有Key获取Value时候抛出java.util.ConcurrentModificationException
-     * <p/>
+     * <p>
      * 遍历时候，LinkedHashMap调用get方法会修改LinkedHashMap结构。
      * remove亦是。
      * 参考下面is2ConcurrentModificationException()方法内容

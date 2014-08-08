@@ -2,7 +2,7 @@ package com.java.essence_36;
 
 /**
  * Created by lw on 14-5-18.
- * <p/>
+ * <p>
  * JDK1.7后除支持的byte、char、short、int、（4个）包装类、枚举
  * 增加了String类型
  */

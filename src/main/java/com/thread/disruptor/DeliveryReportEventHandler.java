@@ -8,10 +8,10 @@ import com.lmax.disruptor.EventHandler;
 public class DeliveryReportEventHandler implements EventHandler<ValueEvent> {
 
     /**
-     * @param event
+     * @param event  事件
      * @param sequence   事件正在处理
      * @param endOfBatch 是否是最后一个事件在处理
-     * @throws Exception
+     * @throws Exception Exception
      */
     @Override
     public void onEvent(ValueEvent event, long sequence, boolean endOfBatch) throws Exception {
