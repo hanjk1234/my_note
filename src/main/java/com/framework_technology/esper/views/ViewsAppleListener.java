@@ -13,12 +13,14 @@ class ViewsAppleListener implements UpdateListener {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ViewsAppleListener.class);
 
     public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-        String key = "price";
+        String key = "size";
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
                 //LOGGER.error("~~~~~~~~ newEvents‘s size is <{}> ~~~~~~~~", i);
                 EventBean eventBean = newEvents[i];
                 System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key));
+                //                System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key) + " , id is " + eventBean.get("id") + " , price is " + eventBean.get("price"));
+
             }
         }
 

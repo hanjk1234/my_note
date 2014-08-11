@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
- * Created by lw on 14-5-30.
+ * @author lw by 14-5-30.
  */
 public class Test {
 

@@ -45,6 +45,7 @@
         <system>GIT</system>
         <url>https://github.com/xiaohulu/my_note/tree/master</url>
     </ciManagement>
+
     <!-- 项目团队 -->
     <developers>
         <developer>

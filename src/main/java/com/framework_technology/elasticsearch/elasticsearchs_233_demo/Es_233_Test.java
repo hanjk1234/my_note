@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class Es_233_Test {
 
-    private static final String[] INDEXS = {"recent_ezsonar_2014-08-06_13-24"};
+    private static final String[] INDEXS = {"analyzier_ezsonar"};
 
     public static void main(String[] dfd) {
         Es_233_Utils.startupClient();

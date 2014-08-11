@@ -2,6 +2,7 @@ package com.framework_technology.plug.metrics;
 
 import com.codahale.metrics.*;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,7 +36,7 @@ public class Metrics_Meters {
         reporter.start(3, TimeUnit.SECONDS);
         while (true) {
             handleRequest();
-            Thread.sleep(100);
+            Thread.sleep(new Random().nextInt(3000));
         }
     }
 

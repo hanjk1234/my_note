@@ -93,8 +93,8 @@ public class Es_233_Search {
         try {
             searchResponse = searchRequestBuilder.execute().actionGet();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~ " + e.getMessage() + "~~~~~~~~~~~~");
-        } finally {
         }
         return searchResponse;
     }

@@ -6,6 +6,8 @@ import com.framework_technology.esper.javabean.Apple;
  * Created by IntelliJ IDEA.
  * User: wei.Li
  * Date: 14-8-8
+ * <p>
+ * 视图 Views窗口
  */
 public class View_1 {
 
@@ -29,8 +31,8 @@ public class View_1 {
      * ext:time_order(timestamp expression, time period)	        Orders events that arrive out-of-order, using an expression providing timestamps to be ordered.
      * std:unique(unique criteria(s))	        对不同的unique[例如:id]保留其最近的一条事件
      * std:groupwin(grouping criteria(s))	    一般与其它窗口组合使用，将进入的数据按表达式 id 分组
-     *                                          关于分组的时间窗口:当使用grouped-window时间窗口,注意,是否保留5分钟的事件或每组保留5分钟的事件,
-     *                                          结果都是一样的从保留的角度事件既保留政策,考虑所有组,同一组的事件。因此请单独指定时间窗
+     * 关于分组的时间窗口:当使用grouped-window时间窗口,注意,是否保留5分钟的事件或每组保留5分钟的事件,
+     * 结果都是一样的从保留的角度事件既保留政策,考虑所有组,同一组的事件。因此请单独指定时间窗
      * std:lastevent()	                        保留最后一个事件，长度为1
      * std:firstevent()	                        保留第一个事件，不顾后续的事件
      * std:firstunique(unique criteria(s))	    Retains only the very first among events having the same value for the criteria expression(s), disregarding all subsequent events for same value(s).
@@ -50,8 +52,8 @@ public class View_1 {
         //[istream | rstream]的规则，在我们插入一批数据后，istream在3秒后输出进入窗口的数据，3秒过后，rstream会输出同样的内容
         String epl3 = "select rstream price , count(price) from " + Apple.CLASSNAME + ".win:time(5 seconds) group by price";
 
-        //TODO unfinished  timestamp ?
-        String epl4 = "select price from " + Apple.CLASSNAME + ".win:ext_timed(timestamp, 10 seconds)";
+        //TODO unfinished  ERROR-> Caused by: com.espertech.esper.view.ViewParameterException: Invalid parameter expression 0: Property named 'timestamp' is not valid in any stream
+        String epl4 = "select price from " + Apple.CLASSNAME + ".win:ext_timed(timestamp, 10 sec)";
 
         //win:time_batch(10 sec,"FORCE_UPDATE, START_EAGER") 加上这两个参数后，会在窗口初始化时就执行查询，并且在没有数据进入和移出时，强制查询出结果
         String epl5 = "select * from " + Apple.CLASSNAME + ".win:time_batch(10 sec, \"FORCE_UPDATE, START_EAGER\")";
@@ -65,21 +67,26 @@ public class View_1 {
         //只输出前10个事件
         String epl8 = "select price from " + Apple.CLASSNAME + ".win:firstlength(10)";
 
-        //对 id 和 price 保留最后一条事件记录
+        //对 id 和 price 分组，保留最后一条事件记录 等同于std:groupwin(id, price).win:length(1)
         String epl9 = "select price from " + Apple.CLASSNAME + ".std:unique(id, price)";
 
-        return epl8;
+        //进入的数据按id分组，相同id的数据条目数不大于3 TODO unfinished
+        String epl10 = "select sum(price) from " + Apple.CLASSNAME + ".std:groupwin(id).win:length(3)";
+
+        //统计每组id最近3次消费的总price
+        String epl11 = "select sum(price) from " + Apple.CLASSNAME + ".std:groupwin(id).win:length(3) group by id";
+        return epl4;
     }
 
     /**
-     * TODO unfinished
-     * win:expr(expiry expression)	  事件基于过期表达式的结果作为一个参数传递。
+     * win:expr(expiry expression)	    窗口的事件是否保留取决于过期表达式expression的结果。
+     * expression相当于开关，如果一直是true，那么时间进入view不移除，直到expression为false，将之前保留的事件从view中全部删掉
      * <p>
      * Table 12.3. Built-in Properties of the Expiry Expression Data Window View
      * <p>
      * Name	            Type	                        Description
      * ================================================================================
-     * current_count	int	            在数据窗口包括当前到达的事件的事件的数量
+     * current_count	int	            当前数据窗口包括到达的事件的数量
      * expired_count	int	            评估过期的事件数量
      * newest_event	    (same event type as arriving events)	最后一个到达的事件
      * newest_timestamp	long	        引擎的时间戳与last-arriving事件有关。
@@ -90,18 +97,25 @@ public class View_1 {
      * @return epl
      */
     protected static String expr() {
-        String epl1 = "select price from " + Apple.CLASSNAME + ".win:expr(current_count = 1)";
 
-        String epl2 = "select price from " + Apple.CLASSNAME + ".win:expr(oldest_timestamp > newest_timestamp - 2000)";
+        //保留最后进入的2个事件
+        String epl1 = "select rstream price from " + Apple.CLASSNAME + ".win:expr(current_count <= 2)";
 
-        String epl3 = "select price from " + Apple.CLASSNAME + ".win:expr(newest_event.id != oldest_event.id)";
+        //已过期事件数量
+        String epl2 = "select rstream price from " + Apple.CLASSNAME + ".win:expr(expired_count = 2)";
 
-        return epl3;
+        //保留最后5秒进入的事件
+        String epl3 = "select rstream price from " + Apple.CLASSNAME + ".win:expr(oldest_timestamp > newest_timestamp - 5000)";
+
+        // id 相同标志的事件被保留，如果 id 值变化则移除保留的事件
+        String epl4 = "select rstream price from " + Apple.CLASSNAME + ".win:expr(newest_event.id = oldest_event.id)";
+
+        return epl2;
     }
 
     /**
-     * TODO unfinished
-     * win:expr_batch(expiry expression)	    Tumbling window that batches events and releases them based on the result of an expiry expression passed as a parameter.
+     * win:expr_batch(expiry expression) 事件窗口,批次处理，基于过期表达式的结果作为一个参数传递判断是否移除他们
+     * 参考{@link #expr()}
      * <p>
      * Table 12.4. Built-in Properties of the Expiry Expression Data Window View
      * <p>
@@ -117,20 +131,57 @@ public class View_1 {
      * @return epl
      */
     protected static String expr_batch() {
-        return "";
+
+        //按current_count保留的事件数量分组，批量处理输出
+        String epl1 = "select rstream price from " + Apple.CLASSNAME + ".win:expr_batch(current_count > 2)";
+
+        //保留最后5秒进入的事件分组- 5秒内的事件，批量输出
+        String epl2 = "select rstream price from " + Apple.CLASSNAME + ".win:expr_batch(oldest_timestamp > newest_timestamp - 5000)";
+
+        return epl1;
     }
 
 
     /**
-     * View	                        Syntax	                                            Description
+     * View	                        Syntax	                                                            Description
      * =============================================================================================================================
      * Size	                    std:size([expression, ...])	                                            Derives a count of the number of events in a data window, or in an insert stream if used without a data window, and optionally provides additional event properties as listed in parameters.
      * Univariate statistics    stat:uni(value expression [,expression, ...])	                        Calculates univariate statistics on the values returned by the expression.
      * Regression	            stat:linest(value expression, value expression [,expression, ...])	    Calculates regression on the values returned by two expressions.
      * Correlation	            stat:correl(value expression, value expression [,expression, ...])	    Calculates the correlation value on the values returned by two expressions.
      * Weighted average	        stat:weighted_avg(value expression, value expression [,expression, ...])Calculates weighted average given a weight expression and an expression to compute the average for.
+     *
+     * @return epl
      */
-    protected static void derived_Value_Views() {
+    protected static String size_Views() {
+        //统计按price分组 事件总数
+        String epl1 = "select size from " + Apple.CLASSNAME + ".std:groupwin(price).std:size()";
 
+        //TODO unfinished
+        String epl2 = "select  size ,id ,price from " + Apple.CLASSNAME + ".win:time(3 sec).std:size(id, price)";
+
+        //TODO unfinished
+        String epl3 = "select size from " + Apple.CLASSNAME + ".win:time(3 sec).std:size()";
+
+        return epl3;
     }
+
+    /**
+     * Property Name	Description
+     * =========================================================
+     * datapoints	值得数量, 相当于  count(*)
+     * total	    总计
+     * average	    平均值
+     * variance	    方差
+     * stddev	    样本的标准偏差(方差的平方根)
+     * stddevpa	    总体标准偏差
+     *
+     * @return epl
+     */
+    protected static String stat_uni_Views() {
+
+
+        return "";
+    }
+
 }
