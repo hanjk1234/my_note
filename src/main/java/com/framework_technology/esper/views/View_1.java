@@ -143,7 +143,7 @@ public class View_1 {
 
 
     /**
-     * View	                        Syntax	                                                            Description
+     * View	                    Syntax	                                                                Description
      * =============================================================================================================================
      * Size	                    std:size([expression, ...])	                                            Derives a count of the number of events in a data window, or in an insert stream if used without a data window, and optionally provides additional event properties as listed in parameters.
      * Univariate statistics    stat:uni(value expression [,expression, ...])	                        Calculates univariate statistics on the values returned by the expression.
@@ -167,6 +167,11 @@ public class View_1 {
     }
 
     /**
+     * View	                    Syntax	                                             Description
+     * ============================================================================================================
+     * Univariate statistics    stat:uni(value expression [,expression, ...])	     Calculates univariate statistics on the values returned by the expression.
+     * <p>
+     * stat:uni属性
      * Property Name	Description
      * =========================================================
      * datapoints	值得数量, 相当于  count(*)
@@ -179,7 +184,6 @@ public class View_1 {
      * @return epl
      */
     protected static String stat_uni_Views() {
-
 
         return "";
     }
