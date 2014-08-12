@@ -26,13 +26,14 @@ public class ViewsMain_Execute implements Runnable {
 
         /**
          * 定义数据
-         * @see com.framework_technology.esper.epl_context.EPL_3_Output#when()
+         * @see com.framework_technology.esper.epl.EPL_3_Output#when()
          */
         ConfigurationOperations config = epAdministrator.getConfiguration();
         config.addVariable("exceed", boolean.class, false);
 
         //获取 epl
-        String epl = View_1.size_Views();
+        String epl = View.dataWindowViews();
+
         EPStatement epStatement = epAdministrator.createEPL(epl);
 
         //注册监听

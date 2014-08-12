@@ -1,4 +1,4 @@
-package com.framework_technology.esper.epl_context;
+package com.framework_technology.esper.epl;
 
 import com.framework_technology.esper.javabean.Apple;
 
@@ -8,7 +8,7 @@ import com.framework_technology.esper.javabean.Apple;
  * Date: 14-7-31
  * Time: 9:37
  */
-public class EPL_1 {
+public class EPL_1_Common {
 
     /**
      * @return 价格的平均数 epl
@@ -171,7 +171,7 @@ public class EPL_1 {
 
          在滑动时间窗口中，CEP会在每条事件进入和移出窗口时，执行EPL语句，比如istream分析窗口内的事件，当有事件移出时，也会对当前窗口内的事件进行统计
          rstream分析移出窗口的事件，但当有事件进入时，也会统计当前移出窗口的事件的总数，当窗口中无数据时，看上去像是把一个空数据移出了
-         @see com.framework_technology.esper.views.View_1#dataWindowViews() -> String epl3
+         @see com.framework_technology.esper.views.View#dataWindowViews() -> String epl3
          */
         String epl6 = "select rstream * from " + Apple.CLASSNAME;
         String epl7 = "select irstream * from " + Apple.CLASSNAME;
@@ -303,7 +303,7 @@ public class EPL_1 {
      * 3.通常情况要保证分组数量有限制，以防止内存溢出。但是如果分组分了很多，就需要使用@Hint加以控制。
      *
      * @return epl
-     * @see com.framework_technology.esper.epl_context.EPL_1#annotation()
+     * @see EPL_1_Common#annotation()
      */
     protected static String groupBy() {
         //TODO Conslole : Apple'saPrice is <null>,color  is <2> ,size is <1>"   NULL?记忆了上次计算的数据

@@ -14,4 +14,14 @@ email:  [liweityut@163.com]
 
 @sina:   [http://weibo.com/xiaohulunb]  @xl_小葫芦
 
-//TODO unsolved  未解决问题标志 
+
+//TODO unsolved  未解决问题标志
+ 
+@Unapprehended  未理解的
+ 
+@Undigested     未充分理解的
+
+@Unsolved       未解决的
+
+@Unfinished     未完成的
+

@@ -1,15 +1,20 @@
 package com.framework_technology.esper.views;
 
 import com.framework_technology.esper.javabean.Apple;
+import com.java.annotation.document.Undigested;
+import com.java.annotation.document.Unfinished;
+import com.java.annotation.document.Unsolved;
 
 /**
  * Created by IntelliJ IDEA.
  * User: wei.Li
  * Date: 14-8-8
  * <p>
- * 视图 Views窗口
+ * 视图 Views窗口语法
+ * <p>
+ * esper/doc/reference - Chapter 12. EPL Reference: Views
  */
-public class View_1 {
+public class View {
 
 
     /**
@@ -52,7 +57,7 @@ public class View_1 {
         //[istream | rstream]的规则，在我们插入一批数据后，istream在3秒后输出进入窗口的数据，3秒过后，rstream会输出同样的内容
         String epl3 = "select rstream price , count(price) from " + Apple.CLASSNAME + ".win:time(5 seconds) group by price";
 
-        //TODO unfinished  ERROR-> Caused by: com.espertech.esper.view.ViewParameterException: Invalid parameter expression 0: Property named 'timestamp' is not valid in any stream
+        @Unfinished(Description = "ERROR-> Caused by: com.espertech.esper.view.ViewParameterException: Invalid parameter expression 0: Property named 'timestamp' is not valid in any stream")
         String epl4 = "select price from " + Apple.CLASSNAME + ".win:ext_timed(timestamp, 10 sec)";
 
         //win:time_batch(10 sec,"FORCE_UPDATE, START_EAGER") 加上这两个参数后，会在窗口初始化时就执行查询，并且在没有数据进入和移出时，强制查询出结果
@@ -70,12 +75,26 @@ public class View_1 {
         //对 id 和 price 分组，保留最后一条事件记录 等同于std:groupwin(id, price).win:length(1)
         String epl9 = "select price from " + Apple.CLASSNAME + ".std:unique(id, price)";
 
-        //进入的数据按id分组，相同id的数据条目数不大于3 TODO unfinished
+        //进入的数据按id分组，相同id的数据条目数不大于3
+        @Unfinished(Description = "输出结果不明确")
         String epl10 = "select sum(price) from " + Apple.CLASSNAME + ".std:groupwin(id).win:length(3)";
 
         //统计每组id最近3次消费的总price
         String epl11 = "select sum(price) from " + Apple.CLASSNAME + ".std:groupwin(id).win:length(3) group by id";
-        return epl4;
+
+        //当前窗口中 最大的3个 price 的sum 值
+        String epl12 = "select sum(price) from " + Apple.CLASSNAME + ".ext:sort(3, price desc)";
+
+        //当前窗口中 按 price 升序 id 降序 的price sum 值
+        String epl13 = "select sum(price) from " + Apple.CLASSNAME + ".ext:sort(3, price desc, id asc)";
+
+        //按 size 分组，只保留最后一个分组的 size 数据，取前3个 price 的 sum 值
+        String epl14 = "select sum(price) from " + Apple.CLASSNAME + ".ext:rank(size, 3, price desc)";
+
+        //create_time 时间排序，保留4s 的数据
+        String epl15 = "select rstream * from " + Apple.CLASSNAME + ".ext:time_order(create_time, 4 sec)";
+
+        return epl15;
     }
 
     /**
@@ -141,41 +160,43 @@ public class View_1 {
         return epl1;
     }
 
+    /**
+     * 以下为数据公式计算
+     */
 
     /**
      * View	                    Syntax	                                                                Description
      * =============================================================================================================================
      * Size	                    std:size([expression, ...])	                                            Derives a count of the number of events in a data window, or in an insert stream if used without a data window, and optionally provides additional event properties as listed in parameters.
-     * Univariate statistics    stat:uni(value expression [,expression, ...])	                        Calculates univariate statistics on the values returned by the expression.
-     * Regression	            stat:linest(value expression, value expression [,expression, ...])	    Calculates regression on the values returned by two expressions.
-     * Correlation	            stat:correl(value expression, value expression [,expression, ...])	    Calculates the correlation value on the values returned by two expressions.
-     * Weighted average	        stat:weighted_avg(value expression, value expression [,expression, ...])Calculates weighted average given a weight expression and an expression to compute the average for.
      *
      * @return epl
      */
+    @Unsolved
     protected static String size_Views() {
         //统计按price分组 事件总数
         String epl1 = "select size from " + Apple.CLASSNAME + ".std:groupwin(price).std:size()";
 
-        //TODO unfinished
+        @Unfinished
         String epl2 = "select  size ,id ,price from " + Apple.CLASSNAME + ".win:time(3 sec).std:size(id, price)";
 
-        //TODO unfinished
+        @Unfinished
         String epl3 = "select size from " + Apple.CLASSNAME + ".win:time(3 sec).std:size()";
 
         return epl3;
     }
 
     /**
-     * View	                    Syntax	                                             Description
-     * ============================================================================================================
-     * Univariate statistics    stat:uni(value expression [,expression, ...])	     Calculates univariate statistics on the values returned by the expression.
-     * <p>
      * stat:uni属性
+     * <p>
+     * View	                    Syntax	                                 Description
+     * ============================================================================================================
+     * 单变量统计数据    stat:uni(value expression [,expression, ...])	     统计由单变量统计出的值
+     * <p>
+     * <p>
      * Property Name	Description
      * =========================================================
      * datapoints	值得数量, 相当于  count(*)
-     * total	    总计
+     * total	    总计  ,  相当于sum()
      * average	    平均值
      * variance	    方差
      * stddev	    样本的标准偏差(方差的平方根)
@@ -185,7 +206,79 @@ public class View_1 {
      */
     protected static String stat_uni_Views() {
 
-        return "";
+        String epl1 = "select stddev from " + Apple.CLASSNAME + ".win:length(3).stat:uni(price)";
+        String epl2 = "select total from " + Apple.CLASSNAME + ".win:length(3).stat:uni(price)";
+        String epl3 = "select average from " + Apple.CLASSNAME + ".win:length(3).stat:uni(price)";
+        String epl4 = "select datapoints from " + Apple.CLASSNAME + ".win:length(3).stat:uni(price)";
+        return epl3;
+    }
+
+    /**
+     * stat:linest  计算两个表达式的返回值的回归和相关的中间结果。
+     * <p>
+     * View	                    Syntax	                                 Description
+     * ============================================================================================================
+     * Regression	            stat:linest(value expression, value expression [,expression, ...])	    Calculates regression on the values returned by two expressions.
+     * <p>
+     * 参考文档 12.4.2. Regression (stat:linest) 部分
+     *
+     * @return epl
+     */
+    @Undigested
+    protected static String stat_linest_Views() {
+
+        //下面的示例选择所有的派生值加上所有事件属性：
+        String epl3 = "select * from " + Apple.CLASSNAME + ".win:time(10 seconds).stat:linest(price, offer, *)";
+
+        return epl3;
+    }
+
+    /**
+     * stat:correl 计算两个事件的相关性
+     * <p>
+     * View	                    Syntax	                                                                Description
+     * ============================================================================================================
+     * Correlation	            stat:correl(value expression, value expression [,expression, ...])	    计算2个表达式返回的值的相关值
+     * <p>
+     * Property Name	Description
+     * =========================================================
+     * correlation	    两个事件的相关性
+     *
+     * @return epl
+     */
+    @Undigested
+    protected static String stat_correl_Views() {
+
+        //计算价格的相关性
+        String epl1 = "select correlation from " + Apple.CLASSNAME + ".stat:correl(size,price)";
+
+        String epl2 = "select * from " + Apple.CLASSNAME + ".stat:correl(price, size, *)";
+
+        return epl2;
+    }
+
+
+    /**
+     * stat:weighted_avg 加权平均数
+     * <p>
+     * View	                    Syntax	                                                                 Description
+     * ============================================================================================================
+     * Weighted average	        stat:weighted_avg(value expression, value expression [,expression, ...]) 返回给返回值来计算的平均值和表达式返回重量表达式的加权平均值
+     * <p>
+     * Property Name	Description
+     * =========================================================
+     * average	        加权平均数
+     *
+     * @return epl
+     */
+    @Undigested
+    protected static String stat_weighted_avg_Views() {
+
+        //计算价格的相关性
+        String epl1 = "select average " +
+                "from " + Apple.CLASSNAME + ".win:time(3 seconds).stat:weighted_avg(price, size)";
+
+        return epl1;
     }
 
 }

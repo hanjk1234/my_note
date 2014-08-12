@@ -6,19 +6,20 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * 监听{@link com.framework_technology.esper.javabean.Apple}
+ * 监听{@link com.framework_technology.esper.javabean.Apple} 事件
  */
 class ViewsAppleListener implements UpdateListener {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ViewsAppleListener.class);
 
     public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-        String key = "size";
+        String key = "sum(price)";
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
                 //LOGGER.error("~~~~~~~~ newEvents‘s size is <{}> ~~~~~~~~", i);
                 EventBean eventBean = newEvents[i];
-                System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key));
+                System.out.println(" newEvents[" + i + "]  eventBean is: " + eventBean.getUnderlying().toString());
+               // System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key));
                 //                System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key) + " , id is " + eventBean.get("id") + " , price is " + eventBean.get("price"));
 
             }

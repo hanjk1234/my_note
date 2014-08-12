@@ -1,4 +1,4 @@
-package com.framework_technology.esper.epl_context;
+package com.framework_technology.esper.epl;
 
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
@@ -16,8 +16,12 @@ class AppleListener implements UpdateListener {
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
                 //LOGGER.error("~~~~~~~~ newEvents‘s size is <{}> ~~~~~~~~", i);
+                String key = "count(*)";
                 EventBean eventBean = newEvents[i];
                 System.out.println(eventBean.getUnderlying().toString());
+                //System.out.println(" newEvents[" + i + "]  eventBean is: " + eventBean.getUnderlying().toString());
+                // System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key));
+                //System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key) + " , id is " + eventBean.get("id"));
             }
         }
 

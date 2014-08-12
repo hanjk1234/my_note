@@ -1,4 +1,4 @@
-    /**
+   /**
      * Table 12.1. Built-in Data Window Views
      * <p>
      * View	Syntax	                                             Description
@@ -17,12 +17,14 @@
      * ext:time_order(timestamp expression, time period)	        Orders events that arrive out-of-order, using an expression providing timestamps to be ordered.
      * std:unique(unique criteria(s))	        对不同的unique[例如:id]保留其最近的一条事件
      * std:groupwin(grouping criteria(s))	    一般与其它窗口组合使用，将进入的数据按表达式 id 分组
-     *                                          关于分组的时间窗口:当使用grouped-window时间窗口,注意,是否保留5分钟的事件或每组保留5分钟的事件,
-     *                                          结果都是一样的从保留的角度事件既保留政策,考虑所有组,同一组的事件。因此请单独指定时间窗
+     * 关于分组的时间窗口:当使用grouped-window时间窗口,注意,是否保留5分钟的事件或每组保留5分钟的事件,
+     * 结果都是一样的从保留的角度事件既保留政策,考虑所有组,同一组的事件。因此请单独指定时间窗
      * std:lastevent()	                        保留最后一个事件，长度为1
      * std:firstevent()	                        保留第一个事件，不顾后续的事件
      * std:firstunique(unique criteria(s))	    Retains only the very first among events having the same value for the criteria expression(s), disregarding all subsequent events for same value(s).
      * win:firstlength(size)	                保留一批数据的前 size 条，需配合delete操作
      * win:firsttime(time period)	            保留窗口初始化后 period 内的所有数据
+     *
+     * @return epl
      */
 

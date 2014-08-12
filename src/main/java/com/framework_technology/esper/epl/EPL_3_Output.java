@@ -1,4 +1,4 @@
-package com.framework_technology.esper.epl_context;
+package com.framework_technology.esper.epl;
 
 import com.framework_technology.esper.javabean.Apple;
 
@@ -7,6 +7,7 @@ import com.framework_technology.esper.javabean.Apple;
  * User: wei.Li
  * Date: 14-7-31
  * <p>
+ * API - 5.7. Stabilizing and Controlling Output: the Output Clause
  * Output 用来控制Esper对事件流计算结果的输出时间和形式,可以以固定频率，也可以是某个时间点输出
  */
 public class EPL_3_Output {
@@ -21,9 +22,9 @@ public class EPL_3_Output {
      * <p>
      * after suppression_def 是可选参数，表示先满足一定的条件再输出。
      * all | first | last | snapshot 表明输出结果的形式，默认值为all。
-     * every output_rate 表示输出频率，即每达到规定的频率就进行输出。
-     * time_period 表示时间频率
-     * output_rate events 表示事件数量
+     * every output_rate    表示输出频率，即每达到规定的频率就进行输出。
+     * time_period          表示时间频率
+     * output_rate events   表示事件数量
      *
      * @return epl
      */
@@ -134,7 +135,13 @@ public class EPL_3_Output {
 
         /**
          对于when关键字，Esper提供了一些内置的属性帮助我们实现更复杂的输出约束
-         具体见官方API
+         Built-In Property Name	        Description
+         ==============================================================================
+         last_output_timestamp	    Timestamp when the last output occurred for the statement; Initially set to time of statement creation
+         count_insert	            Number of insert stream events
+         count_insert_total	        Number of insert stream events in total (not reset when output occurs).
+         count_remove	            Number of remove stream events
+         count_remove_total	        Number of remove stream events in total (not reset when output occurs).
 
          例如：
 
@@ -171,6 +178,32 @@ public class EPL_3_Output {
         String epl2 = "context MyContext select avg (size) from " + Apple.CLASSNAME + " output first every 1 min and when terminated";
 
         return "";
+    }
+
+    /**
+     * Limit子句通常一起使用的顺序和OUTPUT子句将查询结果限制为那些落在指定的范围内的。
+     * 可以用它来接收结果行的第一个定数，或获得一系列的结果行
+     * <p>
+     * limit row_count [offset offset_count]
+     * <p>
+     * limit 8 offset 2
+     * ...equivalent to
+     * limit 2, 8
+     * <p>
+     * ow_count为负数，则无限制输出，若为0，则不输出。当row_count是变量表示并且变量为null，则无限制输出。
+     * offset _count是不允许负数的，如果是变量表示，并且变量值为null或者负数，则EPL会把他假设为0。
+     *
+     * @return epl
+     */
+    protected static String Limit() {
+
+        String epl1 = "select price, count(*) from " + Apple.CLASSNAME +
+                " group by price " +
+                " output snapshot every 5 sec" +
+                " order by count(*) desc " +
+                " limit 4 offset 2";
+
+        return epl1;
     }
 
     /**

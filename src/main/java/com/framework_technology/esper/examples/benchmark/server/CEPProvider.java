@@ -81,7 +81,6 @@ public class CEPProvider {
 	    				null);// will use platform mbean - should enable platform mbean connector in startup command line
                 System.out.println("=== EsperJMX is available, using platform mbean ===");
 			} catch (ClassNotFoundException e) {
-				;
 			}
 
 
@@ -113,7 +112,6 @@ public class CEPProvider {
                     try {
                         Thread.sleep(EsperCEPProvider.sleepListenerMillis);
                     } catch (InterruptedException ie) {
-                        ;
                     }
                 }
             }
@@ -126,7 +124,6 @@ public class CEPProvider {
                 try {
                     Thread.sleep(EsperCEPProvider.sleepListenerMillis);
                 } catch (InterruptedException ie) {
-                    ;
                 }
             }
         }
@@ -136,7 +133,6 @@ public class CEPProvider {
                 try {
                     Thread.sleep(EsperCEPProvider.sleepListenerMillis);
                 } catch (InterruptedException ie) {
-                    ;
                 }
             }
         }
@@ -146,7 +142,6 @@ public class CEPProvider {
                 try {
                     Thread.sleep(EsperCEPProvider.sleepListenerMillis);
                 } catch (InterruptedException ie) {
-                    ;
                 }
             }
         }
