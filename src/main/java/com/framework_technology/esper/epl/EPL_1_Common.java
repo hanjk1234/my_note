@@ -46,7 +46,8 @@ public class EPL_1_Common {
 
 
     /**
-     * 注解支持
+     * 注解支持 参考{@link com.framework_technology.esper.epl.EPL_6_Annotation}
+     * API - 5.2.7. Annotation
      *
      * @return epl
      */

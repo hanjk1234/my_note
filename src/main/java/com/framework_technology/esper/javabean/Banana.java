@@ -47,7 +47,7 @@ public class Banana {
     public static Banana getRandomBanana() {
 
         Banana banana = new Banana();
-        LOGGER.info("~~~~~~~~~ random Apple JavaBean is <{}> ~~~~~~~~~~", banana);
+        LOGGER.info("~~~~~~~~~ random Banana JavaBean is <{}> ~~~~~~~~~~", banana);
         return banana;
     }
 

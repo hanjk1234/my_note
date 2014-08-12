@@ -3,6 +3,7 @@ package com.framework_technology.esper.epl;
 
 import com.espertech.esper.client.*;
 import com.framework_technology.esper.javabean.Apple;
+import com.framework_technology.esper.javabean.Banana;
 
 /**
  * main 函数测试
@@ -32,9 +33,9 @@ public class Main_Execute implements Runnable {
         config.addVariable("exceed", boolean.class, false);
 
         //获取 epl
-        String[] epl = EPL_4_InsertInto.DecoratedEvents();
-        epAdministrator.createEPL(epl[0]);
-        EPStatement epStatement = epAdministrator.createEPL(epl[1]);
+        String epl = EPL_5_Subqueries.any_some();
+       // epAdministrator.createEPL(epl[0]);
+        EPStatement epStatement = epAdministrator.createEPL(epl);
 
         //注册监听
         epStatement.addListener(new AppleListener());
@@ -53,6 +54,7 @@ public class Main_Execute implements Runnable {
             temp++;
 
             epRuntime.sendEvent(Apple.getRandomApple());
+            epRuntime.sendEvent(Banana.getRandomBanana());
             /**
              * 满足条件修改数据
              * @see EPL_3_Output#when()

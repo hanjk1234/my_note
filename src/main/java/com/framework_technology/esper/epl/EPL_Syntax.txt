@@ -33,12 +33,15 @@
  * 3.注解
  * a) @Name 指定EPL的名称，参数只有一个。例如：@Name("MyEPL")
  * b) @Description 对EPL进行描述，参数只有一个。例如：@Description("This is MyEPL")
- * c) @Tag 对EPL进行额外的说明，参数有两个，分别为Tag的名称和Tag的值，用逗号分隔。例如：@Tag(name="author",value="luonanqin")
+ * c) @Tag 对EPL进行额外的说明，参数有两个，分别为Tag的名称和Tag的值，用逗号分隔。
+            例如：@Tag(name="author",value="luonanqin")
  * d) @Priority 指定EPL的优先级，参数只有一个，并且整数（可负可正）。例如：@Priority(10)
  * e) @Drop 指定事件经过此EPL后不再参与其他的EPL计算，该注解无参数。
- * f) @Hint 为EPL加上某些标记，让引擎对此EPL产生其他的操作，会改变EPL实例的内存占用，但通常不会改变输出。其参数固定，由Esper提供，之后的篇幅会穿插讲解这个注解的使用场景。
+ * f) @Hint 为EPL加上某些标记，让引擎对此EPL产生其他的操作，会改变EPL实例的内存占用，但通常不会改变输出。
+            其参数固定，由Esper提供，之后的篇幅会穿插讲解这个注解的使用场景。
  * g) @Audit EPL添加此注解后，可以额外输出EPL运行情况，有点类似日志的感觉（当然没有日志的功能全啦），具体使用场景在此先不提。
  * h) @Hook 与SQL相关，这里暂且不说
- * i) @EventRepresentation 这是用来指定EPL产生的计算结果事件包含的数据形式。参数只有一个，即array=true或array=false。false为默认值，代表数据形式为Map，若为true，则数据形式为数组。
+ * i) @EventRepresentation 这是用来指定EPL产生的计算结果事件包含的数据形式。
+                            参数只有一个，即array=true或array=false。false为默认值，代表数据形式为Map，若为true，则数据形式为数组。
  *
  */
