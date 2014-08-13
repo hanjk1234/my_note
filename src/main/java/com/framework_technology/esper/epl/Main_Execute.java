@@ -17,7 +17,7 @@ public class Main_Execute implements Runnable {
     //线程执行时间间隔-ms
     private static final int EXECUTE_INTERVAL_MILLISECOND = 500;
     //执行次数
-    private static final int EXECUTE_NUM = 30;
+    private static final int EXECUTE_NUM = 10;
 
     protected static final EPServiceProvider defaultProvider = EPServiceProviderManager.getDefaultProvider();
     protected static final EPAdministrator epAdministrator = defaultProvider.getEPAdministrator();
@@ -34,7 +34,7 @@ public class Main_Execute implements Runnable {
         Configuration configuration = new Configuration();
         configuration.getEngineDefaults().getViewResources().setAllowMultipleExpiryPolicies(true);
         //获取 epl
-        String epl = EPL_7_Patterns_1.filterExpressions();
+        String epl = EPL_5_Subqueries.join();
        // epAdministrator.createEPL(epl[0]);
         EPStatement epStatement = epAdministrator.createEPL(epl);
         //注册监听

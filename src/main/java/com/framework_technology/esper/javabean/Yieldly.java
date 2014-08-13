@@ -6,6 +6,9 @@ package com.framework_technology.esper.javabean;
  * @author wei.Li by 14-8-12.
  */
 public class Yieldly {
+
+    public static final String CLASSNAME = Yieldly.class.getName();
+
     private String address;
 
     public Yieldly(String address) {
