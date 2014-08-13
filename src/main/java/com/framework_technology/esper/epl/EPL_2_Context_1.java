@@ -67,8 +67,7 @@ public class EPL_2_Context_1 {
     }
 
     /**
-     看了这么多，可能大家只是知道context的一些基本定义方法，但是不知道什么意思。
-     其实很简单，partition by后面的属性，就是作为context的一个约束，比如说id，如果id相等的则进入同一个context里，如果id不同，那就新建一个context。
+     partition by后面的属性，就是作为context的一个约束，比如说id，如果id相等的则进入同一个context里，如果id不同，那就新建一个context。
      好比根据id分组，id相同的会被分到一个组里，不同的会新建一个组并等待相同的进入。
 
      如果parition by后面跟着同一个流的两个属性，那么必须两个属性值一样才能进入context。

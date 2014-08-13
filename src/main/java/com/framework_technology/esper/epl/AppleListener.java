@@ -22,6 +22,7 @@ class AppleListener implements UpdateListener {
                 //System.out.println(" newEvents[" + i + "]  eventBean is: " + eventBean.getUnderlying().toString());
                 // System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key));
                 //System.out.println(" newEvents[" + i + "]  " + key + " is: " + eventBean.get(key) + " , id is " + eventBean.get("id"));
+
             }
         }
 
