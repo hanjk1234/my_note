@@ -14,8 +14,6 @@ import java.lang.reflect.Method;
  */
 public class Proxy_Cglib implements MethodInterceptor {
 
-    private Object object;
-
     /**
      * 创建代理对象
      *
@@ -23,9 +21,8 @@ public class Proxy_Cglib implements MethodInterceptor {
      * @return 代理对象
      */
     public Object getInstance(Object object) {
-        this.object = object;
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(this.object.getClass());
+        enhancer.setSuperclass(object.getClass());
         // 回调方法
         enhancer.setCallback(this);
         // 创建代理对象

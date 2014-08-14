@@ -36,7 +36,7 @@ public class Map_Common {
     private static void map2List() {
 
 
-        List<String> stringList = Collections.emptyList();
+        ArrayList stringList;
 
         //key
         stringList = new ArrayList<>(map.keySet());
@@ -57,7 +57,7 @@ public class Map_Common {
     private static void write2Map() {
 
         for (String s : map.keySet()) {
-            String key = s;
+            //String key = s;
             String value = map.get(s);
         }
 

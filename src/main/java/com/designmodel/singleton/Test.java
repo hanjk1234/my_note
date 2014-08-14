@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * Created by lw on 14-4-30.
+ * @author lw by 14-4-30.
  */
 public class Test extends Thread implements Runnable {
 

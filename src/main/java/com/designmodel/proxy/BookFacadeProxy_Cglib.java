@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * Created by lw on 14-5-1.
+ * @author lw by 14-5-1.
  */
 public class BookFacadeProxy_Cglib implements MethodInterceptor {
 

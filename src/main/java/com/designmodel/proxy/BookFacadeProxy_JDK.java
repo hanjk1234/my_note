@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * Created by lw on 14-5-1.
+ * @author lw by 14-5-1.
  */
 public class BookFacadeProxy_JDK implements InvocationHandler {
 

@@ -25,3 +25,5 @@ email:  [liweityut@163.com]
 
 @Unfinished     未完成的
 
+@Faulty         有错误的
+
