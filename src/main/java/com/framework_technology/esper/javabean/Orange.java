@@ -8,47 +8,44 @@ import java.util.Locale;
 import java.util.Random;
 
 /**
- * apple javaBean
+ *  @author wei.Li by 14-8-14.
  */
-public class Apple {
+public class Orange {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Apple.class);
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Orange.class);
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.CHINA);
 
-
     private static final String[] COLORS = new String[]{"1", "2", "3"};
-    public static final String[] YIELDLY = new String[]{"BeiJing", "ShanXi", "HeNan", "ShangHai", "TianJing"};
     private static final int COLORS_LENGTH = COLORS.length;
     public static final String AVG_PRICE = "avg(price)";
-    public static final String CLASSNAME = Apple.class.getName();
+    public static final String CLASSNAME = Orange.class.getName();
 
     private String id; //id
     private int price; //价格
     private double discount;//折扣
     private String color;//颜色 COLORS 中随机获取
     private int size;//大小  1-10
-    private Long create_time;//生产时间
-    private Yieldly yieldly;//生产地
+    private Long create_time;//创建时间
 
-    Apple() {
+    Orange() {
         Random random = new Random();
         this.id = random.nextInt(5) + "";
-        this.price = random.nextInt(2);
+        this.price = random.nextInt(10);
         this.discount = random.nextDouble();
         this.color = COLORS[random.nextInt(COLORS_LENGTH)];
         this.size = random.nextInt(2);
         this.create_time = System.currentTimeMillis() - random.nextInt(3) * 1000L;
-        this.yieldly = new Yieldly(YIELDLY[random.nextInt(YIELDLY.length)]);
     }
 
     /**
-     * @return 返回一个随机创建的 {@link Apple}
+     * @return 返回一个随机创建的 {@link com.framework_technology.esper.javabean.Apple}
      */
-    public static Apple getRandomApple() {
+    public static Orange getRandomOrange() {
 
-        Apple apple = new Apple();
-        LOGGER.info("~~~~~~~~~ random Apple JavaBean is <{}> ~~~~~~~~~~", apple);
-        return apple;
+        Orange orange = new Orange();
+        LOGGER.info("~~~~~~~~~ random Orange JavaBean is <{}> ~~~~~~~~~~", orange);
+        return orange;
     }
 
     public String getId() {
@@ -99,17 +96,9 @@ public class Apple {
         this.create_time = create_time;
     }
 
-    public Yieldly getYieldly() {
-        return yieldly;
-    }
-
-    public void setYieldly(Yieldly yieldly) {
-        this.yieldly = yieldly;
-    }
-
     /**
-     * @return 该Apple 折扣后的价格
-     * @see Apple#getPriceByDiscount(int, double)
+     * @return 该Orange 折扣后的价格
+     * @see com.framework_technology.esper.javabean.Apple#getPriceByDiscount(int, double)
      */
     public double getPriceByDiscount() {
         return this.price * this.discount;
@@ -118,7 +107,7 @@ public class Apple {
     /**
      * @param price    price
      * @param discount discount
-     * @return 该Apple 折扣后的价格
+     * @return 该Orange 折扣后的价格
      */
     public double getPriceByDiscount(int price, double discount) {
         return price * discount;
@@ -129,7 +118,7 @@ public class Apple {
      *
      * @param price    price
      * @param discount discount
-     * @return 该Apple 折扣后的价格
+     * @return 该Orange 折扣后的价格
      */
     public static double getPriceByDiscount2StaticMethod(int price, double discount) {
         return price * discount;
@@ -137,14 +126,13 @@ public class Apple {
 
     @Override
     public String toString() {
-        return "Apple{" +
+        return "Orange{" +
                 "id='" + id + '\'' +
                 ", price=" + price +
-                ", discount=" + String.format("%.2f", discount) +
+                ", discount=" + discount +
                 ", color='" + color + '\'' +
                 ", size=" + size +
                 ", create_time=" + FORMAT.format(new Date(create_time)) +
-                ", yieldly=" + yieldly +
                 '}';
     }
 }

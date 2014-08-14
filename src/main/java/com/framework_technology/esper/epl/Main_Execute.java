@@ -4,6 +4,7 @@ package com.framework_technology.esper.epl;
 import com.espertech.esper.client.*;
 import com.framework_technology.esper.javabean.Apple;
 import com.framework_technology.esper.javabean.Banana;
+import com.framework_technology.esper.javabean.Orange;
 
 /**
  * main 函数测试
@@ -34,8 +35,8 @@ public class Main_Execute implements Runnable {
         Configuration configuration = new Configuration();
         configuration.getEngineDefaults().getViewResources().setAllowMultipleExpiryPolicies(true);
         //获取 epl
-        String epl = EPL_5_Subqueries.join();
-       // epAdministrator.createEPL(epl[0]);
+        String epl = EPL_8_Patterns_2.distinct();
+        // epAdministrator.createEPL(epl[0]);
         EPStatement epStatement = epAdministrator.createEPL(epl);
         //注册监听
         epStatement.addListener(new AppleListener());
@@ -61,9 +62,9 @@ public class Main_Execute implements Runnable {
              */
             if (temp % 3 == 0)
                 epRuntime.sendEvent(Banana.getRandomBanana());
-                epRuntime.setVariableValue("exceed", true);
+            epRuntime.setVariableValue("exceed", true);
 
-
+            epRuntime.sendEvent(Orange.getRandomOrange());
             try {
                 Thread.sleep(EXECUTE_INTERVAL_MILLISECOND);
             } catch (InterruptedException e) {

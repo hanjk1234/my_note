@@ -12,6 +12,22 @@
     </appender>
 
 
+    <logger name="com.framework_technology.esper.examples.alarm">
+        <level value="DEBUG"/>
+        <appender-ref ref="alarm"/>
+    </logger>
+
+    <appender name="alarm" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/lw/workfile/log/mynote/mynote.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="20"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p: %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+
     <logger name="org.quartz">
         <level value="INFO"/>
     </logger>
