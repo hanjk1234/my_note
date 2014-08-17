@@ -8,18 +8,17 @@ import java.util.UUID;
 /**
  * @author wei.Li by 14-8-14.
  */
-public class AlarmData {
+public class Alarm {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AlarmData.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Alarm.class);
 
     private String id; //编号
     private String keyunique;//流+类型+开始时间  创建唯一标识
-    private int stream_id;//所属流
     private long start_time;//开始时间
     private long end_time;//结束时间
-    private int type;//告警类型 0条件告警 1基线告警
-    private double num;//实际数值
-    private double Offset;//偏移基线值
+    private String type;//告警类型 0基线告警 1条件告警
+    private int num;//实际数值 = 监视的对象流 num
+    private int Offset;//偏移值
     private int duration;//持续时间
     private boolean merged = false;//是否已告警合并
     private Integer merged_at = null;//告警合并后的最后创建时间
@@ -27,18 +26,21 @@ public class AlarmData {
 
 
     //获取随机的数据对象
-    protected static AlarmData getRandom() {
-        return new AlarmData();
+    protected static Alarm getInstance(final Stream stream, String type) {
+        Alarm alarm = new Alarm();
+        int num = stream.getNum();
+        alarm.setNum(num);
+        alarm.setType(type);
+        alarm.setKeyunique(String.format("%s#%s#%s", stream.getStream_id(), type, alarm.getStart_time()));
+        return alarm;
     }
 
-    public AlarmData() {
+
+    public Alarm() {
         Random random = new Random();
         this.id = UUID.randomUUID().toString();
-        this.stream_id = random.nextInt(3);
         this.start_time = System.currentTimeMillis();
-        this.type = random.nextInt(2);
-        this.num = random.nextInt(10000);
-        this.keyunique = String.format("%s#%s#%s", stream_id, type, start_time);
+
         //LOGGER.debug("Random AlarmData`s type : <{}> , num : <{}>", this.type, this.num);
     }
 
@@ -47,7 +49,6 @@ public class AlarmData {
         return "AlarmData{" +
                 "id='" + id + '\'' +
                 ", keyunique='" + keyunique + '\'' +
-                ", stream_id=" + stream_id +
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
                 ", type=" + type +
@@ -76,14 +77,6 @@ public class AlarmData {
         this.keyunique = keyunique;
     }
 
-    public int getStream_id() {
-        return stream_id;
-    }
-
-    public void setStream_id(int stream_id) {
-        this.stream_id = stream_id;
-    }
-
     public long getStart_time() {
         return start_time;
     }
@@ -100,27 +93,27 @@ public class AlarmData {
         this.end_time = end_time;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public double getNum() {
+    public int getNum() {
         return num;
     }
 
-    public void setNum(double num) {
+    public void setNum(int num) {
         this.num = num;
     }
 
-    public double getOffset() {
+    public int getOffset() {
         return Offset;
     }
 
-    public void setOffset(double offset) {
+    public void setOffset(int offset) {
         Offset = offset;
     }
 
@@ -158,19 +151,68 @@ public class AlarmData {
 }
 
 /**
+ * 被监视的对象流
+ */
+class Stream {
+
+    private int stream_id;//流id
+
+    private int num;//随机产生的数值
+
+    public static Stream getRandom() {
+        return new Stream();
+    }
+
+    Stream() {
+        Random random = new Random();
+        this.stream_id = random.nextInt(3);
+        this.num = random.nextInt(1000);
+    }
+
+    Stream(int stream_id, int num) {
+        this.stream_id = stream_id;
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "Stream{" +
+                "stream_id=" + stream_id +
+                ", num=" + num +
+                '}';
+    }
+
+    public int getStream_id() {
+        return stream_id;
+    }
+
+    public void setStream_id(int stream_id) {
+        this.stream_id = stream_id;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+}
+
+/**
  * 基线值-动态修改
  */
 class Baseline implements Runnable {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Baseline.class);
 
-    public static double num;//当前基线值
+    public static int num;//当前基线值
 
     @Override
     public void run() {
         Random random = new Random();
         while (true) {
-            num = random.nextInt(1000);
+            num = random.nextInt(100);
             //LOGGER.debug("Baseline update num is : <{}>", num);
             try {
                 Thread.sleep(random.nextInt(20000));
@@ -195,7 +237,7 @@ class Condition implements Runnable {
     public void run() {
         while (true) {
             Random random = new Random();
-            num = random.nextInt(1000);
+            num = random.nextInt(100);
             //LOGGER.debug("Condition update num is : <{}>", num);
             try {
                 Thread.sleep(20000);

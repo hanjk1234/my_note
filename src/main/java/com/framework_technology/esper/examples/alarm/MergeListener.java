@@ -15,6 +15,7 @@ public class MergeListener implements UpdateListener {
     public void update(EventBean[] newEvents, EventBean[] oldEvents) {
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
+
                 LOGGER.debug("MergeListener eventBean[{}] : <{}>", i, newEvents[i].getUnderlying());
             }
         }

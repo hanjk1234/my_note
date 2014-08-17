@@ -89,7 +89,7 @@ public class EPL_5_Subqueries {
      */
     protected static String any_some() {
         String epl1 = "select * from " + Apple.CLASSNAME + " as RFID " +
-                "  where RFID.id < any(select id from " + Banana.CLASSNAME + ".win:keepall())";
+                "  where RFID.id > any(select id from " + Banana.CLASSNAME + ".win:keepall())";
         return epl1;
     }
 

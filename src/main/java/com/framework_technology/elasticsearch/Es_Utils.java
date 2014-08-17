@@ -28,6 +28,10 @@ public class Es_Utils {
 
     protected static Client client;
 
+    //
+    protected static final String LOGSTASH_YYYY_MM_DD = "logstash-2014.08.15";
+    protected static final String LOGSTASH_YYYY_MM_DD_MAPPING = "logstash_yyyy_mm_dd_mapping";
+
     //直接传入 index_demo_*  即按前缀* 查询
     protected static final String INDEX_DEMO_ALL = "index_demo_*";
 

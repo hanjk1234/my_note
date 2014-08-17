@@ -12,16 +12,16 @@ public class Es_Test {
     public static void main(String[] dfd) {
         Es_Utils.startupClient();
         try {
-            //Es_BuildIndex.buildIndexMapping();
+            Es_BuildIndex.buildIndexMapping();
             //buildIndex(User.getOneRandomUser());
-          /*  for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 5; i++) {
                 Thread.sleep(2000);
                 Es_BuildIndex.buildBulkIndex(User.getRandomUsers(1000));
-            }*/
+            }
 
             //searchById("5_XDJBA-TBOra4a7oyiYrA");
             //Es_Search.searchByQuery();
-            Es_Search.searchByQuery_Count();
+            //Es_Search.searchByQuery_Count();
             //updateByQuery();
             //Es_Facets.searchByQuery_Facets();
             // Es_Update_Del.deleteIndexByQuery();

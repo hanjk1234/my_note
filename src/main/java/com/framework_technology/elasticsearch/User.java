@@ -13,7 +13,8 @@ import java.util.Random;
  * Created by IntelliJ IDEA.
  * User: lw
  * Date: 14-7-8
- */public class User {
+ */
+public class User {
 
     private String name;
     private String home;//家乡
@@ -83,6 +84,7 @@ import java.util.Random;
     public static XContentBuilder getXContentBuilder(User user) throws IOException {
         return XContentFactory.jsonBuilder()
                 .startObject()
+                .field("@timestamp", System.currentTimeMillis())
                 .field("name", user.getName())//该字段在上面的方法中mapping定义了,所以该字段就有了自定义的属性,比如 age等
                 .field("home", user.getHome())
                 .field("now_home", user.getNow_home())

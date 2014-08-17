@@ -36,7 +36,7 @@ public class Es_BuildIndex {
      */
     protected static void buildIndexMapping() throws Exception {
         //在本例中主要得注意,ttl及timestamp如何用java ,这些字段的具体含义,请去到es官网查看
-        CreateIndexRequestBuilder cib = Es_Utils.client.admin().indices().prepareCreate(Es_Utils.INDEX_DEMO_01);
+        CreateIndexRequestBuilder cib = Es_Utils.client.admin().indices().prepareCreate(Es_Utils.LOGSTASH_YYYY_MM_DD);
         XContentBuilder mapping = XContentFactory.jsonBuilder()
                 .startObject()
                 .startObject("we3r")//
@@ -54,6 +54,7 @@ public class Es_BuildIndex {
                 .endObject()
                         //properties下定义的name等等就是属于我们需要的自定义字段了,相当于数据库中的表字段 ,此处相当于创建数据库表
                 .startObject("properties")
+                .startObject("@timestamp").field("type","long").endObject()
                 .startObject("name").field("type", "string").field("store", "yes").endObject()
                 .startObject("home").field("type", "string").field("index", "not_analyzed").endObject()
                 .startObject("now_home").field("type", "string").field("index", "not_analyzed").endObject()
@@ -65,7 +66,7 @@ public class Es_BuildIndex {
                 .endObject()
                 .endObject()
                 .endObject();
-        cib.addMapping(Es_Utils.INDEX_DEMO_01_MAPPING, mapping);
+        cib.addMapping(Es_Utils.LOGSTASH_YYYY_MM_DD_MAPPING, mapping);
         cib.execute().actionGet();
     }
 
@@ -80,7 +81,7 @@ public class Es_BuildIndex {
      */
     protected static void buildIndex(User user) throws Exception {
         // INDEX_DEMO_01_MAPPING为上个方法中定义的索引,prindextype为类型.jk8231为id,以此可以代替memchche来进行数据的缓存
-        IndexResponse response = Es_Utils.client.prepareIndex(Es_Utils.INDEX_DEMO_01, Es_Utils.INDEX_DEMO_01_MAPPING)
+        IndexResponse response = Es_Utils.client.prepareIndex(Es_Utils.LOGSTASH_YYYY_MM_DD, Es_Utils.LOGSTASH_YYYY_MM_DD_MAPPING)
                 .setSource(
                         User.getXContentBuilder(user)
                 )
@@ -101,7 +102,7 @@ public class Es_BuildIndex {
 
         for (User user : userList) {
             //通过add批量添加
-            bulkRequest.add(Es_Utils.client.prepareIndex(Es_Utils.INDEX_DEMO_01, Es_Utils.INDEX_DEMO_01_MAPPING)
+            bulkRequest.add(Es_Utils.client.prepareIndex(Es_Utils.LOGSTASH_YYYY_MM_DD, Es_Utils.LOGSTASH_YYYY_MM_DD_MAPPING)
                             .setSource(
                                     User.getXContentBuilder(user)
                             )

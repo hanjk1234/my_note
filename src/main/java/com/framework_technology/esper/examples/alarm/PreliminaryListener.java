@@ -25,10 +25,13 @@ public class PreliminaryListener implements UpdateListener {
 
         if (newEvents != null) {
             for (int i = 0; i < newEvents.length; i++) {
-                LOGGER.debug("PreliminaryListener eventBean[{}] : <{}>", i, newEvents[i].getUnderlying());
+                EventBean eventBean = newEvents[i];
+                LOGGER.debug("PreliminaryListener eventBean[{}] : <{}>", i, eventBean.getUnderlying().toString());
+                Stream stream = new Stream(((Integer) eventBean.get("stream_id")), ((Integer) eventBean.get("num")));
+                String type = eventBean.get("label") + "";
+                Alarm alarm = Alarm.getInstance(stream, type);
                 //过滤以后的事件发送到合并处理监听
-                mergeCepProvider.sendEvent(AlarmData.getRandom());
-                //mergeCepProvider.sendEvent(newEvents[i].getUnderlying());
+                mergeCepProvider.sendEvent(alarm);
             }
         }
     }

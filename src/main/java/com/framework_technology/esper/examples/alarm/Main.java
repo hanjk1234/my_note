@@ -8,23 +8,30 @@ import java.util.Random;
  */
 public class Main {
 
-    public static final String ALARMDATANAME = AlarmData.class.getName();
+    public static final String ALARMNAME = Alarm.class.getName();
+    public static final String STREAM = Stream.class.getName();
+
+    public static final String ALARMCATEGORY_CONTEXT =
+            "create context alarmcategory group by num > " + Baseline.num + " as baselinealarm,group by num > " + Condition.num + " as conditionalarm from " + STREAM;
+    public static final String ALARMCATEGORY_EPL =
+            "context alarmcategory  select  context.label , stream_id , num from " + STREAM;//context.id,context.name,context.label,
 
     public static void main(String[] args) {
 
+        //启动线程动态更新基线与条件的设定值
         new Thread(new Baseline()).start();
         new Thread(new Condition()).start();
 
-        EsperService.EsperAlarmProvider mergeCepProvider = EsperService.getInstance("mergeCepProvider", new MergeListener());
-        String epl_MergeBaseline = "select * from " + ALARMDATANAME;
-        mergeCepProvider.registerEPL(epl_MergeBaseline, "epl_MergeBaseline");
+        String epl_MergeBaseline = "select * from " + ALARMNAME;
+        EsperService.EsperAlarmProvider mergeCepProvider = EsperService
+                .getInstance("mergeCepProvider", new MergeListener());
+        mergeCepProvider.registerEPL2Listener(epl_MergeBaseline);
 
-        EsperService.EsperAlarmProvider preliminaryCepProvider = EsperService.getInstance("preliminaryCepProvider", new PreliminaryListener(mergeCepProvider));
-        String epl_Baseline = "select a.type,a.num from " + ALARMDATANAME + " a where a.type = 0 and a.num >" + Baseline.num;
-        String epl_Condition = "select a.type,a.num from " + ALARMDATANAME + " a where a.type = 1 and a.num >" + Condition.num;
 
-        preliminaryCepProvider.registerEPL(epl_Baseline, "epl_Baseline");
-        preliminaryCepProvider.registerEPL(epl_Condition, "epl_Condition");
+        EsperService.EsperAlarmProvider preliminaryCepProvider = EsperService
+                .getInstance("preliminaryCepProvider", new PreliminaryListener(mergeCepProvider));
+        preliminaryCepProvider.registerEPL(ALARMCATEGORY_CONTEXT);
+        preliminaryCepProvider.registerEPL2Listener(ALARMCATEGORY_EPL);
         sendEventByEPRuntime(preliminaryCepProvider);
     }
 
@@ -38,7 +45,7 @@ public class Main {
             @Override
             public void run() {
                 while (true) {
-                    preliminaryCepProvider.sendEvent(AlarmData.getRandom());
+                    preliminaryCepProvider.sendEvent(Stream.getRandom());
                     try {
                         Thread.sleep(new Random().nextInt(3000));
                     } catch (InterruptedException e) {
