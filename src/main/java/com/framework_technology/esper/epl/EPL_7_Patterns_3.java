@@ -6,7 +6,7 @@ import com.framework_technology.esper.javabean.Banana;
 /**
  * @author wei.Li by 14-8-18.
  */
-public class EPL_8_Patterns_3 {
+public class EPL_7_Patterns_3 {
 
     /**
      * And

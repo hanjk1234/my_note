@@ -12,7 +12,7 @@ public class Es_Test {
     public static void main(String[] dfd) {
         Es_Utils.startupClient();
         try {
-            Es_BuildIndex.buildIndexMapping();
+            //Es_BuildIndex.buildIndexMapping();
             //buildIndex(User.getOneRandomUser());
            /* for (int i = 0; i < 5; i++) {
                 Thread.sleep(2000);
@@ -22,10 +22,9 @@ public class Es_Test {
             //Es_Search.searchByQuery();
             //Es_Search.searchByQuery_Count();
             //updateByQuery();
-            //Es_Facets.searchByQuery_Facets();
             // Es_Update_Del.deleteIndexByQuery();
             //Es_Utils.getAllIndices();
-            Es_BuildIndex.createAliases("aliases_test", "index_demo_01", "index_demo_02");
+            //Es_BuildIndex.createAliases("aliases_test", "index_demo_01", "index_demo_02");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
