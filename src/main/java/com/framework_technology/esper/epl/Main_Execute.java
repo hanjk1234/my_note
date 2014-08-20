@@ -35,9 +35,9 @@ public class Main_Execute implements Runnable {
         Configuration configuration = new Configuration();
         configuration.getEngineDefaults().getViewResources().setAllowMultipleExpiryPolicies(true);
         //获取 epl
-        String epl = EPL_8_Patterns_2.distinct();
+        String []epl = EPL_2_Context_2.contextDistinctEventsForTheInitiatingCondition();
         // epAdministrator.createEPL(epl[0]);
-        EPStatement epStatement = epAdministrator.createEPL(epl);
+        EPStatement epStatement = epAdministrator.createEPL(epl[0]);
         //注册监听
         epStatement.addListener(new AppleListener());
 

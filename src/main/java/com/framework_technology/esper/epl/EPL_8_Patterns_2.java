@@ -13,7 +13,7 @@ public class EPL_8_Patterns_2 {
 
     /**
      *
-     ##6.5.1. Every
+     ####6.5.1. Every
      参考{@link #every()} 方法中epl1-epl4 语句
      ==========================
      事件的进入顺序如下:
@@ -91,7 +91,7 @@ public class EPL_8_Patterns_2 {
 
 
 
-     ##6.5.1.3. Every Operator Example 操作实例
+     ####6.5.1.3. Every Operator Example 操作实例
      =======================================================
 
      every A  -> (B -> C) where timer:within(1 hour)
@@ -114,7 +114,7 @@ public class EPL_8_Patterns_2 {
      因为你可能需要关联一个给定的属性。例如 id 的关联 every a=A -> (B(id=a.id -> C(id=a.id)) where timer:within(1 hour)
 
 
-     ##6.5.2. Every-Distinct 字段值去重复
+     ####6.5.2. Every-Distinct 字段值去重复
 
      语法规则:
      every-distinct(distinct_value_expr [, distinct_value_exp[...][, expiry_time_period])
@@ -138,7 +138,7 @@ public class EPL_8_Patterns_2 {
 
 
 
-     ##6.5.3. Repeat 重复发生操作
+     ####6.5.3. Repeat 重复发生操作
 
      语法规则：
      [match_count] repeating_subexpr
@@ -166,7 +166,7 @@ public class EPL_8_Patterns_2 {
 
 
 
-     ##6.5.4.1. Unbound Repeat 释放重复发生的操作
+     ####6.5.4.1. Unbound Repeat 释放重复发生的操作
 
      引擎匹配repeated_pattern_expr模式直到end_pattern_expr子表达式的求值结果为true停止执行。
 
@@ -252,6 +252,8 @@ public class EPL_8_Patterns_2 {
 
 
     /**
+     * every-distinct
+     *
      * @return epl
      */
     protected static String distinct() {

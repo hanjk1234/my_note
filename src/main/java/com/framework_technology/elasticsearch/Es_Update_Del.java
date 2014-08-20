@@ -1,6 +1,8 @@
 package com.framework_technology.elasticsearch;
 
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.deletebyquery.DeleteByQueryResponse;
 import org.elasticsearch.action.update.UpdateRequest;
@@ -17,6 +19,20 @@ import java.io.IOException;
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 public class Es_Update_Del {
+
+
+    /**
+     * 删除 创建的索引index
+     *
+     * @param indexs 要删除的索引数组
+     * @return 是否删除成功
+     */
+    protected static boolean deleteIndexByName(String... indexs) {
+        DeleteIndexResponse deleteIndexResponse = Es_Utils.client
+                .admin().indices().delete(new DeleteIndexRequest(indexs)).actionGet();
+
+        return deleteIndexResponse.isAcknowledged();
+    }
 
     /**
      * 通过Id删除索引记录
@@ -58,7 +74,8 @@ public class Es_Update_Del {
 
     /**
      * 修改
-     * @throws java.io.IOException  IOException
+     *
+     * @throws java.io.IOException IOException
      */
     protected static void updateByQuery() throws IOException {
 

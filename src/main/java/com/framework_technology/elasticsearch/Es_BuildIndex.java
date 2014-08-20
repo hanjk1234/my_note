@@ -1,6 +1,11 @@
 package com.framework_technology.elasticsearch;
 
+import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequestBuilder;
+import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistRequestBuilder;
+import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistResponse;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.admin.indices.stats.IndexStats;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -8,7 +13,9 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lw on 14-7-7.
@@ -35,8 +42,15 @@ public class Es_BuildIndex {
      * @throws Exception Exception
      */
     protected static void buildIndexMapping() throws Exception {
+        Map<String, Object> settings = new HashMap<>();
+        settings.put("number_of_shards", 100);//分片数量
+        settings.put("number_of_replicas", 0);//复制数量
+        settings.put("refresh_interval", "10s");//刷新时间
+
         //在本例中主要得注意,ttl及timestamp如何用java ,这些字段的具体含义,请去到es官网查看
         CreateIndexRequestBuilder cib = Es_Utils.client.admin().indices().prepareCreate(Es_Utils.LOGSTASH_YYYY_MM_DD);
+        cib.setSettings(settings);
+
         XContentBuilder mapping = XContentFactory.jsonBuilder()
                 .startObject()
                 .startObject("we3r")//
@@ -54,7 +68,7 @@ public class Es_BuildIndex {
                 .endObject()
                         //properties下定义的name等等就是属于我们需要的自定义字段了,相当于数据库中的表字段 ,此处相当于创建数据库表
                 .startObject("properties")
-                .startObject("@timestamp").field("type","long").endObject()
+                .startObject("@timestamp").field("type", "long").endObject()
                 .startObject("name").field("type", "string").field("store", "yes").endObject()
                 .startObject("home").field("type", "string").field("index", "not_analyzed").endObject()
                 .startObject("now_home").field("type", "string").field("index", "not_analyzed").endObject()
@@ -70,6 +84,31 @@ public class Es_BuildIndex {
         cib.execute().actionGet();
     }
 
+    /**
+     * 给 []index 创建别名
+     * 重载方法可以按照过滤器或者Query 作为一个别名
+     *
+     * @param aliases aliases别名
+     * @param indices 多个 index
+     * @return 是否完成
+     */
+    protected static boolean createAliases(String aliases, String... indices) {
+        IndicesAliasesRequestBuilder builder = Es_Utils.client.admin().indices().prepareAliases();
+        return builder.addAlias(indices, aliases).execute().isDone();
+    }
+
+    /**
+     * 查询此别名是否存在
+     *
+     * @param aliases aliases
+     * @return 是否存在
+     */
+    protected static boolean aliasesExist(String... aliases) {
+        AliasesExistRequestBuilder builder =
+                Es_Utils.client.admin().indices().prepareAliasesExist(aliases);
+        AliasesExistResponse response = builder.execute().actionGet();
+        return response.isExists();
+    }
 
     /**
      * 添加记录到es

@@ -31,13 +31,12 @@ public class Alarm {
         int num = stream.getNum();
         alarm.setNum(num);
         alarm.setType(type);
-        alarm.setKeyunique(String.format("%s#%s#%s", stream.getStream_id(), type, alarm.getStart_time()));
+        alarm.setKeyunique(String.format("%s#%s#", stream.getStream_id(), type));
         return alarm;
     }
 
 
     public Alarm() {
-        Random random = new Random();
         this.id = UUID.randomUUID().toString();
         this.start_time = System.currentTimeMillis();
 
@@ -212,7 +211,7 @@ class Baseline implements Runnable {
     public void run() {
         Random random = new Random();
         while (true) {
-            num = random.nextInt(100);
+            num = random.nextInt(1);
             //LOGGER.debug("Baseline update num is : <{}>", num);
             try {
                 Thread.sleep(random.nextInt(20000));
@@ -237,7 +236,7 @@ class Condition implements Runnable {
     public void run() {
         while (true) {
             Random random = new Random();
-            num = random.nextInt(100);
+            num = random.nextInt(1);
             //LOGGER.debug("Condition update num is : <{}>", num);
             try {
                 Thread.sleep(20000);

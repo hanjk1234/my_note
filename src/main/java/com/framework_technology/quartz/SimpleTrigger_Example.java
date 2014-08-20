@@ -49,14 +49,14 @@ public class SimpleTrigger_Example {
     }
 
     public static void main(String[] args) throws Exception {
-
+        QuartzSchedule.start();
         for (int i = 0; i < 2; i++) {
             HelloJob helloJob = new HelloJob();
             helloJob.setTask(i + "");
             buildScheduleJob(helloJob);
         }
 
-        QuartzSchedule.start();
+
     }
 
 }

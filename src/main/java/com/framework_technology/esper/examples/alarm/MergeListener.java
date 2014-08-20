@@ -19,5 +19,6 @@ public class MergeListener implements UpdateListener {
                 LOGGER.debug("MergeListener eventBean[{}] : <{}>", i, newEvents[i].getUnderlying());
             }
         }
+        System.out.println();
     }
 }
