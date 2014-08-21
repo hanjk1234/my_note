@@ -184,7 +184,9 @@ public class EPL_7_Patterns_1 {
      */
     @Unfinished
     protected static String namedWindows() {
-        String epl1 = "";
-        return epl1;
+        /**
+         * @see com.framework_technology.esper.epl.EPL_8_NamedWindow
+         */
+        return null;
     }
 }

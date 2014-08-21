@@ -1,5 +1,6 @@
 package com.thread.jdk_thread;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.util.date.Joda_Time;
 
 import java.util.Random;
@@ -12,8 +13,12 @@ import java.util.concurrent.*;
  */
 public class FixedThreadPool_Example {
 
-    static ExecutorService executor = Executors.newFixedThreadPool(10);
-
+    private static ExecutorService executor = Executors.newFixedThreadPool(10);
+    /**
+     * 添加任务到线程池
+     *
+     * @param task 任务编号
+     */
     private static void run2FixedThreadPool(String task) {
         // executor.execute(new FixedThreadPool_Handle());
         FutureTask<String> future;
@@ -21,9 +26,8 @@ public class FixedThreadPool_Example {
             public String call() {
                 try {
                     //模拟执行时间为随机值
-                    Thread.sleep(new Random().nextInt(4000));
+                    Thread.sleep(new Random().nextInt(6000));
                     System.out.println("run task :" + task);
-                    System.out.println();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -33,33 +37,28 @@ public class FixedThreadPool_Example {
         });
         //executor.submit(future);
         executor.execute(future);
-/*
         try {
             //接受任务返回，可以设置超时
             System.out.println(future.get(3, TimeUnit.SECONDS));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }*/
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            try {
+                System.out.println("timeOut task->" + future.get());
+            } catch (InterruptedException | ExecutionException e1) {
+                e1.printStackTrace();
+            }
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public static void main(String[] args) {
         String task = "";//模拟任务
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 5; i++) {
             run2FixedThreadPool(i + task);
         }
         System.out.println("---------- add task done ----------");
+        if (!executor.isShutdown()) {
+            executor.shutdown();
+        }
+        System.out.println("executor is shutdown ->" + executor.isShutdown());
     }
 }
-
-class FixedThreadPool_Handle implements Runnable {
-
-    @Override
-    public void run() {
-        System.out.println(this.toString());
-    }
-}
-

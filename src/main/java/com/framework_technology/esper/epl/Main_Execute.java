@@ -35,9 +35,10 @@ public class Main_Execute implements Runnable {
         Configuration configuration = new Configuration();
         configuration.getEngineDefaults().getViewResources().setAllowMultipleExpiryPolicies(true);
         //获取 epl
-        String []epl = EPL_2_Context_2.contextDistinctEventsForTheInitiatingCondition();
-        // epAdministrator.createEPL(epl[0]);
-        EPStatement epStatement = epAdministrator.createEPL(epl[0]);
+        String[] epl = EPL_8_NamedWindow.triggeredOnSelect();
+        epAdministrator.createEPL(epl[0]);
+        epAdministrator.createEPL(epl[1]);
+        EPStatement epStatement = epAdministrator.createEPL(epl[2]);
         //注册监听
         epStatement.addListener(new AppleListener());
 
@@ -61,10 +62,10 @@ public class Main_Execute implements Runnable {
              * @see EPL_3_Output#when()
              */
             if (temp % 3 == 0)
-                epRuntime.sendEvent(Banana.getRandomBanana());
-            epRuntime.setVariableValue("exceed", true);
+                 epRuntime.sendEvent(Banana.getRandomBanana());
+                epRuntime.setVariableValue("exceed", true);
 
-            epRuntime.sendEvent(Orange.getRandomOrange());
+            //epRuntime.sendEvent(Orange.getRandomOrange());
             try {
                 Thread.sleep(EXECUTE_INTERVAL_MILLISECOND);
             } catch (InterruptedException e) {

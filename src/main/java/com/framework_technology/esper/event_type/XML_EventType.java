@@ -3,6 +3,7 @@ package com.framework_technology.esper.event_type;
 import com.espertech.esper.client.ConfigurationEventTypeXMLDOM;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
+import com.java.annotation.document.Unfinished;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -18,8 +19,8 @@ import java.net.URL;
  * User: wei.Li
  * Date: 14-7-28
  * Time: 17:57
- * TODO unfinished
  */
+@Unfinished
 public class XML_EventType {
 
 

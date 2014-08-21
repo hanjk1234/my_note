@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by lw on 14-7-2.
+ * @author lw by 14-7-2.
  */
 public class Volatile_ implements Runnable {
 

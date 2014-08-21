@@ -33,7 +33,7 @@ public class Apple {
     Apple() {
         Random random = new Random();
         this.id = random.nextInt(5) + "";
-        this.price = random.nextInt(2);
+        this.price = random.nextInt(4);
         this.discount = random.nextDouble();
         this.color = COLORS[random.nextInt(COLORS_LENGTH)];
         this.size = random.nextInt(2);
