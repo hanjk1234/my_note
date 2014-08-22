@@ -1,4 +1,4 @@
-package com.thread.disruptor;
+package com.thread.concurrent_.disruptor;
 
 import com.lmax.disruptor.EventHandler;
 

@@ -1,4 +1,4 @@
-package com.java.queue.example;
+package com.thread.concurrent_.queue.example;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,7 +40,7 @@ public class MarketStorage {
 
     //市场仓库-存储数据的队列 默认仓库容量大小100
     /**
-     * @see com.java.queue.LinkedBlockingQueue_#linkedBlockingQueue2Void()
+     * @see com.thread.concurrent_.queue.LinkedBlockingQueue_#linkedBlockingQueue2Void()
      */
     protected static LinkedBlockingQueue<CommodityObj> blockingQueue
             = new LinkedBlockingQueue<CommodityObj>(100);

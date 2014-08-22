@@ -1,4 +1,4 @@
-package com.java.queue;
+package com.thread.concurrent_.queue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;

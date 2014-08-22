@@ -1,4 +1,4 @@
-package com.thread.disruptor;
+package com.thread.concurrent_.disruptor;
 
 import com.lmax.disruptor.EventFactory;
 
@@ -9,7 +9,7 @@ import com.lmax.disruptor.EventFactory;
  * 生产者向该消息中填充数据（就是修改 value 属性值，后文用生产消息代替），
  * 消费者从消息体中获取数据（获取 value 值，后文用消费消息代替）
  *
- * @see com.thread.disruptor.DeliveryReportEventHandler
+ * @see com.thread.concurrent_.disruptor.DeliveryReportEventHandler
  */
 public final class ValueEvent extends DeliveryReportEventHandler {
 
