@@ -6,6 +6,19 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
+ * 以下是设置和复位索引以及查询的方法：
+ * capacity() ：返回此缓冲区的容量。
+ * clear() ：清除此缓冲区。
+ * flip() ：反转此缓冲区。
+ * limit() ：返回此缓冲区的限制。
+ * limit(int newLimit) ：设置此缓冲区的限制。
+ * mark() ：在此缓冲区的位置设置标记。
+ * position() ：返回此缓冲区的位置。
+ * position(int newPosition) ：设置此缓冲区的位置。
+ * remaining() ：返回当前位置与限制之间的元素数。
+ * reset() ：将此缓冲区的位置重置为以前标记的位置。
+ * rewind() ：重绕此缓冲区。
+ *
  * @author wei.Li by 14-8-22.
  */
 public class ByteBuffer_Example {
@@ -25,7 +38,8 @@ public class ByteBuffer_Example {
             }
             buffer.put(i);
         }
-        buffer.mark();
+
+
         //初始化后的 buffer
         LOGGER.info("init limit  is <{}>", buffer.limit());
         LOGGER.info("init position  is <{}>", buffer.position());
@@ -42,13 +56,24 @@ public class ByteBuffer_Example {
         byte b1 = buffer.get();
         LOGGER.info("run {buffer.get()} after position  is <{}> , b1 is <{}>", buffer.position(), b1);
 
+        //标记position的位置
+        buffer.mark();
+        LOGGER.info("run {buffer.mark()} after position  is <{}> ", buffer.position());
+
+
         //继续读取数据
         byte b2 = buffer.get();
         LOGGER.info("run {buffer.get()} after position  is <{}> , b2 is <{}>", buffer.position(), b2);
 
         /**
+         *将此缓冲区的位置重置为以前标记的位置。
+         */
+        buffer.reset();
+        LOGGER.info("run {buffer.reset()} after position  is <{}> , limit is <{}>", buffer.position(), buffer.limit());
+
+        /**
          *Buffer flip()
-         把 limit 设为当前 position ，把 position 设为 0 ，一般在从 Buffer 读出数据前调用。*/
+         把 limit 设为当前 position ，把 position 设为 0 ，如果已定义了标记，则丢弃该标记 , 一般在从 Buffer 读出数据前调用。*/
         buffer.flip();
         LOGGER.info("run {buffer.flip()} after position  is <{}> , limit is <{}>", buffer.position(), buffer.limit());
 
@@ -58,6 +83,7 @@ public class ByteBuffer_Example {
          */
         buffer.rewind();
         LOGGER.info("run {buffer.rewind()} after position  is <{}> , limit is <{}>", buffer.position(), buffer.limit());
+
 
         /**
          * Buffer clear()

@@ -26,7 +26,7 @@ public class EPL_9_Schema {
      * @return epl[]
      */
     protected static String declareSchema() {
-        String epl1 = "";
+        String epl1 = "update ...";
 
         return epl1;
     }

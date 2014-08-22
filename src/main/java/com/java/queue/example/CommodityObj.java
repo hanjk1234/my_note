@@ -1,16 +1,17 @@
-package com.thread.jdk_thread.example;
+package com.java.queue.example;
 
 import java.util.UUID;
 
 /**
- * 对象
+ * 模拟商品对象
  *
  * @author wei.Li by 14-8-21.
  */
-public class Obj {
+public class CommodityObj {
+
     private String objId;
 
-    public Obj() {
+    public CommodityObj() {
         this.objId = UUID.randomUUID().toString();
     }
 
