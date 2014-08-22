@@ -12,14 +12,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by lw on 14-7-2.
+ * 生产者 Disruptor - 核心内容
+ *
+ * @author lw by 14-7-2.
  */
 public class Disruptor_Example {
 
-    private static final int RINGBUFFER_SIZE = 4;//这个参数应该是2的幂，否则程序会抛出异常：
-    private static RingBuffer<ValueEvent> ringBuffer;
+    private static final int RINGBUFFER_SIZE = 16;//这个参数应该是2的幂，否则程序会抛出异常：
+    private static RingBuffer<ValueEvent> ringBuffer;//定义环形数组内存
     private static Disruptor<ValueEvent> disruptor;
-    private static final ExecutorService EXEC = Executors.newCachedThreadPool();
+    private static final ExecutorService SERVICE//线程池
+            = Executors.newCachedThreadPool();
 
     /**
      * 创建 Disruptor 对象。
@@ -29,11 +32,11 @@ public class Disruptor_Example {
      * 第二个参数，指定 RingBuffer 的大小。这个参数应该是2的幂，否则程序会抛出异常：
      * 第三个参数，就是之前创建的 ExecutorService 对象。
      */
-    protected static void init() {
-        disruptor = new Disruptor(
+    private static void init() {
+        disruptor = new Disruptor<ValueEvent>(
                 ValueEvent.EVENT_FACTORY,
                 RINGBUFFER_SIZE,
-                EXEC,
+                SERVICE,
                 ProducerType.MULTI,
                 new TimeoutBlockingWaitStrategy(1000, TimeUnit.MINUTES)
         );
@@ -42,16 +45,17 @@ public class Disruptor_Example {
     /**
      * 添加消费者对象
      * {@link com.thread.concurrent_.disruptor.DeliveryReportEventHandler}
+     *
      * @param eventHandlers 消费者对象
      */
-    protected static void handleEventsWith(EventHandler[] eventHandlers) {
+    private static void handleEventsWith(EventHandler[] eventHandlers) {
         disruptor.handleEventsWith(eventHandlers);
     }
 
     /**
      * 启动disruptor
      */
-    protected static void start() {
+    private static void start() {
         ringBuffer = disruptor.start();
     }
 
@@ -64,28 +68,27 @@ public class Disruptor_Example {
      *
      * @param event 事件
      */
-    protected static void addEVent(ValueEvent event) {
+    private static void addEVent(ValueEvent event) {
+
         if (hasCapacity()) {
-
             System.out.println("disruptor:ringbuffer 剩余量低于 10 %");
-
         } else {
             long seq = ringBuffer.next();
             /**
-             * @see com.thread.concurrent_.disruptor.ValueEvent.<   com.thread.concurrent_.disruptor.DeliveryReportEventHandler>
+             * @see com.thread.concurrent_.disruptor.ValueEvent.<com.thread.concurrent_.disruptor.DeliveryReportEventHandler>
              */
-            ValueEvent valueEvent = ringBuffer.get(seq);
-            valueEvent.setValue(event.getValue());
-            ringBuffer.publish(seq);
+            ValueEvent valueEvent = ringBuffer.get(seq);//获取可用位置
+            valueEvent.setValue(event.getValue());//填充可用位置
+            ringBuffer.publish(seq);//通知消费者
         }
     }
 
     /**
      * 停止 Disruptor系统（停止消费者线程）
      */
-    protected static void shutdown() {
+    private static void shutdown() {
         disruptor.shutdown();
-        EXEC.shutdown();
+        SERVICE.shutdown();
     }
 
     /**
@@ -93,20 +96,23 @@ public class Disruptor_Example {
      *
      * @return boolean
      */
-    public static boolean hasCapacity() {
+    private static boolean hasCapacity() {
         return (ringBuffer.remainingCapacity() < RINGBUFFER_SIZE * 0.1);
     }
 
     public static void main(String[] args) {
 
-        init();
-        handleEventsWith(new EventHandler[]{new ValueEvent(), new ValueEvent()});
-        start();
+        init();//初始化
+        handleEventsWith(new EventHandler[]{new DeliveryReportEventHandler(1), new DeliveryReportEventHandler(2)});//添加2个消费者
+        start();//启动disruptor
+
+        //生产10个商品
         for (int i = 0; i < 10; i++) {
             ValueEvent valueEvent = new ValueEvent();
             valueEvent.setValue(UUID.randomUUID().toString());
             addEVent(valueEvent);
         }
+        //停止
         shutdown();
     }
 
