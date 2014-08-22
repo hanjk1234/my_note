@@ -51,6 +51,7 @@ public class LinkedBlockingQueue_ {
             System.out.println("take()  run ... 在等待时被中断...");
         }
         try {
+            //将指定元素插入到此队列的尾部，如有必要，则等待空间变得可用。
             queue.put("cc");
         } catch (InterruptedException e) {
             System.out.println("put(E e) run ... 在等待时被中断...");

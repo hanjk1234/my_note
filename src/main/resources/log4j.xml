@@ -12,11 +12,6 @@
     </appender>
 
 
-    <logger name="com.framework_technology.esper.examples.alarm">
-        <level value="DEBUG"/>
-        <appender-ref ref="alarm"/>
-    </logger>
-
     <appender name="alarm" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="/lw/workfile/log/mynote/mynote.log"/>
         <param name="Append" value="true"/>
@@ -27,6 +22,10 @@
         </layout>
     </appender>
 
+    <logger name="com.framework_technology.esper.examples.alarm">
+        <level value="DEBUG"/>
+        <appender-ref ref="alarm"/>
+    </logger>
 
     <logger name="org.quartz">
         <level value="INFO"/>
