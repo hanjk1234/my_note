@@ -20,8 +20,9 @@ public class Producer implements Runnable {
                 CommodityObj commodityObj = new CommodityObj();
                 MarketStorage.blockingQueue.put(commodityObj);
                 System.out.println(this + " producer obj succeed->" + commodityObj);
-                MarketStorage.incProducer_Obj_Count();//计数器++
 
+                MarketStorage.getProducerObj_Count.getAndIncrement();//计数器++
+                System.out.println("getProducerObj_Count is :" + MarketStorage.getProducerObj_Count);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

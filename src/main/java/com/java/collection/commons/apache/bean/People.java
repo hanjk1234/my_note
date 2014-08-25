@@ -1,8 +1,7 @@
-package com.util.commons.bean;
+package com.java.collection.commons.apache.bean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 /**

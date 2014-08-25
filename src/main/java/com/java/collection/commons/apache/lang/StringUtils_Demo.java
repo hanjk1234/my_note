@@ -1,4 +1,4 @@
-package com.util.commons.lang;
+package com.java.collection.commons.apache.lang;
 
 import org.apache.commons.lang.StringUtils;
 

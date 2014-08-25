@@ -5,6 +5,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 市场演示仓库
@@ -21,8 +22,8 @@ public class MarketStorage {
     //生产者线程睡眠随机最大时间
     protected static final int PRODUCER_THREAD_SLEEP = 200;
     //生产者生成对象次数
-    protected static int producerObj_Count = 0;
-    //是否停止生产
+    protected static AtomicInteger getProducerObj_Count = new AtomicInteger(0);
+    //是否生产
     protected static boolean isRun_Producer = true;
 
 
@@ -34,8 +35,8 @@ public class MarketStorage {
     //消费者线程睡眠随机最大时间
     protected static final int CONSUMER_THREAD_SLEEP = 1000;
     //消费者消费对象次数
-    protected static int consumerObj_Count = 0;
-    //是否停止消费
+    protected static AtomicInteger getConsumerObj_Count = new AtomicInteger(0);
+    //是否消费
     protected static boolean isRun_Cousumer = true;
 
     //市场仓库-存储数据的队列 默认仓库容量大小100
@@ -65,7 +66,7 @@ public class MarketStorage {
     }
 
     /**
-     * 停止线程生产与消费
+     * 停止线程 生产与消费
      * 关闭线程池
      */
     private static void shumdown() {
@@ -79,29 +80,13 @@ public class MarketStorage {
         }
     }
 
-    /**
-     * 生产对象 - 计数器+1
-     */
-    protected static synchronized void incProducer_Obj_Count() {
-        producerObj_Count++;
-        System.out.println("producerObj_Count->" + producerObj_Count);
-    }
-
-    /**
-     * 消费对象 - 计数器+1
-     */
-    protected static synchronized void incConsumer_Obj_Count() {
-        consumerObj_Count++;
-        System.out.println("consumerObj_Count->" + consumerObj_Count);
-    }
-
 
     public static void main(String[] args) {
         runConsumer();
         runProducer();
 
         /**
-         * 1 min 后停止执行
+         * 10 s 后停止执行
          */
         new Timer().schedule(new TimerTask() {
             @Override
@@ -109,6 +94,6 @@ public class MarketStorage {
                 shumdown();
                 System.out.println("~~~~~~~~~~~~ shumdown done ~~~~~~~~~~~~~~");
             }
-        }, 1000 * 6L);
+        }, 1000 * 10L);
     }
 }

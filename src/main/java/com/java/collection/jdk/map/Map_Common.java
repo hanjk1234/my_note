@@ -1,4 +1,4 @@
-package com.java.collection.map;
+package com.java.collection.jdk.map;
 
 import java.util.*;
 

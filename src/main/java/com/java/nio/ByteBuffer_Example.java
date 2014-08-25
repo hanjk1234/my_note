@@ -7,17 +7,17 @@ import java.nio.ByteBuffer;
 
 /**
  * 以下是设置和复位索引以及查询的方法：
- * capacity() ：返回此缓冲区的容量。
- * clear() ：清除此缓冲区。
- * flip() ：反转此缓冲区。
- * limit() ：返回此缓冲区的限制。
+ * capacity() ： 返回此缓冲区的容量。
+ * clear() ：    清除此缓冲区。
+ * flip() ：     反转此缓冲区。
+ * limit() ：    返回此缓冲区的限制。
  * limit(int newLimit) ：设置此缓冲区的限制。
- * mark() ：在此缓冲区的位置设置标记。
- * position() ：返回此缓冲区的位置。
+ * mark() ：     在此缓冲区的位置设置标记。
+ * position() ： 返回此缓冲区的位置。
  * position(int newPosition) ：设置此缓冲区的位置。
  * remaining() ：返回当前位置与限制之间的元素数。
- * reset() ：将此缓冲区的位置重置为以前标记的位置。
- * rewind() ：重绕此缓冲区。
+ * reset() ：    将此缓冲区的位置重置为以前标记的位置。
+ * rewind() ：   重绕此缓冲区。
  *
  * @author wei.Li by 14-8-22.
  */

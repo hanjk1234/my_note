@@ -29,6 +29,6 @@ public class Equals_Obj {
     }
 
     public static void main(String[] args) {
-        //aVoid();
+        //analogThreads();
     }
 }

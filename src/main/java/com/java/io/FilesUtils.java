@@ -1,6 +1,8 @@
 package com.java.io;
 
 import com.google.common.io.Files;
+import com.sun.javaws.progress.Progress;
+import com.util.shell.ShellUtil;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -16,7 +18,7 @@ public class FilesUtils {
 
     /**
      * 找出文件中每行不包含 containsStr 字符串的文本
-     * 输出到当前目录下
+     * 输出到当前目录下,open
      *
      * @param filePath    文件地址
      * @param containsStr 不包含的字符串
@@ -39,6 +41,7 @@ public class FilesUtils {
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~" +
                     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("outPath -> " + outPath);
+            ShellUtil.openFile(outPath);
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~" +
                     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         } catch (IOException e) {

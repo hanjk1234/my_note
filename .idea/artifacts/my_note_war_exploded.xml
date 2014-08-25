@@ -66,7 +66,7 @@
           <element id="library" level="project" name="Maven: com.google.inject:guice:3.0" />
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Maven: com.beust:jcommander:1.32" />
-          <element id="library" level="project" name="Maven: com.google.guava:guava:15.0" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:18.0-rc2" />
           <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
         </element>

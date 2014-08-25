@@ -1,4 +1,4 @@
-package com.util.commons.bean;
+package com.java.collection.commons.apache.bean;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -68,11 +68,11 @@ public class Commons_BeanUtils {
      * @throws java.lang.IllegalAccessException IllegalAccessException
      */
     public static void getPeopleForForm(Form form) throws InvocationTargetException, IllegalAccessException {
-        People people = (People) form;
+        People people = form;
         BeanUtils.copyProperties(people, form);
     }
 
-    class Form extends People {
+    class Form extends People{
 
     }
 }

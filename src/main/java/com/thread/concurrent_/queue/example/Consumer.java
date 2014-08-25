@@ -20,7 +20,9 @@ public class Consumer implements Runnable {
                 //消费对象
                 CommodityObj commodityObj = MarketStorage.blockingQueue.take();
                 System.out.println(this + " consumer obj ->" + commodityObj);
-                MarketStorage.incConsumer_Obj_Count();//计数器++
+
+                MarketStorage.getConsumerObj_Count.getAndIncrement();//计数器++
+                System.out.println("getConsumerObj_Count is :" + MarketStorage.getConsumerObj_Count);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

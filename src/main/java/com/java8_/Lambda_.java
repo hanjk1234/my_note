@@ -26,11 +26,11 @@ public class Lambda_ {
 
     private static void forEach() {
         List<String> list = Lists.newArrayList("a", "b");
-        //list.forEach(Lambda_::aVoid);
+        //list.forEach(Lambda_::analogThreads);
     }
 
     private static void aVoid(String s) {
-        System.out.println("aVoid's s is " + s);
+        System.out.println("analogThreads's s is " + s);
     }
 }
 
