@@ -1,4 +1,4 @@
-package com.java.collection.commons.apache.bean;
+package com.framework_technology.commons.apache.bean;
 
 import java.util.ArrayList;
 import java.util.Arrays;

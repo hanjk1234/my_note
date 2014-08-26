@@ -6,7 +6,7 @@ import com.java.annotation.document.Undigested;
 
 /**
  * API - 5.15. Creating and Using Named Windows
- *
+ * <p>
  * 创建 NamedWindow
  * 插入数据
  * 查询数据、按条件触发查询数据
@@ -59,6 +59,9 @@ public class EPL_8_NamedWindow {
         String epl1 = "create window SecurityEvent.win:time(30 sec) " +
                 "(ipAddress string, userId String, numAttempts int, properties String[])";
 
+        /**
+         * @see com.framework_technology.esper.epl.EPL_9_Schema
+         */
         @Undigested(Description = "what is schema ?")
         String epl2 = "create schema SecurityData (name String, roles String[])";
         String epl3 = "create window SecurityEvent.win:time(30 sec) " +

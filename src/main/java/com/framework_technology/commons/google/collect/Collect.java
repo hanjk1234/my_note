@@ -1,12 +1,10 @@
-package com.java.collection.commons.google.collect;
+package com.framework_technology.commons.google.collect;
 
-import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import org.slf4j.LoggerFactory;
 
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author wei.Li by 14-8-25.
@@ -26,6 +24,7 @@ public class Collect {
         //Multiset_.multiset();
         //Multimap_.hashMultimap();
         //BigMap_.biMap();
+        MapMaker_.aVoid();
 
     }
 }
@@ -196,6 +195,7 @@ class MapMaker_ {
             = LoggerFactory.getLogger(MapMaker_.class);
 
     static void aVoid() {
+
 
     }
 }

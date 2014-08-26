@@ -1,9 +1,12 @@
 package com.util.date;
 
-import org.joda.time.DateTime;
+import com.google.common.collect.Lists;
+import com.java.annotation.document.Unsolved;
+import org.joda.time.*;
+import org.joda.time.format.ISODateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by lw on 14-4-18.
@@ -29,17 +32,10 @@ public class Joda_Time {
      * @param milliseconds milliseconds
      * @return DateTime
      */
-    public static DateTime getDareTime(int year, int month, int day, int hour, int minute, int second, int milliseconds) {
+    public static DateTime getDareTime(
+            int year, int month, int day, int hour, int minute, int second, int milliseconds
+    ) {
         return new DateTime(year, month, day, hour, minute, second, milliseconds);
-    }
-
-    /**
-     * 获取当前星期，week
-     *
-     * @return String
-     */
-    public static String getNowWeek() {
-        return new DateTime().toString(WEEK);
     }
 
     /**
@@ -48,7 +44,7 @@ public class Joda_Time {
      * @return String
      */
     public static String getNowDate() {
-        return new DateTime().toString(DATE);
+        return DateTime.now().toString(DATE);
     }
 
     /**
@@ -57,7 +53,7 @@ public class Joda_Time {
      * @return String
      */
     public static String getNowTime() {
-        return new DateTime().toString(DATE + " " + TIME);
+        return DateTime.now().toString(DATE + " " + TIME);
     }
 
     /**
@@ -70,16 +66,6 @@ public class Joda_Time {
         return dateTime.toString(DATE + " " + TIME);
     }
 
-
-    /**
-     * 根据多个参数自己组建日期格式，默认不含空格
-     *
-     * @param parameter parameter
-     * @return String
-     */
-    public static String getTimeForParameter(String parameter) {
-        return new DateTime().toString(parameter);
-    }
 
     /**
      * 字符串转Date日期
@@ -101,13 +87,79 @@ public class Joda_Time {
      * @return String
      */
     public static String computationDateDemo(DateTime dateTime) {
-        dateTime = dateTime.plusYears(5).monthOfYear().setCopy(2).dayOfMonth().withMaximumValue();
-        return getDateTime(dateTime);
+        return dateTime.plusYears(5)
+                .monthOfYear()
+                .setCopy(2)
+                .dayOfMonth()
+                .withMaximumValue()
+                .toString();
     }
 
+    /**
+     * Property属性
+     */
+    private static void property() {
+
+        //计算 11 月中第一个星期一之后的第一个星期二
+        DateTime.now()
+                .monthOfYear()  //获取属性
+                .setCopy(11)    //重新设值
+                .dayOfMonth()
+                .withMinimumValue()
+                .plus(6)
+                .dayOfWeek()
+                .setCopy("Monday")
+                .plus(1);
+    }
 
     /**
-     * other demo
+     * 与JDK 的互通性
+     */
+    private static void tojdkDate() {
+        //与 jdk日期 交互
+        Date jdkDate = new Date();
+        DateTime dateTime = new DateTime(jdkDate);
+        Date dateJDK = dateTime.toDate();
+    }
+
+    /**
+     * 以 Joda 方式格式化时间
+     */
+    private static void timeFormat() {
+
+
+        DateTime dateTime = DateTime.now(DateTimeZone.forTimeZone(TimeZone.getDefault()));
+
+        dateTime.toString(ISODateTimeFormat.date());//yyyy-MM-dd
+        dateTime.toString(ISODateTimeFormat.yearMonthDay());//yyyy-MM-dd
+
+        dateTime.toString(ISODateTimeFormat.dateHourMinuteSecond());//2014-08-26T13:49:46
+
+
+        dateTime.toString(ISODateTimeFormat.basicDateTime());           //20140826T114706.257+0800
+        dateTime.toString(ISODateTimeFormat.basicDateTimeNoMillis());   //20140826T114706+0800
+        dateTime.toString(ISODateTimeFormat.basicOrdinalDateTime());    //2014238T114706.257+0800
+        dateTime.toString(ISODateTimeFormat.basicOrdinalDate());    //2014238T114706.257+0800
+        dateTime.toString(ISODateTimeFormat.basicWeekDateTime());       //2014W352T114843.391+0800
+        dateTime.toString(ISODateTimeFormat.basicTime());       //2014W352T114843.391+0800
+
+        @Unsolved(Description = "java.lang.IllegalArgumentException: No valid ISO8601 format for fields because Time was truncated: []")
+        final String string =
+                dateTime.toString(ISODateTimeFormat.forFields(
+                        Lists.newArrayList(DateTimeFieldType.year()
+                                , DateTimeFieldType.monthOfYear()
+                                , DateTimeFieldType.dayOfMonth()
+                                , DateTimeFieldType.hourOfDay()
+                                , DateTimeFieldType.minuteOfHour()
+                                , DateTimeFieldType.millisOfSecond())
+                        , false  //true to use the extended format (with separators)
+                        , true //true ISO8601, false to include additional formats
+                ));
+
+    }
+
+    /**
+     * plus
      *
      * @return String
      */
@@ -115,23 +167,30 @@ public class Joda_Time {
         DateTime dateTime = new DateTime();
         //日期 +-
         dateTime = dateTime.plusDays(1);
+
         //日期比较
         dateTime.isAfterNow();
         dateTime.isBefore(dateTime.getMillis());
+
         //获取当前分钟数of这个小时
         dateTime.getMinuteOfHour();
-        //与 jdk日期 互通
-        Date jdkDate = new Date();
-        dateTime = new DateTime(jdkDate);
 
         return getDateTime(dateTime);
     }
 
-    public static void main(String[] args) {
+    /**
+     * 本地时间
+     */
+    private static void readablePartial() {
+        ReadablePartial localDate
+                = new org.joda.time.LocalDate(1990, 01, 01);
+        localDate.get(DateTimeFieldType.dayOfMonth());
 
-        Long aLong = (long) (1401785160 * 1000);
-        DateTime dateTime = new DateTime(aLong);
-        String s = getDateTime(dateTime);
-        System.out.println(s);
+        LocalTime localTime = new LocalTime(13, 30, 26, 0);// 1:30:26PM
+
+    }
+
+    public static void main(String[] args) {
+        timeFormat();
     }
 }

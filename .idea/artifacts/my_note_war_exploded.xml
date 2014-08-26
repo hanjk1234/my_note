@@ -61,7 +61,7 @@
           <element id="library" level="project" name="Maven: org.syslog4j:syslog4j:0.9.30" />
           <element id="library" level="project" name="Maven: cglib:cglib:3.1" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm:4.2" />
-          <element id="library" level="project" name="Maven: joda-time:joda-time:2.3" />
+          <element id="library" level="project" name="Maven: joda-time:joda-time:2.4" />
           <element id="library" level="project" name="Maven: net.israfil.cli:jcommander-guice:0.1" />
           <element id="library" level="project" name="Maven: com.google.inject:guice:3.0" />
           <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />

@@ -1,7 +1,6 @@
-package com.java.io;
+package com.java.Basis.io;
 
 import com.google.common.io.Files;
-import com.sun.javaws.progress.Progress;
 import com.util.shell.ShellUtil;
 
 import java.io.*;

@@ -15,4 +15,7 @@ import static java.lang.annotation.ElementType.*;
 public @interface Unfinished {
 
     public String Description() default "";
+
+    public String Result() default "";
+
 }

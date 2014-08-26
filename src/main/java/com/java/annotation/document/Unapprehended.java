@@ -16,5 +16,6 @@ public @interface Unapprehended {
 
     public String Description() default "";
 
+    public String Result() default "";
 
 }

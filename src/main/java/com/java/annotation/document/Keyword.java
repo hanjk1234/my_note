@@ -8,16 +8,15 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 
 /**
- * 有错误的
+ * 关键字
  *
- * @author wei.Li by 14-8-12.
+ * @author wei.Li by 14-8-26.
  */
 @Documented
 @Target(value = {CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
 @Retention(RetentionPolicy.SOURCE)
-public @interface Faulty {
+public @interface Keyword {
+    public String keyWord() default "";
 
     public String Description() default "";
-
-    public String Result() default "";
 }

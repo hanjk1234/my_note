@@ -1,4 +1,4 @@
-package com.java.Basis;
+package com.java.Basis.grammar;
 
 import java.util.HashMap;
 import java.util.Map;

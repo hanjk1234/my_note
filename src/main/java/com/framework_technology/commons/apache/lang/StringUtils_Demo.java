@@ -1,4 +1,4 @@
-package com.java.collection.commons.apache.lang;
+package com.framework_technology.commons.apache.lang;
 
 import org.apache.commons.lang.StringUtils;
 

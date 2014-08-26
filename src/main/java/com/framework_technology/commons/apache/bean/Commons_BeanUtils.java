@@ -1,4 +1,4 @@
-package com.java.collection.commons.apache.bean;
+package com.framework_technology.commons.apache.bean;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -30,9 +30,7 @@ public class Commons_BeanUtils {
 
             System.out.println(people.toString());
 
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -54,7 +52,8 @@ public class Commons_BeanUtils {
             BeanUtils.setProperty(people, "addressMap", addressMap);
             address = BeanUtils.getProperty(people, "addressMap(2)");//括号下标1开始
 
-        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (IllegalAccessException
+                | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -67,7 +66,8 @@ public class Commons_BeanUtils {
      * @throws java.lang.reflect.InvocationTargetException InvocationTargetException
      * @throws java.lang.IllegalAccessException IllegalAccessException
      */
-    public static void getPeopleForForm(Form form) throws InvocationTargetException, IllegalAccessException {
+    public static void getPeopleForForm(Form form)
+            throws InvocationTargetException, IllegalAccessException {
         People people = form;
         BeanUtils.copyProperties(people, form);
     }

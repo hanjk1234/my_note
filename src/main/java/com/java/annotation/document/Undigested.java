@@ -1,5 +1,6 @@
 package com.java.annotation.document;
 
+
 import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
@@ -15,4 +16,5 @@ import static java.lang.annotation.ElementType.*;
 public @interface Undigested {
 
     public String Description() default "";
+
 }

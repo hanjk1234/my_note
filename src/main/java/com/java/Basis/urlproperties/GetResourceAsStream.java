@@ -1,4 +1,4 @@
-package com.java.path;
+package com.java.Basis.urlproperties;
 
 import java.net.URL;
 
@@ -11,7 +11,8 @@ public class GetResourceAsStream {
 
 
     protected static void aVoid() {
-        URL uri = GetResourceAsStream.class.getClassLoader().getResource("esper_benchmark.properties");
+        URL uri = GetResourceAsStream.class.getClassLoader()
+                .getResource("esper_benchmark.properties");
         System.out.println(uri != null ? uri.getPath() : null);
     }
 
