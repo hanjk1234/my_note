@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 import static com.google.common.base.Preconditions.*;
 
 /**
+ * 前置条件校验
+ *
  * @author wei.Li by 14-8-27.
  */
 public class Preconditions_ {
