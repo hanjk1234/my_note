@@ -8,6 +8,8 @@ import com.google.common.collect.Ordering;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -50,6 +52,40 @@ public class ObjectMethodsAndOrdering {
         Objects.hashCode("a", "b");//
     }
 
+    /*
+     * Comparator, Comparable区别
+     * <p>
+     * 1.comparable是通用的接口，用户可以实现它来完成自己特定的比较，
+     *      而comparator可以看成一种算法的实现,在需要容器集合 collection需要比较功能的时候，来指定这个比较器。
+     * 2.一个类实现了Camparable接口表明这个类的对象之间是可以相互比较的。
+     *      如果用数学语言描述的话就是这个类的对象组成的集合中存在一个全序。这样，这个类对象组成的集合就可以使用Sort方法排序了。
+     * 3.而Comparator的作用有两个：
+     * 　a，如果类的设计师没有考虑到Compare的问题而没有实现Comparable接口，可以通过Comparator来实现比较算法进行排序
+     * 　b，可以更加灵活实现排序规则，为了使用不同的排序标准做准备，比如：升序、降序，或者将来想通过类的其他字段进行排序
+     *
+     * 例如：在对List 排序时候默认使用comparable的compareTo(Object o)方法
+     *      但在比较某个对象下的属性时候，我们可以自定义一个Comparator的compare(Object o1, Object o2)方法比较器进行比较
+     *      Collections 中的 public static <T> void sort(List<T> list, Comparator<? super T> c) 方法
+     *
+     */
+    private class ComparableAndComparatorDistinction implements Comparator, Comparable {
+
+        /*
+         * 重写Comparable中的方法
+         */
+        @Override
+        public int compareTo(Object o) {
+            return 0;
+        }
+
+        /*
+         * 重写Comparator中的方法
+         */
+        @Override
+        public int compare(Object o1, Object o2) {
+            return 0;
+        }
+    }
 
     /**
      * 实现一个比较器[Comparator]

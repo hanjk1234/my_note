@@ -1,4 +1,4 @@
-package com.java.Basis.array;
+package com.java.basis.array;
 
 
 /**

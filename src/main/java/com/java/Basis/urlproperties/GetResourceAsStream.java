@@ -1,4 +1,4 @@
-package com.java.Basis.urlproperties;
+package com.java.basis.urlproperties;
 
 import java.net.URL;
 

@@ -1,9 +1,4 @@
-package com.java.Basis;
-
-import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.regex.Pattern;
+package com.java.basis;
 
 /**
  * 语法基础

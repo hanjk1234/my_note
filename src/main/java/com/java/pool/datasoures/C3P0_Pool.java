@@ -1,4 +1,4 @@
-package com.thread.datasoures;
+package com.java.pool.datasoures;
 
 import com.mchange.v2.c3p0.DataSources;
 

@@ -1,4 +1,4 @@
-package com.java.Basis.grammar;
+package com.java.basis.grammar;
 
 import java.text.DecimalFormat;
 
