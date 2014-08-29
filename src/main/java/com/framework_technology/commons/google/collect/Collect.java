@@ -264,6 +264,7 @@ public class Collect {
         //Multimap_.hashMultimap();
         //BigMap_.biMap();
         //MapMaker_.aVoid();
+
         Table_.table_();
 
     }
