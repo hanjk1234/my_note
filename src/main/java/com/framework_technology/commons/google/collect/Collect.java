@@ -1,7 +1,18 @@
+/*
+ * Written by wei.Li and released to the public domain
+ * Welcome to correct discussion as explained at
+ *
+ * -----------------------------------------------------------------
+ *
+ * GitHub:  https://github.com/xiaohulu
+ * Blog  :	http://blog.csdn.net/xiaohulunb
+ * WeiBo :	http://www.weibo.com/xiaohulunb  	@GourdErwa
+ * Email :	gourderwa@163.com
+ */
+
 package com.framework_technology.commons.google.collect;
 
 import com.google.common.collect.*;
-import com.sun.istack.internal.NotNull;
 import org.slf4j.LoggerFactory;
 
 import java.util.Set;
@@ -10,6 +21,17 @@ import java.util.Set;
  * @author wei.Li by 14-8-25.
  */
 public class Collect {
+
+    public static void main(String[] args) {
+        //treeRangeSet();
+
+        //Multiset_.multiset();
+        //Multimap_.hashMultimap();
+        //BigMap_.biMap();
+        //MapMaker_.aVoid();
+        Table_.table_();
+
+    }
 
     /**
      * <dependency>
@@ -161,7 +183,6 @@ public class Collect {
 
     }
 
-
     /*
      * BiMap: 双向 Map
      * <p>
@@ -195,7 +216,6 @@ public class Collect {
             LOGGER.info("biMap.inverse is <{}>", biMap.inverse());
         }
     }
-
 
     /*
      * Table  <R, C, V> <行,列,值>
@@ -255,17 +275,6 @@ public class Collect {
 
 
         }
-    }
-
-    public static void main(String[] args) {
-        //treeRangeSet();
-
-        //Multiset_.multiset();
-        //Multimap_.hashMultimap();
-        //BigMap_.biMap();
-        //MapMaker_.aVoid();
-        Table_.table_();
-
     }
 
 
