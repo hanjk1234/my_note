@@ -1,9 +1,10 @@
-package com.thread.concurrent_.queue;
+package com.thread.concurrent_.queue.linkedblockingqueue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 阻塞队列
  * <p>
  * 一个基于已链接节点的、范围任意的 blocking queue。此队列按 FIFO（先进先出）排序元素。
  * 队列的头部 是在队列中时间最长的元素。队列的尾部 是在队列中时间最短的元素。
@@ -14,6 +15,8 @@ import java.util.concurrent.TimeUnit;
  * 除非插入节点会使队列超出容量，否则每次插入后会动态地创建链接节点。
  *
  * @author wei.L by 14-7-22.
+ *
+ * @see com.thread.concurrent_.queue.concurrentlinkedqueue.ConcurrentLinkedQueue_ 并发队列
  */
 public class LinkedBlockingQueue_ {
 
@@ -63,6 +66,8 @@ public class LinkedBlockingQueue_ {
 
         //移除元素，如果存在
         queue.remove("dd");
+
+        queue.size();//return count.get();
 
     }
 

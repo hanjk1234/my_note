@@ -1,4 +1,4 @@
-package com.thread.concurrent_.queue.example;
+package com.thread.concurrent_.queue.linkedblockingqueue.example;
 
 import java.util.Random;
 
