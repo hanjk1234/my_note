@@ -3,7 +3,9 @@ package com.framework_technology.plug.syslog4j;
 import org.productivity.java.syslog4j.server.SyslogServerMain;
 
 /**
- * Created by lw on 14-7-14.
+ * 服务端启动接受 log
+ *
+ * @author lw by 14-7-14.
  */
 public class Syslog4j_Service {
     /**
@@ -26,10 +28,18 @@ public class Syslog4j_Service {
      * protocol     Syslog4j protocol implementation (tcp, udp, ...)
      */
 
-    private static final String SYSLOGSERVER_ARGS = "-h 192.168.1.58 -p 1514 -o /lw/workfile/log/syslog4j_test/syslog4j.log -a udp";
+
+    private static final String SYSLOGSERVER_ARGS;
+
+    static {
+        SYSLOGSERVER_ARGS = "-h 192.168.1.105 -p 1514 -o /lw/workfile/log/syslog4j_test/syslog4j.log -a udp";
+    }
 
     //启动服务端接受syslog
     public static void main(String[] args) throws Exception {
         SyslogServerMain.main(SYSLOGSERVER_ARGS.split(" "));
+        // SyslogIF syslog = Syslog4j_Service.getSyslog();
     }
+
+
 }

@@ -152,8 +152,8 @@ public class LoadCache {
     /**
      * 由 key 计算对应的 value
      *
-     * @param key
-     * @return
+     * @param key key
+     * @return getValueForKey
      */
     private static String getValueForKey(String key) {
         checkNotNull(key);
@@ -170,30 +170,6 @@ public class LoadCache {
         LOGGER.info("loadingCache.asMap().toString() is : <{}>"
                 , loadingCache.asMap());
     }
-
-    /**
-     * 添加测试数据到缓存线程
-     * 修改部分缓存的值
-     */
-    private static class AddOperationRun implements Runnable {
-
-        @Override
-        public void run() {
-            while (isRunTest) {
-                try {
-                    for (int i = 0; i < 10; i++) {
-                        loadingCache.get(String.valueOf(new Random().nextInt(5)));
-                    }
-                    //刷新 key 值 , 如果不存在load进缓存，否则进行刷新操作
-                    loadingCache.refresh(String.valueOf(new Random().nextInt(10)));
-                    Thread.sleep(2000L);
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     private static void runTest() {
 
@@ -225,5 +201,28 @@ public class LoadCache {
         builderLoadingCache();
 
         runTest();
+    }
+
+    /**
+     * 添加测试数据到缓存线程
+     * 修改部分缓存的值
+     */
+    private static class AddOperationRun implements Runnable {
+
+        @Override
+        public void run() {
+            while (isRunTest) {
+                try {
+                    for (int i = 0; i < 10; i++) {
+                        loadingCache.get(String.valueOf(new Random().nextInt(5)));
+                    }
+                    //刷新 key 值 , 如果不存在load进缓存，否则进行刷新操作
+                    loadingCache.refresh(String.valueOf(new Random().nextInt(10)));
+                    Thread.sleep(2000L);
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

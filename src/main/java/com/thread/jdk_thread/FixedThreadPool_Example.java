@@ -1,6 +1,5 @@
 package com.thread.jdk_thread;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.util.date.Joda_Time;
 
 import java.util.Random;
@@ -14,6 +13,7 @@ import java.util.concurrent.*;
 public class FixedThreadPool_Example {
 
     private static ExecutorService executor = Executors.newFixedThreadPool(10);
+
     /**
      * 添加任务到线程池
      *
@@ -22,18 +22,16 @@ public class FixedThreadPool_Example {
     private static void run2FixedThreadPool(String task) {
         // executor.execute(new FixedThreadPool_Handle());
         FutureTask<String> future;
-        future = new FutureTask<String>(new Callable<String>() {//使用Callable接口作为构造参数
-            public String call() {
-                try {
-                    //模拟执行时间为随机值
-                    Thread.sleep(new Random().nextInt(6000));
-                    System.out.println("run task :" + task);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //真正的任务在这里执行，这里的返回值类型为String，可以为任意类型
-                return Joda_Time.getNowTime();
+        future = new FutureTask<String>(() -> {
+            try {
+                //模拟执行时间为随机值
+                Thread.sleep(new Random().nextInt(6000));
+                System.out.println("run task :" + task);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            //真正的任务在这里执行，这里的返回值类型为String，可以为任意类型
+            return Joda_Time.getNowTime();
         });
         //executor.submit(future);
         executor.execute(future);

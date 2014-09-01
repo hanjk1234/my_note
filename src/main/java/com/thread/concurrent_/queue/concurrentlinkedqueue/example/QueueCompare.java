@@ -31,7 +31,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class QueueCompare {
 
     //测试生产数量
-    public static final int PRODUCER_OBJ_NUM = 10000000;
+    private static final int PRODUCER_OBJ_NUM = 10000000;
     private static final org.slf4j.Logger LOGGER
             = LoggerFactory.getLogger(QueueCompare.class);
     //执行的线程数量
@@ -40,10 +40,10 @@ public class QueueCompare {
     private static final ExecutorService EXECUTOR_SERVICE
             = Executors.newFixedThreadPool(SYNCHRONIZED_DONE_THREAD_NUM);
     //linkedBlockingQueue init
-    private static LinkedBlockingQueue linkedBlockingQueue
+    private static final LinkedBlockingQueue linkedBlockingQueue
             = new LinkedBlockingQueue();
     //concurrentLinkedQueue init
-    private static ConcurrentLinkedQueue concurrentLinkedQueue
+    private static final ConcurrentLinkedQueue concurrentLinkedQueue
             = new ConcurrentLinkedQueue();
 
     private static void runTest() {
@@ -61,7 +61,7 @@ public class QueueCompare {
                 new ConsumerHandle<>(concurrentLinkedQueueMarket, "concurrentLinkedQueueMarket")
         );
 
-        Set set
+        Set<Object> set
                 = new HashSet<>();
         /**
          * 添加blockingQueue生产线程
@@ -151,8 +151,8 @@ public class QueueCompare {
      */
     private static class ProducerHandle<T extends Market<V>, V> implements Runnable {
 
-        T market;
-        V v;
+        final T market;
+        final V v;
 
         private ProducerHandle(T market, V v) {
             this.market = market;
@@ -176,8 +176,8 @@ public class QueueCompare {
      */
     private static class ConsumerHandle<T extends Market<V>, V> implements Runnable {
 
-        T market;
-        V v;
+        final T market;
+        final V v;
 
         private ConsumerHandle(T market, V v) {
             this.market = market;
