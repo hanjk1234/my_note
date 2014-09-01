@@ -70,6 +70,7 @@ public class ConcurrentLinkedQueue_ {
      * 返回以恰当顺序包含此队列所有元素的数组；返回数组的运行时类型是指定数组的运行时类型。
      */
     private static void concurrentLinkedQueue_() {
+
         concurrentLinkedQueue.add("a");
         concurrentLinkedQueue.add("b");
 

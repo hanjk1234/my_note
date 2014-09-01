@@ -17,16 +17,71 @@ import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+
 
 /**
  * @author wei.Li by 14-8-28.
  */
 public class QueueCompare {
 
+    //测试生产数量
+    public static final int PRODUCER_OBJ_NUM = 10000000;
     private static final org.slf4j.Logger LOGGER
             = LoggerFactory.getLogger(QueueCompare.class);
+    //执行的线程数量
+    private static final int SYNCHRONIZED_DONE_THREAD_NUM = 4;
+    //线程池
+    private static final ExecutorService EXECUTOR_SERVICE
+            = Executors.newFixedThreadPool(SYNCHRONIZED_DONE_THREAD_NUM);
+    //linkedBlockingQueue init
+    private static LinkedBlockingQueue linkedBlockingQueue
+            = new LinkedBlockingQueue();
+    //concurrentLinkedQueue init
+    private static ConcurrentLinkedQueue concurrentLinkedQueue
+            = new ConcurrentLinkedQueue();
 
+    private static void runTest() {
+
+        /**
+         * 添加concurrentLinkedQueue生产线程
+         */
+        Market<String> concurrentLinkedQueueMarket =
+                new ConcurrentLinkedQueueMarket<>();
+
+        EXECUTOR_SERVICE.execute(
+                new ProducerHandle<>(concurrentLinkedQueueMarket, "concurrentLinkedQueueMarket")
+        );
+        EXECUTOR_SERVICE.execute(
+                new ConsumerHandle<>(concurrentLinkedQueueMarket, "concurrentLinkedQueueMarket")
+        );
+
+        Set set
+                = new HashSet<>();
+        /**
+         * 添加blockingQueue生产线程
+         */
+        Market<String> blockingQueueMarket
+                = new LinkedBlockingQueueMarket<>();
+        EXECUTOR_SERVICE.execute(
+                new ProducerHandle<>(blockingQueueMarket, "blockingQueueMarket")
+        );
+        EXECUTOR_SERVICE.execute(
+                new ConsumerHandle<>(blockingQueueMarket, "blockingQueueMarket")
+        );
+
+
+        EXECUTOR_SERVICE.shutdown();
+    }
+
+    public static void main(String[] args) {
+        runTest();
+    }
 
     /**
      * 生产者、消费者
@@ -38,8 +93,6 @@ public class QueueCompare {
         void consumer();
 
     }
-
-
 
     /**
      * concurrentLinkedQueue 的生产与消费实现
@@ -61,8 +114,6 @@ public class QueueCompare {
             }
         }
     }
-
-
 
     /**
      * linkedBlockingQueue 的生产与消费实现
@@ -92,8 +143,6 @@ public class QueueCompare {
         }
 
     }
-
-
 
     /**
      * 生产处理线程
@@ -144,63 +193,6 @@ public class QueueCompare {
                     , PRODUCER_OBJ_NUM
                     , DateTime.now().toString(ISODateTimeFormat.dateHourMinuteSecond()));
         }
-    }
-
-
-    //执行的线程数量
-    private static final int SYNCHRONIZED_DONE_THREAD_NUM = 4;
-
-
-    //线程池
-    private static final ExecutorService EXECUTOR_SERVICE
-            = Executors.newFixedThreadPool(SYNCHRONIZED_DONE_THREAD_NUM);
-
-    //linkedBlockingQueue init
-    private static LinkedBlockingQueue linkedBlockingQueue
-            = new LinkedBlockingQueue();
-
-    //concurrentLinkedQueue init
-    private static ConcurrentLinkedQueue concurrentLinkedQueue
-            = new ConcurrentLinkedQueue();
-
-    //测试生产数量
-    public static final int PRODUCER_OBJ_NUM = 10000000;
-
-    private static void runTest() {
-
-        /**
-         * 添加concurrentLinkedQueue生产线程
-         */
-        Market<String> concurrentLinkedQueueMarket =
-                new ConcurrentLinkedQueueMarket<>();
-
-        EXECUTOR_SERVICE.execute(
-                new ProducerHandle<>(concurrentLinkedQueueMarket, "concurrentLinkedQueueMarket")
-        );
-        EXECUTOR_SERVICE.execute(
-                new ConsumerHandle<>(concurrentLinkedQueueMarket, "concurrentLinkedQueueMarket")
-        );
-
-
-        /**
-         * 添加blockingQueue生产线程
-         */
-        Market<String> blockingQueueMarket
-                = new LinkedBlockingQueueMarket<>();
-        EXECUTOR_SERVICE.execute(
-                new ProducerHandle<>(blockingQueueMarket, "blockingQueueMarket")
-        );
-        EXECUTOR_SERVICE.execute(
-                new ConsumerHandle<>(blockingQueueMarket, "blockingQueueMarket")
-        );
-
-
-        EXECUTOR_SERVICE.shutdown();
-    }
-
-
-    public static void main(String[] args) {
-        runTest();
     }
 
 
