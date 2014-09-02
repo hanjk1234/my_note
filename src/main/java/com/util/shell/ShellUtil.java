@@ -1,19 +1,18 @@
 package com.util.shell;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.text.StrBuilder;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author wei.Li by 14-8-25.
  */
 public class ShellUtil {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ShellUtil.class);
-
     public static final String[] ILLEGAL_LETTERS = new String[]{"rm", "ll"};
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ShellUtil.class);
 
     /**
      * 校验字符非法性
@@ -53,7 +52,30 @@ public class ShellUtil {
         }
     }
 
+    /**
+     * 执行 shell
+     */
+    public static void runShell(String s) {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process process = runtime.exec(s);
+            InputStream inputStream = process.getInputStream();
+            byte b[] = new byte[1024];
+            int len = 0;
+            int temp;          //所有读取的内容都使用temp接收
+            while ((temp = inputStream.read()) != -1) {    //当没有读取完时，继续读取
+                b[len] = (byte) temp;
+                len++;
+            }
+            inputStream.close();
+            System.out.println(new String(b, 0, len));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        openFile("/lw");
+        //openFile("/lw");
+        runShell("free");
     }
 }
