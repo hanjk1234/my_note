@@ -25,27 +25,26 @@ public class TryCatchFinally {
      *
      * @return int
      */
-    private static int hasException() {
+    private static int primitiveTypeHasException() {
         int temp = 0;
         try {
             temp = temp / 0;
             System.out.println("not have Exception ,return 0");
-            return temp--;
+            return temp++;
         } catch (Exception e) {
             temp += 100;
-            System.out.println("run  catch{ i += 100; }  i=" + temp);
+            System.out.println("run  catch{ temp += 100; }  temp=" + temp);
             return temp;
         } finally {
             temp++;
-            System.out.println("run  finally{   i++;  }  i=" + temp);
-            //return 2;
+            System.out.println("run  finally{   temp++;  }  temp=" + temp);
+            return temp;
         }
-        //return temp;
     }
     /*
     执行结果:
-    run  catch{ i += 100; }  i=100
-    run  finally{   i++;  }  i=101
+    run  catch{ temp += 100; }  temp=100
+    run  finally{   temp++;  }  temp=101
     return : 100
      */
 
@@ -56,24 +55,22 @@ public class TryCatchFinally {
      *
      * @return int
      */
-    private static int notHasException() {
+    private static int primitiveTypeNotHasException() {
         int temp = 0;
         try {
-            return temp--;
+            return temp++;//换为 return ++temp; 呢？
         } catch (Exception e) {
             temp += 100;
-            System.out.println("run  catch{ i += 100; }  i=" + temp);
-            return temp--;
+            System.out.println("run  catch{ temp += 100; }  temp=" + temp);
+            return temp++;
         } finally {
             temp++;
-            System.out.println("run  finally{   i++;  }  i=" + temp);
-            //return 2;
+            System.out.println("run  finally{   temp++;  }  temp=" + temp);
         }
-        //return temp;
     }
     /*
     执行结果:
-    run  finally{   i++;  }  i=0
+    run  finally{   temp++;  }  temp=2
     return : 0
      */
 
@@ -88,25 +85,24 @@ public class TryCatchFinally {
         Map<String, String> map = new HashMap<>();
         map.put("Key", "init");
         try {
-            map.put("Key", "try");
-            int i = 1 / 0;
+            int temp = 1 / 0;
             return map;
         } catch (Exception e) {
             map.put("Key", "catch");
-            System.out.println("run catch{}  map=" + map);
+            System.out.println("run catch{map.put(\"Key\", \"catch\");}  map=" + map);
             return map;
         } finally {
-            //map.put("Key", "finally");
+            map.put("Key", "finally");
             map = null;
             System.out.println("run finally{ map.put(\"Key\", \"finally\"); map = null;} ,  map=" + map);
+            //return map;
         }
-        //return map;
     }
     /*
     执行结果:
-    run catch{}  map={Key=catch}
+    run catch{map.put("Key", "catch");}  map={Key=catch}
     run finally{ map.put("Key", "finally"); map = null;} ,  map=null
-    return : {Key=catch}
+    return : {Key=finally}
      */
 
 
@@ -124,7 +120,7 @@ public class TryCatchFinally {
             return map;
         } catch (Exception e) {
             map.put("Key", "catch");
-            System.out.println("run catch{}  map=" + map);
+            System.out.println("run catch{map.put(\"Key\", \"catch\");}  map=" + map);
             return map;
         } finally {
             map.put("Key", "finally");
@@ -142,7 +138,7 @@ public class TryCatchFinally {
 
 
     public static void main(String[] args) {
-        System.out.println("return : " + stringMapNotHasException());
+        System.out.println("return : " + primitiveTypeHasException());
     }
 
 }
