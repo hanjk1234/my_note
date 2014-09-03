@@ -162,7 +162,10 @@ public class ValueOrQuoteTransfer {
             }
         }).start();
 
+
+        //获取内存地址
         try {
+
             Unsafe unsafe = getUnsafeInstance();
 
             Field appleField = ObjectLocation.class.getDeclaredField(transfer2.getClass().getName());
