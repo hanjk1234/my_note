@@ -1,25 +1,25 @@
-package com.java.enum_;
+package com.java.basis.enum_;
 
 /**
- * Created by lw on 14-5-29.
+ * @author lw by 14-5-29.
  */
 public enum My_ {
 
     YIWA {
         @Override
         public String toString() {
-            System.out.println(YIWA.name()+"MY_");
+            System.out.println(YIWA.name() + "MY_");
             return super.toString();
         }
     },
     ERWA {
         @Override
         public String toString() {
-            System.out.println(ERWA.name()+"MY_");
+            System.out.println(ERWA.name() + "MY_");
             return super.toString();
         }
 
-        public String getdemo_1(){
+        public String getdemo_1() {
 
             return "";
         }
@@ -27,7 +27,7 @@ public enum My_ {
     SANWA {
         @Override
         public String toString() {
-            System.out.println(SANWA.name()+"MY_");
+            System.out.println(SANWA.name() + "MY_");
             return super.toString();
         }
     }

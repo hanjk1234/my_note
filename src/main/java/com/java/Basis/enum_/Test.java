@@ -1,7 +1,7 @@
-package com.java.enum_;
+package com.java.basis.enum_;
 
 /**
- * Created by lw on 14-5-29.
+ * @author lw by 14-5-29.
  */
 public class Test {
 

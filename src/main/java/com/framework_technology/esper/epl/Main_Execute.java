@@ -3,8 +3,6 @@ package com.framework_technology.esper.epl;
 
 import com.espertech.esper.client.*;
 import com.framework_technology.esper.javabean.Apple;
-import com.framework_technology.esper.javabean.Banana;
-import com.framework_technology.esper.javabean.Orange;
 
 /**
  * main 函数测试
@@ -15,14 +13,13 @@ import com.framework_technology.esper.javabean.Orange;
  */
 public class Main_Execute implements Runnable {
 
+    protected static final EPServiceProvider defaultProvider = EPServiceProviderManager.getDefaultProvider();
+    protected static final EPAdministrator epAdministrator = defaultProvider.getEPAdministrator();
+    protected static final EPRuntime epRuntime = defaultProvider.getEPRuntime();
     //线程执行时间间隔-ms
     private static final int EXECUTE_INTERVAL_MILLISECOND = 500;
     //执行次数
     private static final int EXECUTE_NUM = 10;
-
-    protected static final EPServiceProvider defaultProvider = EPServiceProviderManager.getDefaultProvider();
-    protected static final EPAdministrator epAdministrator = defaultProvider.getEPAdministrator();
-    protected static final EPRuntime epRuntime = defaultProvider.getEPRuntime();
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -35,7 +32,7 @@ public class Main_Execute implements Runnable {
         Configuration configuration = new Configuration();
         configuration.getEngineDefaults().getViewResources().setAllowMultipleExpiryPolicies(true);
         //获取 epl
-        String[] epl = EPL_8_NamedWindow.triggeredOnSelect();
+        String[] epl = EPL_8_NamedWindow.insertIntoDate();
         epAdministrator.createEPL(epl[0]);
         epAdministrator.createEPL(epl[1]);
         EPStatement epStatement = epAdministrator.createEPL(epl[2]);
@@ -62,7 +59,7 @@ public class Main_Execute implements Runnable {
              * @see EPL_3_Output#when()
              */
             if (temp % 3 == 0)
-                 epRuntime.sendEvent(Banana.getRandomBanana());
+                //epRuntime.sendEvent(Banana.getRandomBanana());
                 epRuntime.setVariableValue("exceed", true);
 
             //epRuntime.sendEvent(Orange.getRandomOrange());

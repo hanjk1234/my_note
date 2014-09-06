@@ -118,8 +118,8 @@ public class EPL_8_NamedWindow {
         //新建 window - 插入数据 - 查询数据
         String epl1 = "create window AppleWindow.win:keepall() as select id ,price from " + Apple.CLASSNAME;
         String epl2 = "insert into AppleWindow select id,price from " + Apple.CLASSNAME;
-        String epl3 = "select * from AppleWindow(price>1) ";//查询方式与查询 javabean 方式相同
-
+        String epl3 = "on " + Apple.CLASSNAME + " select count(*) from AppleWindow ";//查询方式与查询 javabean 方式相同
+        //String epl3 = "on " + Banana.CLASSNAME + " as b select win.* from AppleWindow as win ";
         return new String[]{epl1, epl2, epl3};
     }
 
@@ -147,10 +147,12 @@ public class EPL_8_NamedWindow {
 
         //触发条件查询
         String epl3 = "on " + Banana.CLASSNAME + " as b select win.* from AppleWindow as win ";
-        // "where b.id ='1' group by win.price having win.price >0 order by win.price";
+
         //将查询结果插入AppleWindow 中
-        String epl4 = "on " + Banana.CLASSNAME + " as b insert into AppleWindow select * from AppleWindow as win ";
         // "where a.id ='1' group by win.price having win.price >1 order by win.price";
+
+        String epl4 = "on " + Banana.CLASSNAME + " as b insert into AppleWindow select * from AppleWindow as win ";
+
 
         return new String[]{epl1, epl2, epl3};
     }

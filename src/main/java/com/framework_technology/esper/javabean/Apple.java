@@ -12,16 +12,13 @@ import java.util.Random;
  */
 public class Apple {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Apple.class);
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss", Locale.CHINA);
-
-
-    private static final String[] COLORS = new String[]{"1", "2", "3"};
     public static final String[] YIELDLY = new String[]{"BeiJing", "ShanXi", "HeNan", "ShangHai", "TianJing"};
-    private static final int COLORS_LENGTH = COLORS.length;
     public static final String AVG_PRICE = "avg(price)";
     public static final String CLASSNAME = Apple.class.getName();
-
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Apple.class);
+    private static final String[] COLORS = new String[]{"1", "2", "3"};
+    private static final int COLORS_LENGTH = COLORS.length;
     private String id; //id
     private int price; //价格
     private double discount;//折扣
@@ -47,8 +44,19 @@ public class Apple {
     public static Apple getRandomApple() {
 
         Apple apple = new Apple();
-        LOGGER.info("~~~~~~~~~ random Apple JavaBean is <{}> ~~~~~~~~~~", apple);
+        LOGGER.info("~~~~~~~~~ random Apple JavaBean is <{}> ~~~~~~~~~~", "");
         return apple;
+    }
+
+    /**
+     * 静态方法
+     *
+     * @param price    price
+     * @param discount discount
+     * @return 该Apple 折扣后的价格
+     */
+    public static double getPriceByDiscount2StaticMethod(int price, double discount) {
+        return price * discount;
     }
 
     public String getId() {
@@ -121,17 +129,6 @@ public class Apple {
      * @return 该Apple 折扣后的价格
      */
     public double getPriceByDiscount(int price, double discount) {
-        return price * discount;
-    }
-
-    /**
-     * 静态方法
-     *
-     * @param price    price
-     * @param discount discount
-     * @return 该Apple 折扣后的价格
-     */
-    public static double getPriceByDiscount2StaticMethod(int price, double discount) {
         return price * discount;
     }
 
