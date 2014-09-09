@@ -62,6 +62,10 @@ public class Es_Facets {
 
     /**
      * termsStatsFacet
+     * <p>
+     * 统计 key 下面的 value 的值 （Max/Min,Count）
+     * 以 key 分组
+     * 对 value 求一些函数
      */
     private static void termsStatsFacet() {
         TermsStatsFacetBuilder termsStatsFacetBuilder = FacetBuilders.termsStatsFacet("TermsStatsFacetBuilder")
@@ -70,7 +74,6 @@ public class Es_Facets {
 
         TermsStatsFacet entries = (TermsStatsFacet) searchByQuery_Facets(termsStatsFacetBuilder).get("TermsStatsFacetBuilder");
         System.out.println("Without term doc count -> " + entries.getMissingCount());
-
         // For each entry
         for (TermsStatsFacet.Entry entry : entries) {
             entry.getTerm();            // Term

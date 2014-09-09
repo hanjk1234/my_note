@@ -11,8 +11,6 @@ import java.lang.reflect.Method;
  */
 public class BookFacadeProxy_Cglib implements MethodInterceptor {
 
-    private Object object;
-
     /**
      * 创建代理对象
      *
@@ -20,9 +18,9 @@ public class BookFacadeProxy_Cglib implements MethodInterceptor {
      * @return 创建代理对象
      */
     public Object getInstance(Object object) {
-        this.object = object;
+        Object object1 = object;
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(this.object.getClass());
+        enhancer.setSuperclass(object1.getClass());
         // 回调方法
         enhancer.setCallback(this);
         // 创建代理对象

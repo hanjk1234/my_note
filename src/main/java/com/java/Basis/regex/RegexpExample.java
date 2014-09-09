@@ -21,8 +21,11 @@ import java.util.regex.Pattern;
  * @author wei.Li by 14-9-4.
  */
 public class RegexpExample {
+    public static final String s = "" +
+            "(?:[^[:punct:]\\s[:cntrl:]'‘’]+[’'][^[:punct:]\\s[:cntrl:]'‘’]+)" +
+            " | " +
+            "[^[:punct:]\\s[:cntrl:]'‘’]";
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(RegexpExample.class);
-
 
     private static void runExample(String regexp, String s) {
         Pattern pattern = Pattern.compile(regexp);
@@ -31,13 +34,19 @@ public class RegexpExample {
         LOGGER.info("[ {} ] matcher [ {} ] , result [ {} ]", pattern.pattern(), s, b);
     }
 
+    private static void runExampleGroup(String regexp, String s) {
+        Pattern pattern = Pattern.compile(regexp);
+        final Matcher matcher = pattern.matcher(s);
+        String result = null;
+        while (matcher.find()) {
+            result = matcher.group();
+        }
+        LOGGER.info("[ {} ] matcher [ {} ] , result [ {} ]", pattern.pattern(), s, result);
+    }
+
     public static void main(String[] args) {
 
-        // runExample("([\\s]{1}[.]+)", " 1 ");
-
-        int i = 32111;//10 进制数
-        String hex16 = Integer.toBinaryString(i); //转为16进制 用字符串表示
-        System.out.println(hex16);
+        runExampleGroup(s, " sdfsdfsdf asd");
 
     }
 

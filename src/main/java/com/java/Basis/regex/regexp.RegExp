@@ -15,3 +15,12 @@
 我叫(\S),.(\d)岁
 
 
+(?:[^[:punct:]\s[:cntrl:]'‘’]+[’'][^[:punct:]\s[:cntrl:]'‘’]+)
+			# A run of characters that are not a punctuation,
+			# whitespace, or control character, followed by a
+			# single quote, then another run of characters that
+			# are not a punctuation, whitespace, or control character
+|			# OR
+[^[:punct:]\s[:cntrl:]'‘’]+
+			# Just a run of characters that are not a punctuation,
+			# whitespace, or control character

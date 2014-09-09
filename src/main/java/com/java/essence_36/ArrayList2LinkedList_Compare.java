@@ -56,13 +56,40 @@ public class ArrayList2LinkedList_Compare {
 
 
     private static final int INIT_SIZE = 500000;
-    private static final int ADDRANDOM_SIZE = 10000;
-
-    public static LinkedList<Object> linkedList = new LinkedList();
     public static ArrayList<Object> arrayList = new ArrayList(INIT_SIZE);
+    private static final int ADDRANDOM_SIZE = 10000;
+    public static LinkedList<Object> linkedList = new LinkedList();
     private static Object object = new Object();
     private static Random random = new Random();
 
+    public static void main(String[] args) {
+        Proxy_Cglib proxy_cglib = new Proxy_Cglib();
+        ArrayList2LinkedList_Compare compare =
+                (ArrayList2LinkedList_Compare) proxy_cglib.getInstance(new ArrayList2LinkedList_Compare());
+        compare.add2Last("ArrayList  末尾添加数据[50w次]测试：", arrayList);
+        compare.add2Last("LinkedList 末尾添加数据[50w次]测试：", linkedList);
+
+        System.out.println();
+        compare.add2Random("ArrayList  随机位置添加数据[1w次]测试：", arrayList);
+        compare.add2Random("LinkedList 随机位置添加数据[1w次]测试：", linkedList);
+
+        System.out.println();
+        compare.remove2Random("ArrayList  随机位置删除次数[1w次]测试：", arrayList);
+        compare.remove2Random("LinkedList 随机位置删除次数[1w次]测试：", linkedList);
+
+        System.out.println();
+        compare.forEach2("ArrayList  forEach2循环读取测试：", arrayList);
+        compare.forEach2("LinkedList forEach2循环读取测试：", linkedList);
+
+        System.out.println();
+        compare.iterator2("ArrayList  iterator2循环读取测试：", arrayList);
+        compare.iterator2("LinkedList iterator2循环读取测试：", linkedList);
+
+        System.out.println();
+        compare.for2("ArrayList  for循环读取测试：", arrayList);
+        compare.for2("LinkedList for循环读取测试：", linkedList);
+
+    }
 
     public void add2Last(String state, List list) {
         for (int i = 0; i < INIT_SIZE; i++) {
@@ -93,7 +120,6 @@ public class ArrayList2LinkedList_Compare {
         }
     }
 
-
     public void iterator2(String state, List list) {
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
@@ -106,35 +132,6 @@ public class ArrayList2LinkedList_Compare {
             object = list.get(i);
         }
     }
-
-    public static void main(String[] args) {
-        Proxy_Cglib proxy_cglib = new Proxy_Cglib();
-        ArrayList2LinkedList_Compare compare =
-                (ArrayList2LinkedList_Compare) proxy_cglib.getInstance(new ArrayList2LinkedList_Compare());
-        compare.add2Last("ArrayList  末尾添加数据[50w次]测试：", arrayList);
-        compare.add2Last("LinkedList 末尾添加数据[50w次]测试：", linkedList);
-
-        System.out.println();
-        compare.add2Random("ArrayList  随机位置添加数据[1w次]测试：", arrayList);
-        compare.add2Random("LinkedList 随机位置添加数据[1w次]测试：", linkedList);
-
-        System.out.println();
-        compare.remove2Random("ArrayList  随机位置删除次数[1w次]测试：", arrayList);
-        compare.remove2Random("LinkedList 随机位置删除次数[1w次]测试：", linkedList);
-
-        System.out.println();
-        compare.forEach2("ArrayList  forEach2循环读取测试：", arrayList);
-        compare.forEach2("LinkedList forEach2循环读取测试：", linkedList);
-
-        System.out.println();
-        compare.iterator2("ArrayList  iterator2循环读取测试：", arrayList);
-        compare.iterator2("LinkedList iterator2循环读取测试：", linkedList);
-
-        System.out.println();
-        compare.for2("ArrayList  for循环读取测试：", arrayList);
-        compare.for2("LinkedList for循环读取测试：", linkedList);
-
-    }
 }
 
 
@@ -146,8 +143,6 @@ public class ArrayList2LinkedList_Compare {
  */
 class Proxy_Cglib implements MethodInterceptor {
 
-    private Object object;
-
     /**
      * 创建代理对象
      *
@@ -155,9 +150,9 @@ class Proxy_Cglib implements MethodInterceptor {
      * @return
      */
     public Object getInstance(Object object) {
-        this.object = object;
+        Object object1 = object;
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(this.object.getClass());
+        enhancer.setSuperclass(object1.getClass());
         // 回调方法
         enhancer.setCallback(this);
         // 创建代理对象
