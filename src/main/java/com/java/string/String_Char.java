@@ -1,65 +1,58 @@
 package com.java.string;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by IntelliJ IDEA.
  * User: lw
  * Date: 14-5-5
  */
 public class String_Char {
-    private static String string = "liwei我爱我的China!";
 
     /**
-     * 截取字符串，保证不截取半个汉字
+     * 按字节截取字符串，如果截取的最后一个是汉字，则舍弃
      *
-     * @param string
-     * @param index
-     * @return
+     * @param string 截取的字符串
+     * @param index  截取的长度
+     * @return 最终处理
+     * @throws UnsupportedEncodingException 编码转换错误
      */
-    private String subString2GBK(String string, int index) {
-        int temp = string.length();
-        boolean b = false;
-        //byte[] bytes = string.getBytes("UTF-8");
-        byte[] bytes = string.getBytes();
-        index = index > temp ? temp : index;
-        temp = 0;
+    private static String subString(String string, int index)
+            throws UnsupportedEncodingException {
+
+        if (StringUtils.isEmpty(string)) {
+            return "";
+        }
+
+        //转 GBK ，一个汉字对应2字节
+        byte[] bytes = string.getBytes("GBK");
+        int length = bytes.length;
+        index = length >= index ? index : length;
+
+        //截取字节个数 <= 1
+        if (index <= 1) {
+            return (bytes[0] < 0) ? string.substring(0, 1) : "";
+        }
+
+        int temp = 0;
         for (int i = 0; i < index; i++) {
-            if (bytes[i] < 0 && !b) {
-                b = true;
-            } else {
+            //一个汉字2字节 temp+2 ，奇数代表截取到半个汉字
+            if (bytes[i] < 0)
                 temp++;
-                b = false;
-            }
         }
-        return string.substring(0, temp);
+
+        //如果截取到半个汉字则-1，舍弃这个汉字
+        temp = (temp % 2 == 0) ? (temp / 2) : (temp - 1 / 2);
+
+        return string.substring(0, index - temp);
     }
 
-    public static void main(String[] args) {
-        String_Char aChar = new String_Char();
-        String str = aChar.subString2GBK(string, 7);
-        System.out.println(str);
-        new A().getX();
-    }
-}
 
-class A {
-    int x = 1;
-
-    class B {
-        int x = 2;
-
-        public void func() {
-            int x = 3;
-            A a = new A();
-            System.out.println(a.x);
-            System.out.println(this.x);
-            System.out.println(x);
-        }
-    }
-
-    void getX() {
-        int a = 0;
-        boolean b;
-        int c = 0;
-        b = a != 7;
+    public static void main(String[] args)
+            throws UnsupportedEncodingException {
+        String s = "My名字是GourdErwa！";
+        System.out.println(String_Char.subString(s, 3));
     }
 }

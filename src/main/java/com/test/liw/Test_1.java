@@ -1,6 +1,9 @@
 package com.test.liw;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.RandomAccess;
 
 /**
@@ -9,7 +12,7 @@ import java.util.RandomAccess;
  * Date: 14-8-1
  * Time: 10:51
  */
-public class Test_1 implements Serializable,Cloneable,RandomAccess {
+public class Test_1 implements Serializable, Cloneable, RandomAccess {
 
 
     public static String string_1 = "string_1";
@@ -34,17 +37,6 @@ public class Test_1 implements Serializable,Cloneable,RandomAccess {
         System.out.println(string_2);
     }
 
-
-    private String getString_1() {
-        return "method result String_1";
-    }
-
-
-    private String getString_2() {
-        return "method result String_2";
-    }
-
-
     private static int aVoid() {
         for (int i = -1; i < 1; i++) {
             try {
@@ -62,9 +54,39 @@ public class Test_1 implements Serializable,Cloneable,RandomAccess {
         return 0;
     }
 
+    public static void setString() {
+
+        String s = "上海库存Web服务器";
+
+        try {
+            s = URLEncoder.encode(s, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println(s);
+
+        try {
+            s = URLDecoder.decode(s, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(s);
+    }
+
     public static void main(String[] args) {
         // new Test_1();
-        System.out.println(aVoid());
+        setString();
+    }
+
+    private String getString_1() {
+        return "method result String_1";
+    }
+
+    private String getString_2() {
+        return "method result String_2";
     }
 
 }

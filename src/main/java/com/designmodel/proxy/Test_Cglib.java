@@ -8,8 +8,8 @@ public class Test_Cglib {
 
     public static void main(String[] args) {
         BookFacadeProxy_Cglib proxy_cglib = new BookFacadeProxy_Cglib();
-        BookImpl bookImpl = (BookImpl) proxy_cglib.getInstance(new BookImpl());
+        BookFacadeJDKImpl_JDK bookImpl
+                = (BookFacadeJDKImpl_JDK) proxy_cglib.getInstance(new BookFacadeJDKImpl_JDK());
         bookImpl.seeBook();
-
     }
 }

@@ -3,11 +3,6 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="my_note##1.0_etc_java.war">
       <element id="artifact" artifact-name="my_note:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib">
-          <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/annotations.jar" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>

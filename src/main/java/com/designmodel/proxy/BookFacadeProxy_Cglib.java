@@ -33,7 +33,9 @@ public class BookFacadeProxy_Cglib implements MethodInterceptor {
                             MethodProxy proxy) throws Throwable {
         long start = System.currentTimeMillis();
         proxy.invokeSuper(obj, args);
-        System.out.println(proxy.getSuperName() + "执行耗时：" + (System.currentTimeMillis() - start) + "ms");
+        System.out.println(
+                proxy.getSuperName() + "执行耗时：" + (System.currentTimeMillis() - start) + "ms"
+        );
         return null;
     }
 }

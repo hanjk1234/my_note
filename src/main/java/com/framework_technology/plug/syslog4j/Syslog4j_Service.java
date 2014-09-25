@@ -32,7 +32,7 @@ public class Syslog4j_Service {
     private static final String SYSLOGSERVER_ARGS;
 
     static {
-        SYSLOGSERVER_ARGS = "-h 192.168.1.105 -p 1514 -o /lw/workfile/log/syslog4j_test/syslog4j.log -a udp";
+        SYSLOGSERVER_ARGS = "-h 127.0.0.1 -p 1514 -o /lw/workfile/test/syslog4j.log -a udp";
     }
 
     //启动服务端接受syslog

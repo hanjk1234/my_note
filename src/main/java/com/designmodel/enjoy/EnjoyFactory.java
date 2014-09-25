@@ -19,7 +19,7 @@ public class EnjoyFactory {
     public static DataSource getgetConnectionByName(String dataSourcesName) {
         DataSource dataSource = dataSourceMap.get(dataSourcesName);
         if (dataSource == null) {
-            DataSources sources = new DataSources(dataSourcesName);
+            DataSourcesImpl sources = new DataSourcesImpl(dataSourcesName);
             dataSource = sources.getDataSourceByName();
             dataSourceMap.put(dataSourcesName, dataSource);
         }

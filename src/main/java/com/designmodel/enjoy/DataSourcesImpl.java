@@ -8,12 +8,12 @@ import javax.sql.DataSource;
  * <p>
  * 获取不同的数据库连接信息
  */
-public class DataSources implements DataSourcesInterface {
+public class DataSourcesImpl implements DataSourcesInterface {
 
-    private String name;
     private static DataSource name1, name2;
+    private String name;
 
-    DataSources(String name) {
+    DataSourcesImpl(String name) {
         this.name = name;
     }
 

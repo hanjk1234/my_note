@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 远程调用Linux shell 命令
@@ -204,6 +205,7 @@ public class LinuxStateForShell {
                     } else if (line.startsWith("MEM")) {
                         String memStr = "内存使用情况:";
                         try {
+                            Pattern pattern = Pattern.compile("(\\d.{2,3}kused})");
                             memStr += line.split(":")[1]
                                     .replace("TOTAL", "总计")
                                     .replace("USED", "已使用")

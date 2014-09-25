@@ -6,5 +6,5 @@ package com.designmodel.enjoy;
  */
 public enum DataSourcesType {
     name1,
-    name2;
+    name2
 }

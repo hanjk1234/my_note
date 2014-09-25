@@ -1,7 +1,10 @@
 package com.framework_technology.plug.syslog4j;
 
+import com.google.common.collect.Maps;
 import org.productivity.java.syslog4j.Syslog;
 import org.productivity.java.syslog4j.SyslogIF;
+
+import java.util.Map;
 
 /**
  * 客户端发送 log
@@ -10,25 +13,38 @@ import org.productivity.java.syslog4j.SyslogIF;
  */
 public class Syslog4j_Client {
 
-    private static SyslogIF syslog = null;
 
+    //缓存 SyslogIF 对象
+    private static Map<String, SyslogIF> syslogIFConcurrentMap = Maps.newConcurrentMap();
 
     private static void writeLog(SyslogIF syslog) {
-        syslog.error(" --------Log Message --------");
-        syslog.critical("-------Log critical ---------");
+        syslog.error("触发时间范围[2014-09-18/17:30:15-2014-09-18/17:30:15],告警数量[1]");
+        syslog.critical("触发时间范围[2014-09-18/17:30:15-2014-09-18/17:30:15],告警数量[1]");
     }
 
     private static SyslogIF getSyslog() {
-        if (syslog == null) {
-            syslog = Syslog.getInstance("udp");
-            syslog.getConfig().setHost("192.168.1.105");
-            syslog.getConfig().setPort(1514);
-            syslog.getConfig().setCharSet("UTF-8");
+
+        SyslogIF syslogIF = syslogIFConcurrentMap.get("#");
+
+        if (syslogIF == null) {
+            syslogIF = Syslog.getInstance("udp");
+            syslogIF.getConfig().setHost("127.0.0.1");
+            syslogIF.getConfig().setPort(1514);
+            syslogIF.getConfig().setCharSet("UTF-8");
         }
-        return syslog;
+        return syslogIF;
     }
 
     public static void main(String[] args) {
-        writeLog(getSyslog());
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    writeLog(getSyslog());
+                }
+            }
+        }).start();
     }
 }

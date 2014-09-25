@@ -1,11 +1,11 @@
 package com.framework_technology.quartz;
 
 import com.util.date.Joda_Time;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 一个简单的quartz调用job
@@ -17,6 +17,9 @@ public class HelloJob implements Job {
 
     private String task;
 
+    public HelloJob() {
+    }
+
     public String getTask() {
         return task;
     }
@@ -25,12 +28,11 @@ public class HelloJob implements Job {
         this.task = task;
     }
 
-    public HelloJob() {
-    }
-
     public void execute(JobExecutionContext context)
             throws JobExecutionException {
-        _log.info("获取模拟数据——》" + context.getJobDetail().getJobDataMap().get("data") + "\t" + Joda_Time.getNowTime());
+        _log.info("获取模拟数据——》"
+                + context.getJobDetail().getJobDataMap().get("data") + "\t"
+                + Joda_Time.getNowTime());
     }
 
 }

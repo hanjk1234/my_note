@@ -70,8 +70,6 @@
           <element id="library" level="project" name="Maven: com.googlecode.json-simple:json-simple:1.1" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.2.2" />
           <element id="library" level="project" name="Maven: com.jcraft:jsch:0.1.46" />
-          <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/annotations.jar" />
-          <element id="library" level="project" name="Java EE 6-Java EE 6" />
         </element>
       </element>
     </root>
