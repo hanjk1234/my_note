@@ -1,14 +1,13 @@
 package com.java.classinit;
 
 /**
- * Created by lw on 14-4-23.
+ * @author lw by 14-4-23.
  */
 public class A {
 
-    private static A a_1 = new A("类属性[开始]处初始化Class->");
     private static final B b_1 = new B(10);
-    String initString = initString();
     static String staticString = initStaticString();
+    private static A a_1 = new A("类属性[开始]处初始化Class->");
     private static A a = new A("类属性[结尾]处初始化Class->");
 
     {
@@ -20,6 +19,8 @@ public class A {
         System.out.println("A、static代码块->->字符串-静态变量>->" + staticString);
     }
 
+    String initString = initString();
+
     public A() {
         System.out.println("A()-成员变量>->" + initString);
         System.out.println("A()-静态变量>->" + staticString);
@@ -30,11 +31,6 @@ public class A {
         System.out.println("A(str)-成员变量>->" + str + initString);
         System.out.println("A(str)-静态变量>->" + str + staticString);
         System.out.println();
-    }
-
-    private String initString() {
-        System.out.println("initString()方法赋值成员变量执行->");
-        return "[initString()方法返回->->]";
     }
 
     private static String initStaticString() {
@@ -51,6 +47,11 @@ public class A {
             new A();
             System.out.println();
         }
+    }
+
+    private String initString() {
+        System.out.println("initString()方法赋值成员变量执行->");
+        return "[initString()方法返回->->]";
     }
 }
 

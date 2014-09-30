@@ -32,9 +32,6 @@ public class InitClass extends SuperInitClass {
         System.out.println("InitClass->静态代码块 2->访问static String s1=" + s1);
     }
 
-
-    String s3 = "InitClass->成员变量s3";
-    String s4 = getS4();
     static String s5;
 
     {
@@ -42,15 +39,17 @@ public class InitClass extends SuperInitClass {
         System.out.println("InitClass->构造方法代码块 执行时候成员变量s3是否已经初始化了？" + (s3 != null));
     }
 
+    String s3 = "InitClass->成员变量s3";
+    String s4 = getS4();
+
     InitClass() {
         System.out.println("InitClass->构造方法");
         System.out.println("InitClass->构造方法 执行时候成员变量s3是否已经初始化了？" + (s3 != null));
     }
 
-
     static String getS2() {
-        System.out.println("InitClass->getS2()执行->初始化静态变量s1");
-        return "InitClass->初始化静态变量s1";
+        System.out.println("InitClass->getS2()执行->初始化静态变量s2");
+        return "InitClass->初始化静态变量s2";
     }
 
     static String getS4() {
@@ -102,8 +101,8 @@ class SuperInitClass {
     }
 
     static String getS2() {
-        System.out.println("SuperInitClass->getS2()执行->初始化静态变量s1");
-        return "SuperInitClass->初始化静态变量s1";
+        System.out.println("SuperInitClass->getS2()执行->初始化静态变量s2");
+        return "SuperInitClass->初始化静态变量s2";
     }
 
     static String getS4() {
@@ -130,9 +129,6 @@ class People {
  */
 class InitQuestion {
 
-    private int x;
-    private int y = 20;
-
     private static int xStatic;
     private static int yStatic = 20;
 
@@ -153,6 +149,9 @@ class InitQuestion {
         // return ;
     }
 
+    private int x;
+    private int y = 20;
+
     public InitQuestion() throws Exception {
         this(0, 0);
     }
@@ -167,16 +166,14 @@ class InitQuestion {
 
 /**
  * 静态变量的初始化工作默认放入static{}语句块前执行
- *      即：生成一个<clinit>方法
+ * 即：生成一个<clinit>方法
  * 实例变量的初始化工作默认放入构造方法{}语句块前执行
  * 然后把语句块放入每个构造方法的前面
- *      即：每个构造器生成一个<init>方法
- *
+ * 即：每个构造器生成一个<init>方法
+ * <p>
  * <clinit><init>证明如下【Init.java】文件执行后的代码
  */
 class InitQuestion_2 {
-    private int x;
-    private int y;
     private static int xStatic;
     private static int yStatic;
 
@@ -187,6 +184,9 @@ class InitQuestion_2 {
             //
         }
     }
+
+    private int x;
+    private int y;
 
     public InitQuestion_2() throws Exception {
         this(0, 0);
@@ -212,7 +212,6 @@ class InitQuestion_2 {
 
 class Init {
 
-    private int x = getX();
     private static int xStatic = getXStatic();
 
     static {
@@ -231,22 +230,14 @@ class Init {
         }
     }
 
+    private int x = getX();
+
     public Init() {
         try {
             throw new Exception("构造方法执行...");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private int getX() {
-        try {
-            throw new Exception("实例变量x初始化...");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return 10;
     }
 
     private static int getXStatic() {
@@ -258,4 +249,22 @@ class Init {
 
         return 10;
     }
+
+    private int getX() {
+        try {
+            throw new Exception("实例变量x初始化...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 10;
+    }
 }
+
+/**
+ * 先静态语句块，静态变量，按声明顺序初始化
+ * 然后变量，构造方法语句块，按声明顺序初始化
+ * 最后执行构造方法
+ *
+ * 有父类，先初始化父类
+ */

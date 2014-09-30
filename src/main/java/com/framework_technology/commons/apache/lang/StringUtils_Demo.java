@@ -3,7 +3,7 @@ package com.framework_technology.commons.apache.lang;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Created by lw on 14-5-18.
+ * @author lw by 14-5-18.
  */
 public class StringUtils_Demo {
 
@@ -72,7 +72,7 @@ public class StringUtils_Demo {
 
     public static void main(String[] args) {
 
-        System.out.println(StringUtils.strip("  abcyx  ", "xyz"));
+        System.out.println(StringUtils.strip("  abcyx ", "xyz"));
     }
 
 }

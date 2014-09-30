@@ -20,9 +20,8 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
  */
 public class Es_233_Search {
 
-    public Client client;
-
     private static final int SEARCHREQUEST_SIZE = 6000;
+    public Client client;
 
     public Es_233_Search(Client client) {
         this.client = client;
@@ -176,4 +175,6 @@ public class Es_233_Search {
                 .getCount();
         System.out.println("searchByQuery_Count<{}>:" + countByCount);
     }
+
+
 }
