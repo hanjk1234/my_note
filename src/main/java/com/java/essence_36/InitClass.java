@@ -26,12 +26,6 @@ public class InitClass extends SuperInitClass {
     static String s1 = "InitClass->静态变量s1";
 
     static String s2 = getS2();
-
-    static {
-        System.out.println("InitClass->静态代码块 2");
-        System.out.println("InitClass->静态代码块 2->访问static String s1=" + s1);
-    }
-
     static String s5;
 
     {
@@ -40,6 +34,12 @@ public class InitClass extends SuperInitClass {
     }
 
     String s3 = "InitClass->成员变量s3";
+
+    static {
+        System.out.println("InitClass->静态代码块 2");
+        System.out.println("InitClass->静态代码块 2->访问static String s1=" + s1);
+    }
+
     String s4 = getS4();
 
     InitClass() {
@@ -129,6 +129,7 @@ class People {
  */
 class InitQuestion {
 
+
     private static int xStatic;
     private static int yStatic = 20;
 
@@ -151,6 +152,7 @@ class InitQuestion {
 
     private int x;
     private int y = 20;
+
 
     public InitQuestion() throws Exception {
         this(0, 0);

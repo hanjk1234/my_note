@@ -133,7 +133,21 @@ public class ByteBuffer_Example {
     }
 
     public static void main(String[] args) {
-        readInSystem();
+        //readInSystem();
+        String export_path = "/lw//a//b//c.txt";
+        export_path = export_path.replace("//", "/");
+        String path_0 = export_path.substring(0, export_path.lastIndexOf("/"));
 
+        System.out.println(path_0);
+
+        /*File file = new File("/lw/a/a.txt");
+        if (!file.exists()) {
+            try {
+
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
     }
 }

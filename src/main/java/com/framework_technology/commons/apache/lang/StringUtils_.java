@@ -5,7 +5,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * @author lw by 14-5-18.
  */
-public class StringUtils_Demo {
+public class StringUtils_ {
 
     private static void demo_1() {
 

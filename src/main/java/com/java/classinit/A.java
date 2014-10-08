@@ -9,6 +9,7 @@ public class A {
     static String staticString = initStaticString();
     private static A a_1 = new A("类属性[开始]处初始化Class->");
     private static A a = new A("类属性[结尾]处初始化Class->");
+    String initString = initString();
 
     {
         System.out.println("A、构造方法公用代码块-字符串-成员变量>->" + initString);
@@ -19,7 +20,6 @@ public class A {
         System.out.println("A、static代码块->->字符串-静态变量>->" + staticString);
     }
 
-    String initString = initString();
 
     public A() {
         System.out.println("A()-成员变量>->" + initString);
